@@ -13,7 +13,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    ng build --prod
+    ng build
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
@@ -24,16 +24,3 @@ steps:
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: '$(build.ArtifactStagingDirectory)'
-
-- task: FtpUpload@2
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftp://ftp.alfirdaws.be'
-    username: 'TechExtensor'
-    password: 'Tech2022@'
-    rootDirectory: '$(Build.ArtifactStagingDirectory)'
-    filePatterns: '**'
-    remoteDirectory: '/'
-    clean: true
-    preservePaths: true
-    trustSSL: false 
