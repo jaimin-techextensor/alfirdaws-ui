@@ -19,7 +19,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
+    SourceFolder: '$(Build.SourcesDirectory)/dist/fuse/'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
   
 - task: PublishBuildArtifacts@1    
