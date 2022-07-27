@@ -23,7 +23,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
+    sourceFolder: '$(Build.SourcesDirectory)/alfirdawsmanager'
     contents: '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)'
     targetFolder: '$(Build.ArtifactStagingDirectory)'
 
