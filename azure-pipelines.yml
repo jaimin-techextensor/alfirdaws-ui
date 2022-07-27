@@ -21,26 +21,7 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: '$(Build.SourcesDirectory)/alfirdawsmanager'
-    contents: '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: drop
-    
-- task: FtpUpload@2
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftp://ftp.alfirdaws.be'
-    username: 'TechExtensor'
-    password: 'Tech2022@'
-    rootDirectory: '$(Build.ArtifactStagingDirectory)'
-    filePatterns: '**'
-    remoteDirectory: '/'
-    clean: true
-    preservePaths: true
-    trustSSL: false
