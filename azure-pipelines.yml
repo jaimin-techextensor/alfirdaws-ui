@@ -25,5 +25,5 @@ steps:
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
 
