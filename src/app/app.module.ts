@@ -12,6 +12,12 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import { JwtModule } from "@auth0/angular-jwt";
+import { HttpClientModule } from "@angular/common/http";
+
+export function tokenGetter() {
+    return localStorage.getItem("access_token");
+  }
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -39,7 +45,15 @@ const routerConfig: ExtraOptions = {
         LayoutModule,
 
         // 3rd party modules that require global configuration via forRoot
-        MarkdownModule.forRoot({})
+        MarkdownModule.forRoot({}),
+        HttpClientModule,
+        JwtModule.forRoot({
+            config: {
+              tokenGetter: tokenGetter,
+              allowedDomains: ["example.com"],
+              disallowedRoutes: ["http://example.com/examplebadroute/"],
+            },
+          })
     ],
     bootstrap   : [
         AppComponent
