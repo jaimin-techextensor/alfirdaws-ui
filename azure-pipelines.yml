@@ -23,13 +23,13 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 - task: ArchiveFiles@2
-  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    PathtoPublish: '$(build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
