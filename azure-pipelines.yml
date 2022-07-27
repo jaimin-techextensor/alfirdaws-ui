@@ -19,7 +19,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist'
+    SourceFolder: '$(Build.SourcesDirectory)'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 - task: ArchiveFiles@2
