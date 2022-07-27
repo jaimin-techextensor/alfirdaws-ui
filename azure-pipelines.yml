@@ -17,9 +17,9 @@ steps:
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
   inputs:
-    SourceFolder: '$(agent.builddirectory)/dist/fuse'
+    SourceFolder: '$(Build.SourcesDirectory)'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
   
 - task: PublishBuildArtifacts@1    
