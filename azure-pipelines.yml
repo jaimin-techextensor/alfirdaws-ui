@@ -20,16 +20,16 @@ steps:
   displayName: 'Copy Files to'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: ArchiveFiles@2
-  displayName: 'Archive $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    PathtoPublish: '$(build.ArtifactStagingDirectory)'
 
