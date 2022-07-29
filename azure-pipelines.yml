@@ -32,7 +32,7 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'ftp.alfirdaws.be'
+    serverUrl: 'ftp://ftp.alfirdaws.be'
     username: 'TechExtensor'
     password: 'Tech2022@'
     rootDirectory: '$(build.ArtifactStagingDirectory)'
