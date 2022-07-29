@@ -20,8 +20,7 @@ steps:
   displayName: 'Copy npm package'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
-    contents: '*.tgz' 
-    targetFolder: $(Build.ArtifactStagingDirectory)/npm
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: ArchiveFiles@2
   displayName: 'Archive $(Build.ArtifactStagingDirectory)'
