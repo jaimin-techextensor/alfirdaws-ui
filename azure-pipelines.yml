@@ -11,10 +11,12 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install -g @angular/cli
     npm install
-    ng build
-  displayName: 'npm install and build'
+  displayName: 'npm install'
+
+- script: |
+    npm run build
+  displayName: 'npm build'
 
 - task: CopyFiles@2
   displayName: 'Copy npm package'
@@ -22,14 +24,7 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
-- task: ArchiveFiles@2
-  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: false
-
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: '$(build.ArtifactStagingDirectory)'
-
