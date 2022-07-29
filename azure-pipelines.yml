@@ -21,7 +21,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy npm package'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
+    SourceFolder: '$(Build.SourcesDirectory)/dist'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1    
