@@ -77,7 +77,6 @@ export class AuthSignInComponent implements OnInit
         this._authService.signIn(this.signInForm.value)
             .subscribe(
                 (data) => {
-                    debugger
                     // localStorage.setItem('token', data.token)
                     // Set the redirect url.
                     // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
@@ -90,7 +89,6 @@ export class AuthSignInComponent implements OnInit
 
                 },
                 (response) => {
-debugger
                     // Re-enable the form
                     this.signInForm.enable();
 
