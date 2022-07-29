@@ -1,19 +1,19 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
-import { MarkdownModule } from 'ngx-markdown';
+import { JwtModule } from "@auth0/angular-jwt";
 import { FuseModule } from '@fuse';
-import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { CoreModule } from 'app/core/core.module';
-import { appConfig } from 'app/core/config/app.config';
-import { mockApiServices } from 'app/mock-api';
-import { LayoutModule } from 'app/layout/layout.module';
+import { FuseConfigModule } from '@fuse/services/config';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-import { JwtModule } from "@auth0/angular-jwt";
-import { HttpClientModule } from "@angular/common/http";
+import { appConfig } from 'app/core/config/app.config';
+import { CoreModule } from 'app/core/core.module';
+import { LayoutModule } from 'app/layout/layout.module';
+import { mockApiServices } from 'app/mock-api';
+import { MarkdownModule } from 'ngx-markdown';
 
 export function tokenGetter() {
     return localStorage.getItem("access_token");

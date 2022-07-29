@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
+import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
@@ -45,21 +45,22 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['hughes.brian@company.com', [Validators.required, Validators.email]],
-            password  : ['admin', Validators.required],
+            email     : ['', [Validators.required, Validators.email]],
+            password  : ['', Validators.required],
             rememberMe: ['']
         });
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------
 
     /**
      * Sign in
      */
     signIn(): void
     {
+        localStorage.clear();
         // Return if the form is invalid
         if ( this.signInForm.invalid )
         {
@@ -76,7 +77,8 @@ export class AuthSignInComponent implements OnInit
         this._authService.signIn(this.signInForm.value)
             .subscribe(
                 (data) => {
-                    localStorage.setItem('token', data.token)
+                    debugger
+                    // localStorage.setItem('token', data.token)
                     // Set the redirect url.
                     // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
                     // to the correct page after a successful sign in. This way, that url can be set via
@@ -88,7 +90,7 @@ export class AuthSignInComponent implements OnInit
 
                 },
                 (response) => {
-
+debugger
                     // Re-enable the form
                     this.signInForm.enable();
 
