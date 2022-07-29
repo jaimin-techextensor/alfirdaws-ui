@@ -17,10 +17,11 @@ steps:
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to'
+  displayName: 'Copy npm package'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    contents: '*.tgz' 
+    targetFolder: $(Build.ArtifactStagingDirectory)/npm
 
 - task: ArchiveFiles@2
   displayName: 'Archive $(Build.ArtifactStagingDirectory)'
