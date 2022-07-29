@@ -37,8 +37,8 @@ steps:
     password: 'Tech2022@'
     rootDirectory: '$(build.ArtifactStagingDirectory)'
     filePatterns: '**'
-    remoteDirectory: '/managertest/'
+    remoteDirectory: '/'
     clean: false
     cleanContents: false
-    preservePaths: false
+    preservePaths: true
     trustSSL: false
