@@ -4,88 +4,82 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id   : 'example',
-        title: 'Search Engine',
-        type : 'basic',
-        icon : 'heroicons_outline:search',
-        link : '/example'
-    },
-    {
-        id   : '',
         title: 'Dashboard',
         type : 'basic',
         icon : 'heroicons_outline:chart-pie',
-        link : '/'
+        link : '/example'
     },
     {
-        id   : '',
+        id   : 'dashboards.project',
         title: 'Customer',
         type : 'basic',
         icon : 'heroicons_solid:user',
-        link : '/'
+        link : '/dashboards/project'
     },
     {
-        id   : '',
+        id   : 'dashboards.analytics',
         title: 'Subscription',
         type : 'basic',
         icon : 'heroicons_solid:pencil-alt',
-        link : '/'
+        link : '/dashboards/analytics'
     },
     {
-        id   : '',
+        id   : 'dashboards.finance',
         title: 'Advertisement',
         type : 'basic',
         icon : 'heroicons_solid:shopping-cart',
-        link : '/'
+        link : '/dashboards/finance'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Campaigns',
         type : 'basic',
         icon : 'heroicons_solid:speakerphone',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Billings',
         type : 'basic',
         icon : 'heroicons_solid:cash',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Voucher',
         type : 'basic',
         icon : 'heroicons_solid:gift',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Broker',
         type : 'basic',
         icon : 'heroicons_solid:users',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Messages',
         type : 'basic',
         icon : 'heroicons_solid:chat',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Reports',
         type : 'basic',
         icon : 'heroicons_outline:document-report',
-        link : '/'
+        link : '/dashboards/crypto'
     },
     {
-        id   : '',
+        id   : 'dashboards.crypto',
         title: 'Settings',
         type : 'basic',
         icon : 'heroicons_outline:cog',
-        link : '/'
+        link : '/dashboards/crypto'
     }
+
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
