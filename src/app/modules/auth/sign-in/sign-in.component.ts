@@ -81,19 +81,13 @@ export class AuthSignInComponent implements OnInit {
                     if (data.status == "User Not Found") {
                         console.log('wrong')
                         this.signInForm.enable();
-
-                        // Reset the form
-                        this.signInNgForm.resetForm();
-    
-                        // Set the alert
+                        this.signInNgForm.resetForm();  
                         this.alert = {
                             type: 'error',
                             message: 'Wrong email or password'
                         };
-    
-                        // Show the alert
                         this.showAlert = true;
-                        this._router.navigate(['sign-in']);
+                        // this._router.navigate(['sign-in']);
                     } else {
                         // localStorage.setItem('token', data.token)
                         // Set the redirect url.
@@ -104,7 +98,7 @@ export class AuthSignInComponent implements OnInit {
 
                         // Navigate to the redirect url
                         this._router.navigateByUrl(redirectURL);
-                    }   
+                    }
 
 
                 },

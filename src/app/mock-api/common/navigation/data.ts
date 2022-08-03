@@ -10,14 +10,28 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link : '/example'
     },
     {
-        id   : 'dashboards.project',
+        id   : 'searchengine',
+        title: 'Search Engine',
+        type : 'basic',
+        icon : 'heroicons_outline:search',
+        link : '/dashboards/project'
+    },
+    {
+        id   : 'dashboards',
         title: 'Customer',
         type : 'basic',
         icon : 'heroicons_solid:user',
         link : '/dashboards/project'
     },
     {
-        id   : 'dashboards.analytics',
+        id   : 'dashboards',
+        title: 'Cases',
+        type : 'basic',
+        icon : 'heroicons_outline:document-duplicate',
+        link : '/dashboards/project'
+    },
+    {
+        id   : 'dashboards',
         title: 'Subscription',
         type : 'basic',
         icon : 'heroicons_solid:pencil-alt',

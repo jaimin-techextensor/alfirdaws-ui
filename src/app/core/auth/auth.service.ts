@@ -10,9 +10,6 @@ export class AuthService
 {
     private _authenticated: boolean = false;
 
-    /**
-     * Constructor
-     */
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
@@ -20,13 +17,6 @@ export class AuthService
     {
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Setter & getter for access token
-     */
     set accessToken(token: string)
     {
         localStorage.setItem('accessToken', token);
@@ -37,19 +27,6 @@ export class AuthService
         return localStorage.getItem('accessToken') ?? '';
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Forgot password
-     *
-     * @param email
-     */
-    forgotPassword(email: string): Observable<any>
-    {
-        return this._httpClient.post('api/auth/forgot-password', email);
-    }
 
     /**
      * Reset password
@@ -60,6 +37,23 @@ export class AuthService
     {
         return this._httpClient.post('api/auth/reset-password', password);
     }
+
+     /**
+     * Forgot password
+     *
+     * @param email
+     */
+      forgotPassword(email: string): Observable<any>
+      {
+          const fpwd_cred = {
+              UserName: email
+          }
+          return this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword', email).pipe(
+              switchMap((response:any) => {
+                return of(response);
+              })
+          );
+      }
 
     /**
      * Sign in
