@@ -14,6 +14,7 @@ import { CoreModule } from 'app/core/core.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { mockApiServices } from 'app/mock-api';
 import { MarkdownModule } from 'ngx-markdown';
+//import { SettingsComponent } from './modules/settings/settings.component';
 
 export function tokenGetter() {
     return localStorage.getItem("access_token");
@@ -26,7 +27,8 @@ const routerConfig: ExtraOptions = {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+       
     ],
     imports     : [
         BrowserModule,

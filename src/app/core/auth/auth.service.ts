@@ -35,7 +35,7 @@ export class AuthService
      */
     resetPassword(password: string): Observable<any>
     {
-        return this._httpClient.post('api/auth/reset-password', password);
+        return this._httpClient.post('Authenticate/ResetPassword', password);
     }
 
      /**
@@ -43,17 +43,24 @@ export class AuthService
      *
      * @param email
      */
-      forgotPassword(email: string): Observable<any>
-      {
-          const fpwd_cred = {
-              UserName: email
-          }
-          return this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword', email).pipe(
-              switchMap((response:any) => {
-                return of(response);
-              })
-          );
-      }
+    //   forgotPassword(email: string): Observable<any>
+    //   {
+    //       const fpwd_cred = {
+    //           UserName: email
+    //       }
+    //       return this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword', email).pipe(
+    //           switchMap((response:any) => {
+    //             return of(response);
+    //           })
+    //       );
+    //   }
+
+    forgotPassword(email):  Observable<any> {
+       
+       
+        return of(this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword'+ '?Email' + email,null));
+       
+     }
 
     /**
      * Sign in
