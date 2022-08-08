@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  APIUrl : "https://localhost:44344/api"
+  APIUrl : "http://techext-001-site50.itempurl.com/api"
 };
