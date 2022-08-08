@@ -36,7 +36,6 @@ export class AuthForgotPasswordComponent implements OnInit {
     }
 
     sendResetLink() {
-        debugger;
         this.submitAttempt = true;
         if (this.forgotPasswordForm.valid) {
             const data = {
@@ -51,7 +50,6 @@ export class AuthForgotPasswordComponent implements OnInit {
                     this.forgotPasswordForm.reset();
                     this.submitAttempt = false;
                 }, (error) => {
-                    debugger
                     this.alert={
                         type: 'error',
                         message: 'Email does not found! Are you sure you are already a member?'

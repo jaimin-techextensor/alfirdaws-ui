@@ -33,9 +33,13 @@ export class AuthService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
+    resetPassword(password: string, email: string): Observable<any>
     {
-        return this._httpClient.post('Authenticate/ResetPassword', password);
+        const resetpassword_model = {
+            email: email,
+            password: password
+          } 
+        return this._httpClient.post(environment.APIUrl +'Authenticate/ResetPassword', resetpassword_model);
     }
 
      /**
@@ -56,10 +60,9 @@ export class AuthService
     //   }
 
     forgotPassword(email):  Observable<any> {
-       debugger
        const forgetpassword_cred = {
         Email: email,
-      }
+      } 
         return  this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword',forgetpassword_cred);
      }
 

@@ -57,7 +57,6 @@ export class AuthSignInComponent implements OnInit {
      * Sign in
      */
     signIn(): void {
-        debugger;
         this.isLoginerror = false;
         this.submitted = true
         localStorage.clear();
@@ -76,7 +75,6 @@ export class AuthSignInComponent implements OnInit {
         this._authService.signIn(this.signInForm.value)
             .subscribe(
                 (data) => {
-                    debugger
                     console.log(data.status);
                     if (data.status == "User Not Found") {
                         console.log('wrong')

@@ -5,6 +5,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseValidators } from '@fuse/validators';
 import { FuseAlertType } from '@fuse/components/alert';
 import { AuthService } from 'app/core/auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector     : 'auth-reset-password',
@@ -22,13 +23,15 @@ export class AuthResetPasswordComponent implements OnInit
     };
     resetPasswordForm: UntypedFormGroup;
     showAlert: boolean = false;
-
+    email: string;
     /**
      * Constructor
      */
     constructor(
         private _authService: AuthService,
-        private _formBuilder: UntypedFormBuilder
+        private _formBuilder: UntypedFormBuilder,
+        private route: ActivatedRoute,
+        private router: Router
     )
     {
     }
@@ -42,6 +45,13 @@ export class AuthResetPasswordComponent implements OnInit
      */
     ngOnInit(): void
     {
+        this.route.queryParams
+        .subscribe(params => {
+            this.email=params.email;
+           console.log(params); 
+        }
+      );
+
         // Create the form
         this.resetPasswordForm = this._formBuilder.group({
                 password       : ['', Validators.required],
@@ -75,7 +85,7 @@ export class AuthResetPasswordComponent implements OnInit
         this.showAlert = false;
 
         // Send the request to the server
-        this._authService.resetPassword(this.resetPasswordForm.get('password').value)
+        this._authService.resetPassword(this.resetPasswordForm.get('password').value,this.email)
             .pipe(
                 finalize(() => {
 
@@ -91,12 +101,12 @@ export class AuthResetPasswordComponent implements OnInit
             )
             .subscribe(
                 (response) => {
-
                     // Set the alert
                     this.alert = {
                         type   : 'success',
                         message: 'Your password has been reset.'
                     };
+                    this.router.navigate(['/sign-in'])
                 },
                 (response) => {
 
