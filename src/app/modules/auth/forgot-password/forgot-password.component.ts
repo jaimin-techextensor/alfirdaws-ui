@@ -56,6 +56,7 @@ export class AuthForgotPasswordComponent implements OnInit {
                         type: 'error',
                         message: 'Email does not found! Are you sure you are already a member?'
                     };
+                    this.showAlert = true;
                 })
         }
     }
