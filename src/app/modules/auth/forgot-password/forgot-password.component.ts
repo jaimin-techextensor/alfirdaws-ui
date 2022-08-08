@@ -42,21 +42,21 @@ export class AuthForgotPasswordComponent implements OnInit {
             const data = {
                 email: this.forgotPasswordForm.value.email
             }
-            this._authService.forgotPassword(data).subscribe((data) => {
-                
-                this.alert = {
-                    type: 'success',
-                    message: 'Password reset sent! You\'ll receive an email if you are registered on our system.'
-                };
-                this.forgotPasswordForm.reset();
-                this.submitAttempt = false;
-            }), (err) => {
-
-                this.alert = {
-                    type: 'error',
-                    message: 'Email does not found! Are you sure you are already a member?'
-                };
-            }
+            this._authService.forgotPassword(data).subscribe(
+                (data) => {
+                    this.alert = {
+                        type: 'success',
+                        message: 'Password reset sent! You\'ll receive an email if you are registered on our system.'
+                    };
+                    this.forgotPasswordForm.reset();
+                    this.submitAttempt = false;
+                }, (error) => {
+                    debugger
+                    this.alert={
+                        type: 'error',
+                        message: 'Email does not found! Are you sure you are already a member?'
+                    };
+                })
         }
     }
 }
