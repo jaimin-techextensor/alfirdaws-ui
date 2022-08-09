@@ -1,39 +1,204 @@
-<p>settings works!</p>
-<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
-    <div class="flex flex-col flex-auto">
-        <div
-            class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
-            <div>
-                <div class="text-4xl font-extrabold tracking-tight leading-none">Settings</div>
-                <div class="flex items-center mt-0.5 font-medium text-secondary">
-                    Overview of general settings of the Al.Firdaws platform
+<div class="h-400 min-h-400 max-h-400">
+    <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+        <div class="flex flex-col flex-auto">
+            <div
+                class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
+                <div>
+                    <div class="text-4xl font-extrabold tracking-tight leading-none">Settings</div>
+                    <div class="flex items-center mt-0.5 font-medium text-secondary">
+                        Overview of general settings of the Al.Firdaws platform
+                    </div>
                 </div>
             </div>
-        </div>
+    
+            <div class="p-6 md:p-8 space-y-8">
+                <div class="ml-1.5 text-lg font-semibold text-secondary">Users,Roles & Security</div>
+                <hr>
+                <div class="flex flex-auto">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:user" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary user_label">
+                                USERS  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Users Registered</div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:cog" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary user_label">
+                                ROLES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Roles Defined</div>
+                        </div>
+                    </div>
 
-        <div class="p-6 md:p-8 space-y-8">
-            <div class="font-medium">Users,Roles & Security</div>
-            <div class="flex flex-wrap -m-2 mt-2">
-                <div class="relative w-40 h-40 m-2 p-4 shadow rounded-2xl bg-card">
-                    <a class="absolute z-20 top-1.5 right-1.5 w-8 h-8 min-h-8">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:collection" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary truncate module_label">
+                                MODULES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Modules Defined</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="ml-1.5 text-lg font-semibold text-secondary">UI settings & Languages</div>
+                <hr>
+                <div class="flex flex-auto">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:desktop-computer" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary uisettings_label">
+                                UI SETTINGS  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">Dark Modus</div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:cog" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary languages_label">
+                                LANGUAGES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">2 Languages</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-80 h-40 p-6  rounded-2xl overflow-hidden settings-card">
                         
-                    </a>
+                    </div>
+                </div>
+    
+                <div class="ml-1.5 text-lg font-semibold text-secondary">Al.firdaws settings</div>
+                <hr>
+                <div class="flex flex-auto">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:document-duplicate" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary category_label">
+                                CATEGORIES & <br>
+                                SUBCATEGORIES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold cat_txt">
+                                21 Categories<br>
+                                21 SubCategories
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:globe-alt" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary category_label">
+                                COUNTRIES & <br>
+                                REGIONS  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold cat_txt">
+                                21 Countries<br>
+                                21 Regions
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:volume-up" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary campaigntype_label">
+                                CAMPAIGN TYPES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Campaign Types</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-auto">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:user" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary subs_label">
+                                SUBSCRIPTION<br>
+                                MODELS  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">4 Subscription Models</div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:location-marker" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary addr_label">
+                                ADDRESS TYPES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Address Types</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:credit-card" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary payment_label">
+                                PAYMENT TYPES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Payment Types</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-auto">
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:document-text" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary inv_label">
+                                INVOICE TYPES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Invoice Types</div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col w-80 h-40 p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
+                        <div class="flex items-start justify-between">
+                            <mat-icon svgIcon="heroicons_solid:cog" class="user_mat-icon"></mat-icon>
+                            <div class="ml-1.5 text-lg font-semibold text-secondary vat_label">
+                                VAT TYPES  
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                            <div class="ml-1.5 text-lg font-semibold">21 Vat Types</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-80 h-40 p-6  rounded-2xl overflow-hidden settings-card">
+                        
+                    </div>
                 </div>
             </div>
-
-            <div class="font-medium">UI settings & Languages</div>
-            <div class="flex flex-wrap -m-2 mt-2">
-                <a class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
-                </a>
-            </div>
-
-            <div class="font-medium">Al.firdaws settings</div>
-            <div  class="flex flex-wrap -m-2 mt-2" >
-                <a class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
-                </a>
-            </div>
-
         </div>
     </div>
 </div>

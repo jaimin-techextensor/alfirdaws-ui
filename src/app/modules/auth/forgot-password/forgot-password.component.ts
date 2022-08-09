@@ -47,8 +47,8 @@ export class AuthForgotPasswordComponent implements OnInit {
                         type: 'success',
                         message: 'Password reset sent! You\'ll receive an email if you are registered on our system.'
                     };
-                    this.forgotPasswordForm.reset();
                     this.submitAttempt = false;
+                    this.showAlert=true;
                 }, (error) => {
                     this.alert={
                         type: 'error',

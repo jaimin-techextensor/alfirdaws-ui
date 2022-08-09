@@ -61,7 +61,7 @@ export class AuthService
 
     forgotPassword(email):  Observable<any> {
        const forgetpassword_cred = {
-        Email: email,
+        email: email.email,
       } 
         return  this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword',forgetpassword_cred);
      }
