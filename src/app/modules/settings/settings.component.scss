@@ -1,13 +1,15 @@
 .user_mat-icon{
-    min-height: 60px;
-    min-width: 60px;
-    font-size: 60px;
-    line-height: 60px;
-    margin-top: 20px;
+    min-height: 40px;
+    min-width: 40px;
+    font-size: 40px;
+    line-height: 40px;
+    margin-top: 0px;
 }
 .user_label{
-    margin-top: 40px;
+    margin-top: 20px;
     margin-right: 65px;
+    font-size: 60px;
+    text-decoration-color: #3A86F2;
 }
 // .usertxt_label{
 //     margin-top: 0px !important;
@@ -41,6 +43,10 @@
 .vat_label{
     margin-top: 40px;
     margin-right: 40px;
+}
+.lbl{
+    vertical-align: bottom;
+    margin-top: 20;
 }
 hr{
     border: 1px solid rgba(122, 122, 122, 0.541);
