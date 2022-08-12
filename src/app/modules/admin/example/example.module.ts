@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { ExampleComponent } from 'app/modules/admin/example/example.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+//import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
@@ -17,7 +17,7 @@ const exampleRoutes: Route[] = [
 @NgModule({
     declarations: [
         ExampleComponent,
-        DashboardComponent,
+       // DashboardComponent,
         CustomerComponent,
         SubscriptionComponent,
         AdvertisementComponent,

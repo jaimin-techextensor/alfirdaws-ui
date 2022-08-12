@@ -6,6 +6,8 @@ import { InitialDataResolver } from 'app/app.resolvers';
 import { ExampleComponent } from './modules/admin/example/example.component';
 import { AuthSignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { SettingsComponent } from "./modules/settings/settings.component";
+import { DashboardComponent } from './modules/admin/example/dashboard/dashboard.component';
+
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -21,7 +23,7 @@ export const appRoutes: Route[] = [
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
     
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'example', title: 'Home',component:ExampleComponent},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'dashboard', title: 'Home',component:DashboardComponent},
 
     // Auth routes for guests
     {
@@ -79,7 +81,8 @@ export const appRoutes: Route[] = [
         },
         children   : [
             {path: 'example',title:'Home', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
-            {path: 'settings', title:'Setting', loadChildren: ()=> import('app/modules/settings/settings.module').then(m =>m.SettingsModule)}
+            {path: 'settings', title:'Setting', loadChildren: ()=> import('app/modules/settings/settings.module').then(m =>m.SettingsModule)},
+            {path: 'dashboard', title: 'Dashboard', loadChildren: ()=> import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule)}
         ]
     }
 ];
