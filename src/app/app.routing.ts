@@ -79,7 +79,7 @@ export const appRoutes: Route[] = [
         },
         children   : [
             {path: 'example',title:'Home', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
-            {path: 'settingspage', title:'Setting', loadChildren: ()=> import('app/modules/settings/settings.module').then(m =>m.SettingsModule)}
+            {path: 'settings', title:'Setting', loadChildren: ()=> import('app/modules/settings/settings.module').then(m =>m.SettingsModule)}
         ]
     }
 ];
