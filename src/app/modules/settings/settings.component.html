@@ -1,8 +1,9 @@
 <div class="h-800 min-h-400 max-h-400">
     <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
         <div class="flex flex-col flex-auto">
-            
-              <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
+
+            <div
+                class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
                 <div>
                     <div class="text-4xl font-extrabold tracking-tight leading-none">Settings</div>
                     <div class="flex items-center mt-0.5 font-medium text-secondary">
@@ -10,18 +11,18 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="p-6 md:p-8 space-y-8">
                 <!--Users Roles & Security-->
                 <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Users, Roles & Security</div>
                 <div class="flex flex-auto">
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
-                        
+
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:user" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">25</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.usersCount}}</div>
                             <div class="text-md text-secondary">Users Registered</div>
                         </div>
                     </div>
@@ -30,8 +31,8 @@
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:user-group" class="user_mat-icon"></mat-icon>
                         </div>
-                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">10</div>
+                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label" >
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.rolesCount}}</div>
                             <div class="text-md text-secondary">Roles Defined</div>
                         </div>
                     </div>
@@ -41,7 +42,7 @@
                             <mat-icon svgIcon="heroicons_outline:collection" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">14</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.modulesCount}}</div>
                             <div class="text-md text-secondary">Modules</div>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
                 <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">UI settings & Languages</div>
                 <div class="flex flex-auto">
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
-                        
+
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:desktop-computer" class="user_mat-icon"></mat-icon>
                         </div>
@@ -65,23 +66,23 @@
                             <mat-icon svgIcon="heroicons_outline:globe" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">2</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.languagesCount}}</div>
                             <div class="text-md text-secondary">Languages</div>
                         </div>
                     </div>
                 </div>
 
-                 <!-- Al.firdaws settings-->
-                 <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Al.firdaws settings</div>
-                 <div class="flex flex-auto">
+                <!-- Al.firdaws settings-->
+                <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Al.firdaws settings</div>
+                <div class="flex flex-auto">
 
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
-                        
+
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:duplicate" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">12</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.categoriesCount}}</div>
                             <div class="text-md text-secondary">Categories</div>
                         </div>
                     </div>
@@ -91,7 +92,7 @@
                             <mat-icon svgIcon="heroicons_outline:duplicate" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">70</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.subCategoriesCount}}</div>
                             <div class="text-md text-secondary">SubCategories</div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
                             <mat-icon svgIcon="heroicons_outline:flag" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">3</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.countriesCount}}</div>
                             <div class="text-md text-secondary">Countries</div>
                         </div>
                     </div>
@@ -109,20 +110,20 @@
                             <mat-icon svgIcon="mat_outline:location_on" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">35</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.regionsCount}}</div>
                             <div class="text-md text-secondary">Regions</div>
                         </div>
                     </div>
-                 </div>
-                 <div class="flex flex-auto">
-                    
+                </div>
+                <div class="flex flex-auto">
+
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
-                        
+
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">5</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.campaignsCount}}</div>
                             <div class="text-md text-secondary">Campaign Types</div>
                         </div>
                     </div>
@@ -132,7 +133,7 @@
                             <mat-icon svgIcon="mat_outline:subscriptions" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">4</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.subscriptionModelsCount}}</div>
                             <div class="text-md text-secondary">Subscription Models</div>
                         </div>
                     </div>
@@ -141,7 +142,7 @@
                             <mat-icon svgIcon="mat_outline:house" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">3</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.addressTypesCount}}</div>
                             <div class="text-md text-secondary">Address Types</div>
                         </div>
                     </div>
@@ -150,19 +151,19 @@
                             <mat-icon svgIcon="heroicons_outline:credit-card" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">3</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.paymentTypesCount}}</div>
                             <div class="text-md text-secondary">Payment Types</div>
                         </div>
                     </div>
-                 </div>
-                 <div class="flex flex-auto">
-                    
+                </div>
+                <div class="flex flex-auto">
+
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:document-text" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">3</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.invoiceTypesCount}}</div>
                             <div class="text-md text-secondary">Invoice Types</div>
                         </div>
                     </div>
@@ -172,7 +173,7 @@
                             <mat-icon svgIcon="mat_outline:fact_check" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">2</div>
+                            <div class="text-2xl font-semibold leading-tight">{{counterList.vATTypesCount}}</div>
                             <div class="text-md text-secondary">VAT Types</div>
                         </div>
                     </div>
@@ -185,498 +186,8 @@
                             <div class="text-md text-secondary">Case Management</div>
                         </div>
                     </div>
-                    
-                 </div>
-            </div>
-
-
-<!--
-            <div class="p-6 md:p-8 space-y-8">
-                <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Users, Roles & Security</div>
-                
-
-                <div class="flex flex-auto">
-                    <div class="flex flex-col  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6  ">
-                                <mat-icon svgIcon="heroicons_solid:user" class="user_mat-icon"></mat-icon>
-                              
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3 lbl">Users
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-6xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                21   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Users Registered</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:user-group" class="user_mat-icon"></mat-icon>
-                               
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Roles
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                10   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Roles defined</div>
-                        </div>
-                    </div>
-        
-                    <div class="flex flex-col  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:collection" class="user_mat-icon"></mat-icon>
-                               
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Modules
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                14   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Modules</div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-    
-                <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">UI settings & Languages</div>
-
-                <div class="flex flex-auto">
-
-                    <div class="flex flex-col  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:desktop-computer" class="user_mat-icon"></mat-icon>
-                               
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">UI settings
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-black-500">
-                                Dark   
-                            </div>
-                            <div class="text-lg font-medium text-black-600 dark:text-black-500">User Interface</div>
-                        </div>
-                    </div>
-
-
-                    <div class="flex flex-col  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:globe" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Languages
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                2   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Languages</div>
-                        </div>
-                    </div>
-
-
-                </div>
-    
-                <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Al.firdaws settings</div>
-               
-                <div class="flex flex-auto">
-
-                    <div class="flex flex-col w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:duplicate" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Categories
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                12   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Categories</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:duplicate" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Sub Categories
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                70   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Sub Categories</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:flag" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Countries
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                3   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Countries</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col  w-80  h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="mat_outline:location_on" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Regions
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                35   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Regions</div>
-                        </div>
-                    </div>
-        
-                   
-
-                   
-                </div>
-                <div class="flex flex-auto">
-                   
-                    <div class="flex flex-col flex-auto  w-80 h-50  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Campaigns
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                5   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Campaigns</div>
-                        </div>
-                    </div>
-
-                   
-                    <div class="flex flex-row  w-80 h-30 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card">
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
-                            <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
-                        </div>
-                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted">
-                            <div class="text-2xl font-semibold leading-tight">25</div>
-                            <div class="text-md text-secondary">Users Registered</div>
-                        </div>
-                    </div>
-
-                   
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="mat_outline:subscriptions" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Sub models
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                4   
-                            </div>
-                            <div class="text-1xl font-medium text-blue-600 dark:text-blue-500">Subscription models</div>
-                        </div>
-                    </div>
-        
-                    <div class="flex flex-col w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="mat_outline:house" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Address types
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                3   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Address types</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:credit-card" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Payment types
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                4   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Payment types</div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-                <div class="flex flex-auto">
-                    
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:document-text" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Invoice types
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                3   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Invoice types</div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="heroicons_solid:credit-card" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">VAT types
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                2   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">VAT types</div>
-                        </div>
-                    </div>
-                    
-        
-                    <div class="flex flex-col  w-80 h-50 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden settings-card ">
-                        <div class="flex items-start justify-between">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate ">
-                                <mat-icon svgIcon="mat_outline:cases" class="user_mat-icon"></mat-icon>
-                            </div>
-                            <div class="ml-2 -mt-2 -mr-3">Case Management
-                                <button mat-icon-button="" class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base" aria-haspopup="menu" aria-expanded="true" aria-controls="mat-menu-panel-482">
-                                    <span class="mat-button-wrapper">
-                                        <mat-icon role="img" class="mat-icon notranslate icon-size-5 mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="dots-vertical" data-mat-icon-namespace="heroicons_solid">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                                            </svg>
-                                        </mat-icon>
-                                    </span>
-                                    <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
-                                    <span class="mat-button-focus-overlay"></span>
-                                </button>
-                            </div> 
-                        </div>
-                        <div class="flex flex-col items-center mt-2">
-                            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
-                                8   
-                            </div>
-                            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Case Mgmt</div>
-                        </div>
-                    </div>
-
-                
                 </div>
             </div>
-
--->
-
-
         </div>
     </div>
 </div>
