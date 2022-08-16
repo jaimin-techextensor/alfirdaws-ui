@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +14,8 @@ export class SettingsComponent implements OnInit {
   counterList: any;
 
   constructor(
-    private _httpClient: HttpClient,
+      private _httpClient: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,9 @@ export class SettingsComponent implements OnInit {
   async settingsCounter() {
     debugger;
     
+  }
+  navigateToUsers() {
+    this.router.navigateByUrl('/users');
   }
 
 }

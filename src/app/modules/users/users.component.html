@@ -1,124 +1,148 @@
-<div class="h-200 min-h-100 max-h-100">
-    <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
-        <div class="flex flex-col flex-auto">
-            <div
-                class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
-                <div class="flex flex-row">
-                    <div class="w-10">
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
-                            <mat-icon svgIcon="heroicons_outline:user" class="user_mat-icon"></mat-icon>
-                        </div>
-                    </div>
-                    <div class="w-200">
-                        <div class="text-4xl font-extrabold tracking-tight leading-none">Users</div>
-                        <div class="flex items-center mt-0.5 font-medium text-secondary">
-                            Manage Users and Permissions
-                        </div>
-                    </div>
-                    <div>
-                        <button class="ml-4" mat-flat-button [color]="'primary'" (click)="backToSettings()">
-                            <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-                            <span class="ml-2 mr-1">Back</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-row">
-                <div>
-                    <!-- <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
-                        <mat-icon
-                            class="icon-size-5"
-                            matPrefix
-                            [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                        <input
-                            matInput
-                            
-                            [autocomplete]="'off'"
-                            [placeholder]="'Search products'">
-                    </mat-form-field> -->
-                </div>
-                <div>
-                    <button class="ml-4" mat-flat-button [color]="'primary'">
-                        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-                        <span class="ml-2 mr-1">Back</span>
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
-                <!-- <ng-container *ngIf="(products$ | async) as products"> -->
-                <!-- <ng-container *ngIf="products.length > 0; else noProducts"> -->
-                <div class="grid flex-auto">
-                    <!-- Header -->
-                    <div class="users-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
-                        matSort matSortDisableClear>
-                        <div></div>
-                        <div class="hidden md:block" [mat-sort-header]="'sku'">
-                            SKU
-                        </div>
-                        <div  class="hidden md:block" [mat-sort-header]="'name'">
-                            Name
-                        </div>
-                        <div class="hidden sm:block" [mat-sort-header]="'price'">
-                            Price
-                        </div>
-                        <div class="hidden lg:block" [mat-sort-header]="'active'">
-                            Active
-                        </div>
-                    </div>
-                    <!-- <ng-container *ngIf="(products$ | async) as products">
-                                <ng-container *ngFor="let product of products; trackBy: trackByFn"> -->
-                    <div class="users-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
-                        <!-- Image -->
-                        <div class="flex items-center">
-                            <!-- <div
-                                class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded overflow-hidden border">
-                                <img class="w-8" *ngIf="product.thumbnail" [alt]="'Product thumbnail image'"
-                                    [src]="product.thumbnail">
-                                <div class="flex items-center justify-center w-full h-full text-xs font-semibold leading-none text-center uppercase"
-                                    *ngIf="!product.thumbnail">
-                                    NO THUMB
-                                </div>
-                            </div> -->
-                        </div>
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
 
-                        <!-- SKU -->
-                        <div class="hidden md:block truncate">
-                            <!-- {{product.sku}} -->
-                        </div>
-
-                        <!-- Name -->
-                        <div class="truncate">
-                            <!-- {{product.name}} -->
-                        </div>
-
-                        <!-- Price -->
-                        <div class="hidden sm:block">
-                            <!-- {{product.price | currency:'USD':'symbol':'1.2-2'}} -->
-                        </div>
-
-                        <!-- Active -->
-                        <div class="hidden lg:block">
-                            <!-- <ng-container *ngIf="product.active">
-                                <mat-icon
-                                    class="text-green-400 icon-size-5"
-                                    [svgIcon]="'heroicons_solid:check'"></mat-icon>
-                            </ng-container>
-                            <ng-container *ngIf="!product.active">
-                                <mat-icon
-                                    class="text-gray-400 icon-size-5"
-                                    [svgIcon]="'heroicons_solid:x'"></mat-icon>
-                            </ng-container> -->
-                        </div>
-                    </div>
-                    <!-- </ng-container>
-                            </ng-container> -->
-                    <!-- </ng-container> -->
-                    <!-- </ng-container> -->
-                </div>
-                <mat-paginator
-                    class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
-                    [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
-            </div>
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Users</div>
+        <!-- <div class="flex items-center mt-0.5 font-medium text-secondary">
+            Overview of general settings of the Al.Firdaws platform
+        </div> -->
+        <!-- Action -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            
+            <!-- Add user button -->
+            <button class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Add</span>
+            </button>
+            <button class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'arrow_back'"></mat-icon>
+                <span class="ml-2 mr-1">back</span>
+            </button>
         </div>
     </div>
-</div>
+
+    <!-- Main div -->
+    <div class="">
+        
+        <table class="rwd-table">
+          <tbody>
+            <tr>
+              <th>Pitcture</th>
+              <th>Username</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email address</th>
+              <th>Role</th>
+              <th>Is Active</th>
+              <th>Last logged in</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            <tr>
+              <td >
+                
+              </td>
+              <td >
+                ttttttttt
+              </td>
+              <td >
+                ttttttttttt
+              </td>
+              <td >
+                ttttttttt
+              </td>
+              <td >
+                t2@test.com
+              </td>
+              <td >
+               
+              </td>
+              <td>
+                
+              </td>
+              <td>
+                2022-08-16T15:13:42.893
+              </td>
+              <td>
+                Edit
+              </td>
+              <td>
+                Delete
+              </td>
+            </tr>
+            <tr>
+                <td >
+                  
+                </td>
+                <td >
+                  yash
+                </td>
+                <td >
+                  yd
+                </td>
+                <td >
+                  
+                </td>
+                <td >
+                    yash.depani@techextensor.com
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  2022-08-16T15:13:42.893
+                </td>
+                <td>
+                  Edit
+                </td>
+                <td>
+                  Delete
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td >
+                    yashd
+                </td>
+                <td >
+                    yash
+                </td>
+                <td >
+                    patel
+                </td>
+                <td >
+                    yash@test.com
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                    2022-08-16T16:36:58.213
+                </td>
+                <td>
+                  Edit
+                </td>
+                <td>
+                  Delete
+                </td>
+              </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+                    class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
+                    [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
