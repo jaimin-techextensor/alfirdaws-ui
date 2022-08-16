@@ -82,7 +82,7 @@ export class AuthService
             UserName: credentials.email,
             Password: credentials.password
           }
-          return this._httpClient.post(environment.APIUrl + '/Authenticate/Login', login_cred).pipe(
+          return this._httpClient.post(environment.APIUrl + '/authenticate/login', login_cred).pipe(
             switchMap((response: any) => {
               localStorage.setItem('token', response.token)
               this._authenticated = true;

@@ -6,6 +6,7 @@ import { InitialDataResolver } from 'app/app.resolvers';
 import { ExampleComponent } from './modules/admin/example/example.component';
 import { AuthSignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { SettingsComponent } from "./modules/settings/settings.component";
+import { UsersComponent } from "./modules/users/users.component";
 import { DashboardComponent } from './modules/admin/example/dashboard/dashboard.component';
 
 
@@ -82,6 +83,7 @@ export const appRoutes: Route[] = [
         children   : [
             {path: 'example',title:'Home', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
             {path: 'settings', title:'Setting', loadChildren: ()=> import('app/modules/settings/settings.module').then(m =>m.SettingsModule)},
+            {path: 'users', title:'Users', loadChildren: ()=> import('app/modules/users/users.module').then(m =>m.UsersModule)},
             {path: 'dashboard', title: 'Dashboard', loadChildren: ()=> import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule)}
         ]
     }
