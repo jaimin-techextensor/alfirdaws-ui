@@ -18,19 +18,19 @@ import { MarkdownModule } from 'ngx-markdown';
 
 export function tokenGetter() {
     return localStorage.getItem("access_token");
-  }
+}
 
 const routerConfig: ExtraOptions = {
-    preloadingStrategy       : PreloadAllModules,
+    preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled'
 };
 
 @NgModule({
     declarations: [
         AppComponent,
-       
+
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
@@ -51,16 +51,15 @@ const routerConfig: ExtraOptions = {
         HttpClientModule,
         JwtModule.forRoot({
             config: {
-              tokenGetter: tokenGetter,
-              allowedDomains: ["example.com"],
-              disallowedRoutes: ["http://example.com/examplebadroute/"],
+                tokenGetter: tokenGetter,
+                allowedDomains: ["example.com"],
+                disallowedRoutes: ["http://example.com/examplebadroute/"],
             },
-          })
+        })
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
