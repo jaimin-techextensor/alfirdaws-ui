@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -34,7 +35,8 @@ export class UsersComponent implements OnInit {
 
   userList: any[] = [];
   isLoggedIn: boolean = false;
-
+  selectedProductForm: UntypedFormGroup;
+  searchTextForModerator: any;
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -52,15 +54,10 @@ export class UsersComponent implements OnInit {
   }
 
   geUsersList() {
-    debugger;
     this._httpClient.get(environment.APIUrl + 'users').subscribe(
       (data: any) => {
-        debugger
         if (data.success == true) {
           this.userList = data.data
-          this.isLoggedIn = this.userList.length > 0;
-
-          console.log(data.data[0]);
         }
         else {
           console.log("Data not found")
