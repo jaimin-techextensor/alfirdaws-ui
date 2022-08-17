@@ -65,4 +65,8 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+  createUser()
+  {
+    this._router.navigate(['sign-in']);
+  }
 }
