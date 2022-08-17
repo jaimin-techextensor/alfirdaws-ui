@@ -65,8 +65,11 @@ export class UsersComponent implements OnInit {
       }
     );
   }
-  createUser()
-  {
-    this._router.navigate(['sign-in']);
+  createUser() {
+    /* this._router.navigate(['sign-in']); */
+    /* this._router.navigateByUrl('/createuser'); 
+    */
+    this._router.navigateByUrl('/users/add');
+    /* this._router.navigate(['/users/add']); */
   }
 }

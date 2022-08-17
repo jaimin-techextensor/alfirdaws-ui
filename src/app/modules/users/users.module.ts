@@ -14,12 +14,12 @@ import { FuseCardModule } from '@fuse/components/card';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { authSignInRoutes } from 'app/modules/auth/sign-in/sign-in.routing';
-import { CraeteUserComponent } from './create/createuser.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
     declarations: [
         UsersComponent,
-        CraeteUserComponent
+        // AddUserComponent
     ],
     imports: [
         RouterModule.forChild(usersRoutes),
