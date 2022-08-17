@@ -5,7 +5,8 @@ import { environment } from 'environments/environment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import {Location} from '@angular/common'
 @Component({
   selector: 'app-settings',
   templateUrl: './users.component.html',
@@ -41,6 +42,8 @@ export class UsersComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _httpClient: HttpClient,
+    private sanitizer: DomSanitizer,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +60,15 @@ export class UsersComponent implements OnInit {
     this._httpClient.get(environment.APIUrl + 'users').subscribe(
       (data: any) => {
         if (data.success == true) {
+          debugger
           this.userList = data.data
+          this.userList.forEach(element => {
+            // let objectURL = 'data:image/png;base64,' + element.picture;
+            // element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            const reader = new FileReader();
+            reader.onload = (e) => element.picture = e.target.result;
+            reader.readAsDataURL(new Blob([data]));
+         });
         }
         else {
           console.log("Data not found")
@@ -65,11 +76,12 @@ export class UsersComponent implements OnInit {
       }
     );
   }
-  createUser() {
-    /* this._router.navigate(['sign-in']); */
-    /* this._router.navigateByUrl('/createuser'); 
-    */
-    this._router.navigateByUrl('/users/add');
-    /* this._router.navigate(['/users/add']); */
+  createUser()
+  {
+    this._router.navigate(['users/add']);
+  }
+  back()
+  {
+    this._location.back();
   }
 }
