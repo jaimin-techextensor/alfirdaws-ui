@@ -19,7 +19,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 @NgModule({
     declarations: [
         UsersComponent,
-        // AddUserComponent
+        AddUserComponent
     ],
     imports: [
         RouterModule.forChild(usersRoutes),
@@ -28,7 +28,7 @@ import { AddUserComponent } from './add-user/add-user.component';
         MatFormFieldModule,
         MatSortModule,
         MatPaginatorModule,
-        RouterModule.forChild(authSignInRoutes),
+        // RouterModule.forChild(authSignInRoutes),
         MatCheckboxModule,
         MatInputModule,
         MatProgressSpinnerModule,

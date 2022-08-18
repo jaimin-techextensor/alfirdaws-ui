@@ -85,8 +85,7 @@ export const appRoutes: Route[] = [
             { path: 'example', title: 'Home', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
             { path: 'settings', title: 'Setting', loadChildren: () => import('app/modules/settings/settings.module').then(m => m.SettingsModule) },
             { path: 'users', title: 'Users', loadChildren: () => import('app/modules/users/users.module').then(m => m.UsersModule) },
-            { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) },
-            { path: 'users/add', title: 'Users Add', component: AddUserComponent }
+            { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }
 ];
