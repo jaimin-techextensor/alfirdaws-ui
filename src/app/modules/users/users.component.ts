@@ -21,11 +21,11 @@ import {Location} from '@angular/common'
             }
 
             @screen md {
-                grid-template-columns: 48px 112px auto 112px 72px;
+                grid-template-columns: 48px 112px auto 112px 72px 40px;
             }
 
             @screen lg {
-                grid-template-columns: 150px 150px auto 250px 96px 96px 100px;
+                grid-template-columns: 150px 150px auto 250px 96px 96px 100px 40px;
             }
         }
     `
@@ -60,15 +60,15 @@ export class UsersComponent implements OnInit {
     this._httpClient.get(environment.APIUrl + 'users').subscribe(
       (data: any) => {
         if (data.success == true) {
-          debugger
+          //debugger
           this.userList = data.data
-          this.userList.forEach(element => {
+        /*  this.userList.forEach(element => {
             // let objectURL = 'data:image/png;base64,' + element.picture;
             // element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
             const reader = new FileReader();
             reader.onload = (e) => element.picture = e.target.result;
             reader.readAsDataURL(new Blob([data]));
-         });
+         });*/
         }
         else {
           console.log("Data not found")

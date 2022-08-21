@@ -20,7 +20,7 @@ export class AddUserComponent implements OnInit {
       email :['', [Validators.required]],
       username :['', [Validators.required]],
       password : [''],
-      repetepassword : [''],
+      repeatpassword : [''],
       shouldchangepasswordonnextlogin : [''],
       sendactivationemail : [''],
       active : ['']

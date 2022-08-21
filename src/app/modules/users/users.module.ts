@@ -10,6 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
 import { FuseCardModule } from '@fuse/components/card';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
@@ -32,6 +33,7 @@ import { AddUserComponent } from './add-user/add-user.component';
         MatCheckboxModule,
         MatInputModule,
         MatProgressSpinnerModule,
+        MatMenuModule,
         FuseCardModule,
         FuseAlertModule,
         SharedModule
