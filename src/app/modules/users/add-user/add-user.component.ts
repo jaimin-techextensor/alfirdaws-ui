@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {Location} from '@angular/common'
 
 @Component({
@@ -9,6 +9,7 @@ import {Location} from '@angular/common'
 })
 export class AddUserComponent implements OnInit {
   userForm: UntypedFormGroup;
+  @ViewChild('userNgForm') userNgForm: NgForm;
 
   constructor(private _location: Location,private _formBuilder: UntypedFormBuilder,
     ) { }

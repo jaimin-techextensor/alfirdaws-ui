@@ -79,6 +79,7 @@
                                             <div class="hidden sm:block">Role</div>
                                             <div class="hidden sm:block">Is Active</div>
                                             <div class="hidden sm:block">Last Logged In</div>
+                                            
                                             <!-- <div class="hidden sm:block">Delete</div> -->
                                         </div>
                                         <!-- Rows -->
@@ -91,12 +92,9 @@
 
                                                     <div class="flex items-center">
                                                         <div
-                                                            class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded overflow-hidden border">
+                                                            class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border">
                                                             <img class="w-8" *ngIf="user.picture" [src]="user.picture">
-                                                            <div class="flex items-center justify-center w-full h-full text-xs font-semibold leading-none text-center uppercase"
-                                                                *ngIf="!user.picture">
-                                                                NO IMAGE
-                                                            </div>
+                                                            <img class="w-8" *ngIf="user.picture == null" src="../../../assets/images/avatars/icon.jpg">
                                                         </div>
                                                     </div>
 
@@ -150,7 +148,7 @@
                                                 <!-- Product images and status -->
                                                 <div class="flex flex-col items-center sm:items-start mb-8 sm:mb-0">
                                                     <div class="flex flex-col items-center">
-                                                        <div class="w-32 h-44 border rounded overflow-hidden">
+                                                        <div class="w-32 h-44 border rounded-full overflow-hidden">
                                                             <ng-container
                                                                 *ngIf="selectedProductForm.get('images').value.length; else noImage">
                                                                 <img class="w-full h-full object-cover"

@@ -63,11 +63,10 @@ export class UsersComponent implements OnInit {
           debugger
           this.userList = data.data
           this.userList.forEach(element => {
-            // let objectURL = 'data:image/png;base64,' + element.picture;
-            // element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-            const reader = new FileReader();
-            reader.onload = (e) => element.picture = e.target.result;
-            reader.readAsDataURL(new Blob([data]));
+            if(element.picture != null){
+              let objectURL = 'data:image/png;base64,' + element.picture;
+              element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            }
          });
         }
         else {

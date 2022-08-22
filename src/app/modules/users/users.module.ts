@@ -35,6 +35,9 @@ import { AddUserComponent } from './add-user/add-user.component';
         FuseCardModule,
         FuseAlertModule,
         SharedModule
+    ],
+    exports:[
+        AddUserComponent
     ]
 })
 

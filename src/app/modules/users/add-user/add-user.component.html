@@ -60,6 +60,9 @@
                                 <input
                                     matInput
                                     [formControlName]="'firstname'">
+                                <mat-error *ngIf="userForm.get('firstname').hasError('required')">
+                                        FirstName  is required
+                                    </mat-error>
                             </mat-form-field>
                             <mat-form-field class="w-full">
                                 <mat-label>Last Name</mat-label>
