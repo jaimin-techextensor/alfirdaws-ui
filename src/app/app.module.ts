@@ -9,7 +9,7 @@ import { FuseMockApiModule } from '@fuse/lib/mock-api';
 import { FuseConfigModule } from '@fuse/services/config';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-import { usersRoutes } from 'app/modules/users/users.routing';
+import { usersRoutes } from 'app/modules/settings/users/users.routing';
 import { appConfig } from 'app/core/config/app.config';
 import { CoreModule } from 'app/core/core.module';
 import { LayoutModule } from 'app/layout/layout.module';

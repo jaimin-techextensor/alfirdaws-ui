@@ -7,15 +7,15 @@
         <!-- Title -->
         <div>
             <div class="flex flex-auto items-center min-w-0">
-                <mat-icon svgIcon="heroicons_outline:user"></mat-icon>
+                <mat-icon  class="icon-size-10"  svgIcon="heroicons_outline:user"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
                         <div
-                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-0 md:leading-snug truncate">
                             Users</div>
                     </ng-container>
                     <div class="flex items-center">
-                        <div class="ml-1.5 leading-2 truncate text-secondary">Manage users and permissions</div>
+                        <div class="ml-1.5 leading-0 truncate text-secondary">Manage users and permissions</div>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">Create new user</span>
             </button>
-            <button (click)="back()" class="ml-4" mat-flat-button [color]="'primary'">
+            <button (click)="back()" class="ml-4" mat-flat-button [color]="'accent'">
                 <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
                 <span class="ml-2 mr-1">Back</span>
             </button>
@@ -93,8 +93,8 @@
                                                     <div class="flex items-center">
                                                         <div
                                                             class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border">
-                                                            <img class="w-8" *ngIf="user.picture" [src]="user.picture">
-                                                            <img class="w-8" *ngIf="user.picture == null" src="../../../assets/images/avatars/icon.jpg">
+                                                            <img class="w-12" *ngIf="user.picture" [src]="user.picture" >
+                                                            <img class="w-12" *ngIf="user.picture == null" src="../../../assets/images/avatars/icon.jpg">
                                                         </div>
                                                     </div>
 
@@ -132,6 +132,7 @@
                                                     <div class="hidden sm:block">
                                                         {{user.lastLoginTime | date: 'dd/MM/yyyy'}}
                                                     </div>
+
                                                     <div class="hidden sm:block">
                                                         <button class="min-w-10 min-h-7 h-7 px-2 leading-6"
                                                             mat-stroked-button
@@ -141,11 +142,24 @@
                                                                 [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
                                                         </button>
                                                         <mat-menu #summaryMenu="matMenu">
-                                                            <button mat-menu-item>Edit</button>
-                                                            <button mat-menu-item>Delete</button>
-                                                            <button mat-menu-item>Activate</button>
-                                                            <button mat-menu-item>De-activate</button>
+                                                            <button mat-menu-item>
+                                                                <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
+                                                                <span>Edit</span>
+                                                            </button>
+                                                            <button mat-menu-item (click)="deleteSelectedUser()">
+                                                                <mat-icon svgIcon="heroicons_outline:user-remove"></mat-icon>
+                                                                <span>Delete</span>
+                                                            </button>
+                                                            <button mat-menu-item>
+                                                                <mat-icon  class="text-green-400" svgIcon="heroicons_outline:check"></mat-icon>
+                                                                <span>Activate</span>
+                                                            </button>
+                                                            <button mat-menu-item>
+                                                                <mat-icon class="text-red-400" svgIcon="heroicons_outline:x-circle"></mat-icon>
+                                                                <span >De-activate</span>
+                                                            </button>
                                                         </mat-menu>
+
                                                     </div>
                                                 </div>
                                             </ng-container>

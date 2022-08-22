@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { DomSanitizer } from '@angular/platform-browser';
 import {Location} from '@angular/common'
 @Component({
@@ -43,6 +44,7 @@ export class UsersComponent implements OnInit {
     private _router: Router,
     private _httpClient: HttpClient,
     private sanitizer: DomSanitizer,
+    private _fuseConfirmationService: FuseConfirmationService,
     private _location: Location
   ) { }
 
@@ -83,4 +85,43 @@ export class UsersComponent implements OnInit {
   {
     this._location.back();
   }
+
+/**
+     * Delete the selected user using the form data
+     */
+ deleteSelectedUser(): void
+ {
+     // Open the confirmation dialog
+     const confirmation = this._fuseConfirmationService.open({
+         title  : 'Delete user',
+         message: 'Are you sure you want to remove this user? This action cannot be undone!',
+         actions: {
+             confirm: {
+                 label: 'Delete'
+             }
+         }
+     });
+
+     // Subscribe to the confirmation dialog closed action
+     confirmation.afterClosed().subscribe((result) => {
+
+         // If the confirm button pressed...
+         if ( result === 'confirmed' )
+         {
+           /*
+             // Get the user object
+             const product = this.selectedProductForm.getRawValue();
+
+             // Delete the user on the server
+             this._inventoryService.deleteProduct(product.id).subscribe(() => {
+
+               // Refresh the user list
+               //this.closeDetails();
+             });*/
+         }
+     });
+ }
+
+
+
 }
