@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {Location} from '@angular/common'
 import { FuseValidators } from '@fuse/validators';
-import { UsersService } from '../../../service/users.service';
 import { FuseAlertType } from '@fuse/components/alert';
 import { PasswordStrengthValidator } from 'app/shared/helpers/password-strength.validators';
+import { UsersService } from 'app/service/users.service';
 
 @Component({
   selector: 'app-add-user',
