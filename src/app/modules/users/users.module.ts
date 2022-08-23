@@ -16,6 +16,7 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { authSignInRoutes } from 'app/modules/auth/sign-in/sign-in.routing';
 import { AddUserComponent } from './add-user/add-user.component';
+import { UsersService } from 'app/service/users.service';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,9 @@ import { AddUserComponent } from './add-user/add-user.component';
     ],
     exports:[
         AddUserComponent
+    ],
+    providers:[
+        UsersService
     ]
 })
 

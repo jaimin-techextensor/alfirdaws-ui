@@ -1,19 +1,8 @@
 
-<!-- <div class="-ml-4 sm:mt-8">
-    <a
-        mat-button
-        [routerLink]="['../']"
-        [color]="'primary'">
-        <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
-        <span class="ml-2">Back to Users</span>
-    </a>
-</div> -->
 <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
-    <!-- Header -->
     <div
         class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
-        <!-- Loader -->
-        <!-- Title -->
+ 
         <div>
             <div class="flex flex-auto items-center min-w-0">
                 <mat-icon svgIcon="heroicons_outline:user"></mat-icon>
@@ -47,10 +36,13 @@
                     <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
                         <div class="flex mb-4">
                             <div class="box pr-4">
-                                <div class="js--image-preview"></div>
+                                <div *ngIf="!imageData" class="js--image-preview"></div>
+                                <div *ngIf="imageData">
+                                    <img [src]="imageData" />
+                                </div>
                                 <div class="upload-options">
                                     <label>Load Picture
-                                        <input type="file" class="image-upload" accept="image/*" />
+                                        <input type="file" class="image-upload" accept="image/*" (change)="onFileSelect($event)" />
                                     </label>
                                 </div>
                             </div>
@@ -61,11 +53,17 @@
                                         matInput
                                         [formControlName]="'firstname'">
                                 </mat-form-field>
+                                <mat-error *ngIf="userForm.get('firstname').hasError('required')">
+                                    First Name  is required
+                                </mat-error>
                                 <mat-form-field class="w-full">
                                     <mat-label>Last Name</mat-label>
                                     <input
                                         matInput
                                         [formControlName]="'lastname'">
+                                        <mat-error *ngIf="userForm.get('lastname').hasError('required')">
+                                            Last Name  is required
+                                        </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -75,9 +73,9 @@
                                 <mat-label>User name</mat-label>
                                 <input
                                     matInput
-                                    [formControlName]="'firstname'">
-                                <mat-error *ngIf="userForm.get('firstname').hasError('required')">
-                                        FirstName  is required
+                                    [formControlName]="'username'">
+                                <mat-error *ngIf="userForm.get('username').hasError('required')">
+                                        User Name  is required
                                     </mat-error>
                             </mat-form-field>
                             <mat-form-field class="w-full">
@@ -85,6 +83,12 @@
                                 <input
                                     matInput
                                     [formControlName]="'email'">
+                                    <mat-error *ngIf="userForm.get('email').hasError('required')">
+                                        Email  is required
+                                    </mat-error>
+                                    <mat-error *ngIf=" userForm.get('email').hasError('email')">
+                                        Please enter a valid email
+                                    </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="flex mb-3">
@@ -93,12 +97,21 @@
                                 <input type="password"
                                     matInput
                                     [formControlName]="'password'">
+                                    <mat-error *ngIf="userForm.get('password').hasError('required')">
+                                        password  is required
+                                    </mat-error>
                             </mat-form-field>
                             <mat-form-field class="w-full">
                                 <mat-label>Password (repeat)</mat-label>
                                 <input type="password"
                                     matInput
                                     [formControlName]="'repeatpassword'">
+                                    <mat-error *ngIf="userForm.get('repeatpassword').hasError('required')">
+                                        password  is required
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.get('repeatpassword').hasError('mustMatch')">
+                                        Passwords must match
+                                    </mat-error>
                             </mat-form-field>
                         </div>
                         <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'shouldchangepasswordonnextlogin'">
@@ -114,12 +127,11 @@
                             <button (click)="back()" class="mr-4" mat-flat-button [color]="'primary'">
                                 <span class="ml-2 mr-1">Cancel</span>
                             </button>
-                            <button mat-flat-button [color]="'primary'">
+                            <button mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="addUser()">
                                 <span class="ml-2 mr-1">Submit</span>
                             </button>
                         </div>
                     </div>
-                    
                 </div>
             </form>
         </div>
