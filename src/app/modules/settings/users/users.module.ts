@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UsersComponent } from 'app/modules/users/users.component';
-import { usersRoutes } from 'app/modules/users/users.routing';
+import { UsersComponent } from 'app/modules/settings/users/users.component';
+import { usersRoutes } from 'app/modules/settings/users/users.routing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
