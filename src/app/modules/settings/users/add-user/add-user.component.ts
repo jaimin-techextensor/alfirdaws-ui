@@ -5,6 +5,7 @@ import { FuseValidators } from '@fuse/validators';
 import { FuseAlertType } from '@fuse/components/alert';
 import { PasswordStrengthValidator } from 'app/shared/helpers/password-strength.validators';
 import { UsersService } from 'app/service/users.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -19,13 +20,16 @@ export class AddUserComponent implements OnInit {
   showAlert: boolean = false;
   imageSrc: string;
   imageData: string;
+  userId:string;
+  userData : any;
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
     message: ''
 };
   constructor(private _location: Location,
     private _formBuilder: UntypedFormBuilder,
-    private _userService : UsersService
+    private _userService : UsersService,
+    private route: ActivatedRoute
     ) { }
 
 
@@ -35,7 +39,6 @@ export class AddUserComponent implements OnInit {
       lastname : ['', [Validators.required]],
       email :['', [Validators.required,Validators.email]],
       username :['', [Validators.required]],
-     // password : ['',[Validators.required]],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), PasswordStrengthValidator])],
       repeatpassword : ['',[Validators.required]],
       shouldchangepasswordonnextlogin : [''],
@@ -46,13 +49,17 @@ export class AddUserComponent implements OnInit {
             {
                 validators: FuseValidators.mustMatch('password', 'repeatpassword')
             })
+            this.route.paramMap.subscribe((params: ParamMap) => {
+              this.userId= params.get('userId')
+              this.GetUsers(this.userId);
+            })
+           
   }
   back()
   {
     this._location.back();
   }
   addUser(): void {
-    debugger
     this.isLoginerror = false;
     this.submitted = true
     localStorage.clear();
@@ -107,13 +114,13 @@ export class AddUserComponent implements OnInit {
     this.imageSrc= reader.result.split(',')[1];
     var j= this.userForm;
   }
-  GetUsers()
+  GetUsers(Id: string)
   { 
-    // this._userService.GetUser(16).subscribe(
-    // (data) => {
-    //   debugger
-    //   var data1 =data;
-    // })
-
+    this._userService.GetUser(Id).subscribe((data) => {
+      if(data.success == true)
+      {
+        this.userData = data.data;
+      }
+    })
   }
 }

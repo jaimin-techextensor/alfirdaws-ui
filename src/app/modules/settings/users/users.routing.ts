@@ -10,5 +10,9 @@ export const usersRoutes: Route[] = [
     {
         path: 'add-user',
         component: AddUserComponent
+    },
+    {
+        path: 'edit-user/:userId',
+        component: AddUserComponent
     }
 ];

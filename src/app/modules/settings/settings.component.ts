@@ -33,8 +33,6 @@ export class SettingsComponent implements OnInit {
   }
 
   async settingsCounter() {
-    debugger;
-    
   }
   navigateToUsers() {
     this.router.navigateByUrl('/users');
