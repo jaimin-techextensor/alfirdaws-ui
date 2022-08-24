@@ -10,8 +10,8 @@ export class UsersService {
 
   constructor(private _httpClient: HttpClient,) { }
 
-  GetUserList(): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + 'users?PageNumber=1&PageSize=2').pipe(
+  GetUserList(pageIndex: number, pageSize: number): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + "users?PageNumber=" + pageIndex + "&PageSize=" + pageSize).pipe(
       switchMap((response: any) => {
         return of(response);
       })

@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
@@ -40,7 +41,9 @@ export class UsersComponent implements OnInit {
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
   userListModel: UserList = new UserList();
-  displayedColumns: string[] = ['Name', 'Email', 'IsActive'];
+  displayedColumns: string[] = ['Picture','UserName', 'Name', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
+  dataSource: any;
+  pageEvent: PageEvent;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -53,7 +56,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.geUsersList();
+    this.geUsersList(null);
   }
 
   backToSettings(): void {
@@ -62,39 +65,30 @@ export class UsersComponent implements OnInit {
 
   }
 
-  geUsersList() {
-    debugger
-    this._userService.GetUserList().subscribe(res => {
+  geUsersList(event: any) {
+    this.userListModel.PageSize = event?.pageSize ? event?.pageSize : this.userListModel.PageSize;
+    this.userListModel.PageNumber = event?.pageIndex ? event?.pageIndex : this.userListModel.PageNumber;
+    this._userService.GetUserList(this.userListModel.PageNumber, this.userListModel.PageSize).subscribe(res => {
       if (res.success == true) {
-          this.userList = res.data;
-          this.userList.forEach(element => {
-            if (element.picture != null) {
-              let objectURL = 'data:image/png;base64,' + element.picture;
-              element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-            }
-          });
-        }
-        else {
-          console.log("Data not found")
-        }
-    });
-    /* this._httpClient.get(environment.APIUrl + "users?PageNumber=" + this.userListModel.PageNumber +"&PageSize=" + this.userListModel.PageSize).subscribe(
-      (data: any) => {
-        if (data.success == true) {
-          //debugger
-          this.userList = data.data
-          this.userList.forEach(element => {
-            if (element.picture != null) {
-              let objectURL = 'data:image/png;base64,' + element.picture;
-              element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-            }
-          });
-        }
-        else {
-          console.log("Data not found")
+        this.userList = res.data;
+        this.userList.forEach(element => {
+          if (element.picture != null) {
+            let objectURL = 'data:image/png;base64,' + element.picture;
+            element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          }
+        });
+        this.dataSource = new MatTableDataSource(this.userList);
+        if(res.pageInfo) {
+          this.userListModel.PageNumber = res.pageInfo.currentPage;
+          this.userListModel.PageSize = res.pageInfo.pageSize;
+          this.userListModel.TotalPages = res.pageInfo.totalPages;
+          this.userListModel.TotalCount= res.pageInfo.totalCount;
         }
       }
-    ); */
+      else {
+        console.log("Data not found")
+      }
+    });
   }
   createUser() {
     this._router.navigate(['users/add']);
@@ -135,16 +129,5 @@ export class UsersComponent implements OnInit {
           });*/
       }
     });
-  }
-
-  getQueryParams() {
-    debugger
-    let params = new HttpParams();
-    var that = this;
-    Object.keys(that.userListModel).map(k => {
-      params[k] = that.userListModel[k];
-    });
-    /* params.append("someParamKey", this.someParamValue) */
-    return params;
   }
 }

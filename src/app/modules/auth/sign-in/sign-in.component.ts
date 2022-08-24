@@ -87,7 +87,6 @@ export class AuthSignInComponent implements OnInit {
                         this.showAlert = true;
                         // this._router.navigate(['sign-in']);
                     } else {
-                        debugger
                         // localStorage.setItem('token', data.token)
                         // Set the redirect url.
                         // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
