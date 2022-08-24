@@ -8,22 +8,28 @@ import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 })
 export class UsersService {
 
-  constructor( private _httpClient: HttpClient,) { }
-  AddUser(data:any ): Observable<any>
-  {
+  constructor(private _httpClient: HttpClient,) { }
+
+  GetUserList(): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + 'users?PageNumber=1&PageSize=2').pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+  AddUser(data: any): Observable<any> {
     return this._httpClient.post(environment.APIUrl + 'users', data).pipe(
       switchMap((response: any) => {
         return of(response);
       })
     );
   }
-  GetUser(Id: string): Observable<any>
-  {
-    return this._httpClient.get(environment.APIUrl + 'users/'+Id).pipe(
+  GetUser(Id: string): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + 'users/' + Id).pipe(
       switchMap((response: any) => {
         return of(response);
       })
-   );
+    );
   }
 
 }

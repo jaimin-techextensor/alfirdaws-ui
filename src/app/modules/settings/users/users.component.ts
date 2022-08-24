@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { Location } from '@angular/common';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { DomSanitizer } from '@angular/platform-browser';
-import {Location} from '@angular/common'
+import { ActivatedRoute, Router } from '@angular/router';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { UsersService } from 'app/service/users.service';
+import { UserList } from './user-list';
 @Component({
   selector: 'app-settings',
   templateUrl: './users.component.html',
@@ -34,18 +34,22 @@ import {Location} from '@angular/common'
 })
 /* grid-template-columns: 48px 112px auto 112px 96px 96px 72px; */
 export class UsersComponent implements OnInit {
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   userList: any[] = [];
   isLoggedIn: boolean = false;
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
+  userListModel: UserList = new UserList();
+  displayedColumns: string[] = ['Name', 'Email', 'IsActive'];
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _httpClient: HttpClient,
     private sanitizer: DomSanitizer,
     private _fuseConfirmationService: FuseConfirmationService,
-    private _location: Location
+    private _location: Location,
+    private _userService: UsersService
   ) { }
 
   ngOnInit(): void {
@@ -59,69 +63,88 @@ export class UsersComponent implements OnInit {
   }
 
   geUsersList() {
-    this._httpClient.get(environment.APIUrl + 'users').subscribe(
+    debugger
+    this._userService.GetUserList().subscribe(res => {
+      if (res.success == true) {
+          this.userList = res.data;
+          this.userList.forEach(element => {
+            if (element.picture != null) {
+              let objectURL = 'data:image/png;base64,' + element.picture;
+              element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            }
+          });
+        }
+        else {
+          console.log("Data not found")
+        }
+    });
+    /* this._httpClient.get(environment.APIUrl + "users?PageNumber=" + this.userListModel.PageNumber +"&PageSize=" + this.userListModel.PageSize).subscribe(
       (data: any) => {
         if (data.success == true) {
           //debugger
           this.userList = data.data
           this.userList.forEach(element => {
-            if(element.picture != null){
+            if (element.picture != null) {
               let objectURL = 'data:image/png;base64,' + element.picture;
               element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
             }
-         });
+          });
         }
         else {
           console.log("Data not found")
         }
       }
-    );
+    ); */
   }
-  createUser()
-  {
+  createUser() {
     this._router.navigate(['users/add']);
   }
-  back()
-  {
+  back() {
     this._location.back();
   }
 
-/**
-     * Delete the selected user using the form data
-     */
- deleteSelectedUser(): void
- {
-     // Open the confirmation dialog
-     const confirmation = this._fuseConfirmationService.open({
-         title  : 'Delete user',
-         message: 'Are you sure you want to remove this user? This action cannot be undone!',
-         actions: {
-             confirm: {
-                 label: 'Delete'
-             }
-         }
-     });
+  /**
+       * Delete the selected user using the form data
+       */
+  deleteSelectedUser(): void {
+    // Open the confirmation dialog
+    const confirmation = this._fuseConfirmationService.open({
+      title: 'Delete user',
+      message: 'Are you sure you want to remove this user? This action cannot be undone!',
+      actions: {
+        confirm: {
+          label: 'Delete'
+        }
+      }
+    });
 
-     // Subscribe to the confirmation dialog closed action
-     confirmation.afterClosed().subscribe((result) => {
+    // Subscribe to the confirmation dialog closed action
+    confirmation.afterClosed().subscribe((result) => {
 
-         // If the confirm button pressed...
-         if ( result === 'confirmed' )
-         {
-           /*
-             // Get the user object
-             const product = this.selectedProductForm.getRawValue();
+      // If the confirm button pressed...
+      if (result === 'confirmed') {
+        /*
+          // Get the user object
+          const product = this.selectedProductForm.getRawValue();
 
-             // Delete the user on the server
-             this._inventoryService.deleteProduct(product.id).subscribe(() => {
+          // Delete the user on the server
+          this._inventoryService.deleteProduct(product.id).subscribe(() => {
 
-               // Refresh the user list
-               //this.closeDetails();
-             });*/
-         }
-     });
- }
+            // Refresh the user list
+            //this.closeDetails();
+          });*/
+      }
+    });
+  }
 
-
-
+  getQueryParams() {
+    debugger
+    let params = new HttpParams();
+    var that = this;
+    Object.keys(that.userListModel).map(k => {
+      params[k] = that.userListModel[k];
+    });
+    /* params.append("someParamKey", this.someParamValue) */
+    return params;
+  }
 }
