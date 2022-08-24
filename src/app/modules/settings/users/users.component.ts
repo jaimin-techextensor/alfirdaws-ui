@@ -15,6 +15,7 @@ import { UserList } from './user-list';
   styles: [
     /* language=SCSS */
     `
+        tr.mat-row { height: 75px; }
         .inventory-grid {
             grid-template-columns: 48px auto 40px;
 
