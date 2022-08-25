@@ -8,9 +8,12 @@
                 <mat-icon svgIcon="heroicons_outline:user"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
-                        <div
+                        <div *ngIf = "!isEditMode"
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
                         Create new user</div>
+                        <div *ngIf = "isEditMode && userData"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                        Edit user : {{userData.name}} {{userData.lastname}}</div>
                     </ng-container>
                     
                 </div>
@@ -51,17 +54,17 @@
                                     <mat-label>First Name</mat-label>
                                     <input
                                         matInput
-                                        [formControlName]="'firstname'">
+                                        [formControlName]="'name'">
                                 </mat-form-field>
-                                <mat-error *ngIf="userForm.get('firstname').hasError('required')">
+                                <mat-error *ngIf="userForm.get('name').hasError('required')">
                                     First Name  is required
                                 </mat-error>
                                 <mat-form-field class="w-full">
                                     <mat-label>Last Name</mat-label>
                                     <input
                                         matInput
-                                        [formControlName]="'lastname'">
-                                        <mat-error *ngIf="userForm.get('lastname').hasError('required')">
+                                        [formControlName]="'lastName'">
+                                        <mat-error *ngIf="userForm.get('lastName').hasError('required')">
                                             Last Name  is required
                                         </mat-error>
                                 </mat-form-field>
@@ -73,8 +76,8 @@
                                 <mat-label>User name</mat-label>
                                 <input
                                     matInput
-                                    [formControlName]="'username'">
-                                <mat-error *ngIf="userForm.get('username').hasError('required')">
+                                    [formControlName]="'userName'">
+                                <mat-error *ngIf="userForm.get('userName').hasError('required')">
                                         User Name  is required
                                     </mat-error>
                             </mat-form-field>
@@ -114,10 +117,10 @@
                                     </mat-error>
                             </mat-form-field>
                         </div>
-                        <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'shouldchangepasswordonnextlogin'">
+                        <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'changePwdAtNextLogin'">
                             Should change password on next login
                         </mat-checkbox>
-                        <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'sendactivationemail'">
+                        <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'sendActivationEmail'">
                             Send activation email
                         </mat-checkbox>
                         <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'active'">
@@ -127,7 +130,10 @@
                             <button (click)="back()" class="mr-4" mat-flat-button [color]="'primary'">
                                 <span class="ml-2 mr-1">Cancel</span>
                             </button>
-                            <button mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="addUser()">
+                            <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="editUser()">
+                                <span class="ml-2 mr-1">Submit</span>
+                            </button>
+                            <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="addUser()">
                                 <span class="ml-2 mr-1">Submit</span>
                             </button>
                         </div>

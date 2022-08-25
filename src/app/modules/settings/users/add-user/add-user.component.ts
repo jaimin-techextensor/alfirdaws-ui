@@ -22,6 +22,7 @@ export class AddUserComponent implements OnInit {
   imageData: string;
   userId:string;
   userData : any;
+  isEditMode : boolean=false;
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
     message: ''
@@ -35,23 +36,29 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this._formBuilder.group({
-      firstname : ['', [Validators.required]],
-      lastname : ['', [Validators.required]],
+      name : ['', [Validators.required]],
+      lastName : ['', [Validators.required]],
       email :['', [Validators.required,Validators.email]],
-      username :['', [Validators.required]],
+      userName :['', [Validators.required]],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), PasswordStrengthValidator])],
       repeatpassword : ['',[Validators.required]],
-      shouldchangepasswordonnextlogin : [''],
-      sendactivationemail : [''],
+      changePwdAtNextLogin : [''],
+      sendActivationEmail : [''],
       active : [''],
-      picture:['']
+      picture:[''],
+      userId:['']
     },
             {
                 validators: FuseValidators.mustMatch('password', 'repeatpassword')
             })
             this.route.paramMap.subscribe((params: ParamMap) => {
-              this.userId= params.get('userId')
-              this.GetUsers(this.userId);
+               
+              this.userId= params.get('userId');
+              if(this.userId  != null)
+              {
+                this.GetUsers(this.userId);
+                this.isEditMode = true;
+              }
             })
            
   }
@@ -71,17 +78,16 @@ export class AddUserComponent implements OnInit {
       this.userForm.disable();
       // Hide the alert
       this.showAlert = false;
-      var values = this.userForm.value;
       let UserModel={
-        UserName :this.userForm.value["username"],
-        Name :this.userForm.value["firstname"],
-        LastName :this.userForm.value["lastname"],
-        Picture : this.imageSrc,
-        Email : this.userForm.value["email"],
-        Active : this.userForm.value["active"],
-        Password: this.userForm.value["password"],
-        ChangePwdAtNextLogin: this.userForm.value["shouldchangepasswordonnextlogin"],
-        SendActivationEmail:this.userForm.value["sendactivationemail"]
+        userName :this.userForm.value["userName"],
+        name :this.userForm.value["name"],
+        lastName :this.userForm.value["lastName"],
+        picture : this.imageData,
+        email : this.userForm.value["email"],
+        active : this.userForm.value["active"],
+        password: this.userForm.value["password"],
+        changePwdAtNextLogin: this.userForm.value["changePwdAtNextLogin"],
+        sendActivationEmail:this.userForm.value["sendActivationEmail"]
       }
       this._userService.AddUser(UserModel).subscribe(
         (data) => {
@@ -97,6 +103,34 @@ export class AddUserComponent implements OnInit {
         })
   }
 
+  editUser(): void {
+    debugger
+    this.isLoginerror = false;
+    this.submitted = true
+    localStorage.clear();
+    // Return if the form is invalid
+    if (this.userForm.invalid) {
+        return;
+    }
+    // Disable the form
+      this.userForm.disable();
+      // Hide the alert
+      this.showAlert = false;
+     
+    this.userForm.value["picture"]=this.imageData;
+    this._userService.EditUser(this.userForm.value).subscribe(
+      (data) => {
+        if(data.success == true)
+        {
+          this.alert = {
+            type: 'success',
+            message: 'User Created Successfully!!'
+         };
+         this.showAlert = true;
+          this._location.back();
+        }
+      })
+  }
   onFileSelect(e) {
     const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
     const pattern = /image-*/;
@@ -120,6 +154,11 @@ export class AddUserComponent implements OnInit {
       if(data.success == true)
       {
         this.userData = data.data;
+        this.imageData = this.userData.picture;
+        this.userForm.get("repeatpassword").setValue(this.userData.password);
+        this.userForm.value["userId"]=this.userData.userId;
+
+        this.userForm.patchValue(this.userData);
       }
     })
   }

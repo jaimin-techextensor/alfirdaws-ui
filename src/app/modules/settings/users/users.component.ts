@@ -74,7 +74,7 @@ export class UsersComponent implements OnInit {
         this.userList = res.data;
         this.userList.forEach(element => {
           if (element.picture != null) {
-            let objectURL = 'data:image/png;base64,' + element.picture;
+            let objectURL = element.picture;
             element.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
           }
         });
