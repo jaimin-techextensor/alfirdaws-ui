@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
 import { UserList } from './user-list';
@@ -45,11 +45,15 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['Picture', 'UserName', 'Name', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
+  alert: { type: FuseAlertType; message: string } = {
+    type: 'success',
+    message: ''
+  };
+  showAlert = false;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private _httpClient: HttpClient,
     private sanitizer: DomSanitizer,
     private _fuseConfirmationService: FuseConfirmationService,
     private _location: Location,
@@ -96,9 +100,11 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
   createUser() {
     this._router.navigate(['users/add']);
   }
+
   back() {
     this._location.back();
   }
@@ -126,5 +132,19 @@ export class UsersComponent implements OnInit {
         })
       }
     });
+  }
+
+  ngActivateDeactivateUser(element: any) {
+    element.active = !element.active;
+    this._userService.activateDeactivateUser(element.userId, element.active).subscribe(
+      (data) => {
+        if (data.success == true) {
+          this.alert = {
+            type: 'success',
+            message: 'User Updated Successfully!!'
+          };
+          this.showAlert = true;
+        }
+      })
   }
 }

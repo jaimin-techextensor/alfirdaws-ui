@@ -104,7 +104,6 @@ export class AddUserComponent implements OnInit {
   }
 
   editUser(): void {
-    debugger
     this.isLoginerror = false;
     this.submitted = true
     localStorage.clear();

@@ -25,7 +25,6 @@ export class UsersService {
     );
   }
   EditUser(data: any): Observable<any> {
-    debugger
     return this._httpClient.put(environment.APIUrl + 'users', data).pipe(
       switchMap((response: any) => {
         return of(response);
@@ -39,11 +38,18 @@ export class UsersService {
       })
     );
   }
- DeleteUser(Id: string): Observable<any> {
-  return this._httpClient.delete(environment.APIUrl + 'users/' + Id).pipe(
-    switchMap((response: any) => {
-      return of(response);
-    })
-  );
-}
+  DeleteUser(Id: string): Observable<any> {
+    return this._httpClient.delete(environment.APIUrl + 'users/' + Id).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+  activateDeactivateUser(id: number, isActive: boolean): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + 'activateDeactivateUser?id=' + id + '&isActive=' + isActive).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
 }
