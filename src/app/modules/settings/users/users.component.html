@@ -238,7 +238,7 @@
           [pageSizeOptions]="[5, 10, 15, 20]"
           [pageIndex]="userListModel.PageNumber"
           [pageSize]="userListModel.PageSize"
-          (page)="geUsersList($event)"
+          (page)="getUsersList($event)"
           [length]="userListModel.TotalCount"
           showFirstLastButtons
         >
