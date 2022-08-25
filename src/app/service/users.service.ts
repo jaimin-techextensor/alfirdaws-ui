@@ -24,6 +24,14 @@ export class UsersService {
       })
     );
   }
+  EditUser(data: any): Observable<any> {
+    debugger
+    return this._httpClient.put(environment.APIUrl + 'users', data).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
   GetUser(Id: string): Observable<any> {
     return this._httpClient.get(environment.APIUrl + 'users/' + Id).pipe(
       switchMap((response: any) => {
