@@ -34,8 +34,12 @@ export class SettingsComponent implements OnInit {
 
   async settingsCounter() {
   }
+
   navigateToUsers() {
     this.router.navigateByUrl('/users');
   }
 
+  navigateToRoles() {
+    this.router.navigateByUrl('/roles');
+  }
 }
