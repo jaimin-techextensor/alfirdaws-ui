@@ -13,7 +13,7 @@
                         Create new user</div>
                         <div *ngIf = "isEditMode && userData"
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                        Edit user : {{userData.name}} {{userData.lastname}}</div>
+                        Edit user : {{userData.name}} {{userData.lastName}}</div>
                     </ng-container>
                     
                 </div>
@@ -55,10 +55,11 @@
                                     <input
                                         matInput
                                         [formControlName]="'name'">
+                               
+                                    <mat-error *ngIf="userForm.get('name').hasError('required')">
+                                        First Name  is required
+                                    </mat-error>
                                 </mat-form-field>
-                                <mat-error *ngIf="userForm.get('name').hasError('required')">
-                                    First Name  is required
-                                </mat-error>
                                 <mat-form-field class="w-full">
                                     <mat-label>Last Name</mat-label>
                                     <input
@@ -101,7 +102,10 @@
                                     matInput
                                     [formControlName]="'password'">
                                     <mat-error *ngIf="userForm.get('password').hasError('required')">
-                                        password  is required
+                                        Password is required
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.get('password').hasError('minlength')">
+                                        Password should contain 8 characters
                                     </mat-error>
                             </mat-form-field>
                             <mat-form-field class="w-full">
@@ -110,7 +114,7 @@
                                     matInput
                                     [formControlName]="'repeatpassword'">
                                     <mat-error *ngIf="userForm.get('repeatpassword').hasError('required')">
-                                        password  is required
+                                        Password is required
                                     </mat-error>
                                     <mat-error *ngIf="userForm.get('repeatpassword').hasError('mustMatch')">
                                         Passwords must match
@@ -127,14 +131,14 @@
                             Active
                         </mat-checkbox>
                         <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
-                            <button (click)="back()" class="mr-4" mat-flat-button [color]="'primary'">
+                            <button (click)="back()" class="mr-4" mat-flat-button >
                                 <span class="ml-2 mr-1">Cancel</span>
                             </button>
                             <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="editUser()">
-                                <span class="ml-2 mr-1">Submit</span>
+                                <span class="ml-2 mr-1">Update</span>
                             </button>
                             <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="userForm.disabled" (click)="addUser()">
-                                <span class="ml-2 mr-1">Submit</span>
+                                <span class="ml-2 mr-1">Save</span>
                             </button>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
 import { UserList } from './user-list';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './users.component.html',
@@ -61,7 +62,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.geUsersList(null);
+    this.getUsersList(null);
   }
 
   backToSettings(): void {
@@ -70,7 +71,7 @@ export class UsersComponent implements OnInit {
 
   }
 
-  geUsersList(event: any) {
+  getUsersList(event: any) {
     this.userList = [];
     this.userListModel.PageSize = event?.pageSize ? event.pageSize : this.userListModel.PageSize;
     this.userListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.userListModel.PageNumber;
@@ -141,9 +142,13 @@ export class UsersComponent implements OnInit {
         if (data.success == true) {
           this.alert = {
             type: 'success',
-            message: 'User Updated Successfully!!'
+            message: 'User updated successfully!!'
           };
           this.showAlert = true;
+          setTimeout(()=>{
+            this.showAlert = false;
+          },2000);
+         
         }
       })
   }
