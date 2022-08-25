@@ -1,16 +1,22 @@
-<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+<div
+  class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent"
+>
   <!-- Header -->
-  <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+  <div
+    class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b"
+  >
     <!-- Loader -->
-    
+
     <!-- Title -->
     <div>
       <div class="flex flex-auto items-center min-w-0">
-        <mat-icon class="icon-size-10"  svgIcon="heroicons_outline:user">       
+        <mat-icon class="icon-size-10" svgIcon="heroicons_outline:user">
         </mat-icon>
         <div class="flex flex-col min-w-0 ml-4">
           <ng-container>
-            <div class="text-2xl md:text-3xl font-semibold tracking-tight leading-0 md:leading-snug truncate">
+            <div
+              class="text-2xl md:text-3xl font-semibold tracking-tight leading-0 md:leading-snug truncate"
+            >
               Users
             </div>
           </ng-container>
@@ -25,8 +31,14 @@
 
     <!-- Actions -->
     <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-      <mat-form-field  class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
-        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'" > 
+      <mat-form-field
+        class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64"
+      >
+        <mat-icon
+          class="icon-size-5"
+          matPrefix
+          [svgIcon]="'heroicons_solid:search'"
+        >
         </mat-icon>
         <input
           matInput
@@ -36,7 +48,12 @@
           [ngModelOptions]="{ standalone: true }"
         />
       </mat-form-field>
-      <button  class="ml-4"  mat-flat-button  [color]="'primary'"  [routerLink]="['add-user']">
+      <button
+        class="ml-4"
+        mat-flat-button
+        [color]="'primary'"
+        [routerLink]="['add-user']"
+      >
         <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
         <span class="ml-2 mr-1">Create new user</span>
       </button>
@@ -50,17 +67,34 @@
   <!-- User table list-->
   <div class="flex flex-auto overflow-hidden">
     <!-- Users list -->
-    <div  class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto" >
+    <div
+      class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+    >
       <div class="grid">
-        <table  *ngIf="userList.length > 0"  mat-table   [dataSource]="dataSource"  class="mat-elevation-z8">
+        <table
+          *ngIf="userList.length > 0"
+          mat-table
+          [dataSource]="dataSource"
+          class="mat-elevation-z8"
+        >
           <!-- Picture column-->
           <ng-container matColumnDef="Picture">
             <th mat-header-cell *matHeaderCellDef>Picture</th>
             <td mat-cell *matCellDef="let element">
-              <div class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border">                        
-                <img  class="w-12"  *ngIf="element.picture"  [src]="element.picture" />
-                <img  class="w-12"  *ngIf="element.picture == null"  src="../../../assets/images/avatars/icon.jpg"  />
-              </div> 
+              <div
+                class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border"
+              >
+                <img
+                  class="w-12"
+                  *ngIf="element.picture"
+                  [src]="element.picture"
+                />
+                <img
+                  class="w-12"
+                  *ngIf="element.picture == null"
+                  src="../../../assets/images/avatars/icon.jpg"
+                />
+              </div>
             </td>
           </ng-container>
 
@@ -76,7 +110,7 @@
           <ng-container matColumnDef="Name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.name + ' ' + element.lastName }}
+              {{ element.name + " " + element.lastName }}
             </td>
           </ng-container>
 
@@ -93,17 +127,23 @@
             <th mat-header-cell *matHeaderCellDef>Is Active</th>
             <td mat-cell *matCellDef="let element">
               <ng-container *ngIf="element.active">
-                <mat-icon  class="text-green-400 icon-size-6" [svgIcon]="'heroicons_solid:check'">
+                <mat-icon
+                  class="text-green-400 icon-size-6"
+                  [svgIcon]="'heroicons_solid:check'"
+                >
                 </mat-icon>
               </ng-container>
               <ng-container *ngIf="!element.active">
-                <mat-icon  class="text-red-400 icon-size-5"   [svgIcon]="'heroicons_solid:x'">
+                <mat-icon
+                  class="text-red-400 icon-size-5"
+                  [svgIcon]="'heroicons_solid:x'"
+                >
                 </mat-icon>
               </ng-container>
             </td>
           </ng-container>
 
-            <!-- Last logged in Column -->
+          <!-- Last logged in Column -->
           <ng-container matColumnDef="LastLoginTime">
             <th mat-header-cell *matHeaderCellDef>Last Login Time</th>
             <td mat-cell *matCellDef="let element">
@@ -111,63 +151,80 @@
             </td>
           </ng-container>
 
-            <!-- Drop down actions -->
+          <!-- Drop down actions -->
           <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef="let element">
               <div class="hidden sm:block">
-                
-                <button  class="min-w-10 min-h-7 h-7 px-2 leading-6"  mat-stroked-button  [matMenuTriggerFor]="summaryMenu" >
-                  <mat-icon  class="icon-size-5"  [svgIcon]="'heroicons_solid:chevron-down'">
+                <button
+                  class="min-w-10 min-h-7 h-7 px-2 leading-6"
+                  mat-stroked-button
+                  [matMenuTriggerFor]="summaryMenu"
+                >
+                  <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:chevron-down'"
+                  >
                   </mat-icon>
                 </button>
 
                 <mat-menu #summaryMenu="matMenu">
-                  <button  mat-menu-item [routerLink]="['edit-user', element.userId]">
+                  <button
+                    mat-menu-item
+                    [routerLink]="['edit-user', element.userId]"
+                  >
                     <mat-icon svgIcon="heroicons_outline:pencil-alt">
                     </mat-icon>
                     <span>Edit</span>
                   </button>
-                  <button mat-menu-item (click)="deleteSelectedUser(element.userId)">
+                  <button
+                    mat-menu-item
+                    (click)="deleteSelectedUser(element.userId)"
+                  >
                     <mat-icon svgIcon="heroicons_outline:user-remove">
                     </mat-icon>
                     <span>Delete</span>
                   </button>
                   <ng-container *ngIf="!element.active">
                     <button mat-menu-item>
-                      <mat-icon  class="text-green-400"  svgIcon="heroicons_outline:check">
+                      <mat-icon
+                        class="text-green-400"
+                        svgIcon="heroicons_outline:check"
+                      >
                       </mat-icon>
                       <span>Activate</span>
                     </button>
                   </ng-container>
                   <ng-container *ngIf="element.active">
                     <button mat-menu-item>
-                      <mat-icon  class="text-red-400" svgIcon="heroicons_outline:x-circle">
+                      <mat-icon
+                        class="text-red-400"
+                        svgIcon="heroicons_outline:x-circle"
+                      >
                       </mat-icon>
                       <span>De-activate</span>
                     </button>
                   </ng-container>
-
                 </mat-menu>
               </div>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row  *matRowDef="let row; columns: displayedColumns"></tr>
-
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <mat-paginator
+          *ngIf="userList.length > 0"
           class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
           [pageSizeOptions]="[5, 10, 15, 20]"
           [pageIndex]="userListModel.PageNumber"
           [pageSize]="userListModel.PageSize"
           (page)="geUsersList($event)"
           [length]="userListModel.TotalCount"
-          showFirstLastButtons>
+          showFirstLastButtons
+        >
         </mat-paginator>
       </div>
     </div>
   </div>
-
 </div>

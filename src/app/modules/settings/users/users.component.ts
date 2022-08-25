@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
   userListModel: UserList = new UserList();
-  displayedColumns: string[] = ['Picture','UserName', 'Name', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
+  displayedColumns: string[] = ['Picture', 'UserName', 'Name', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
 
@@ -67,10 +67,21 @@ export class UsersComponent implements OnInit {
   }
 
   geUsersList(event: any) {
-    this.userListModel.PageSize = event?.pageSize ? event?.pageSize : this.userListModel.PageSize;
-    this.userListModel.PageNumber = event?.pageIndex ? event?.pageIndex : this.userListModel.PageNumber;
+    this.userList = [];
+    this.userListModel.PageSize = event?.pageSize ? event.pageSize : this.userListModel.PageSize;
+    this.userListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.userListModel.PageNumber;
     this._userService.GetUserList(this.userListModel.PageNumber, this.userListModel.PageSize).subscribe(res => {
       if (res.success == true) {
+        if (res.pageInfo) {
+          if (event?.pageIndex >= 0) {
+            this.userListModel.PageNumber = res.pageInfo.currentPage - 1;
+          } else {
+            this.userListModel.PageNumber = res.pageInfo.currentPage;
+          }
+          this.userListModel.PageSize = res.pageInfo.pageSize;
+          this.userListModel.TotalPages = res.pageInfo.totalPages;
+          this.userListModel.TotalCount = res.pageInfo.totalCount;
+        }
         this.userList = res.data;
         this.userList.forEach(element => {
           if (element.picture != null) {
@@ -79,12 +90,6 @@ export class UsersComponent implements OnInit {
           }
         });
         this.dataSource = new MatTableDataSource(this.userList);
-        if(res.pageInfo) {
-          this.userListModel.PageNumber = res.pageInfo.currentPage;
-          this.userListModel.PageSize = res.pageInfo.pageSize;
-          this.userListModel.TotalPages = res.pageInfo.totalPages;
-          this.userListModel.TotalCount= res.pageInfo.totalCount;
-        }
       }
       else {
         console.log("Data not found")
@@ -110,16 +115,15 @@ export class UsersComponent implements OnInit {
     });
     confirmation.afterClosed().subscribe((result) => {
       if (result === 'confirmed') {
-          this._userService.DeleteUser(Id).subscribe((data) => {
-            if(data.success == true)
-            {
-               const index = this.userList.findIndex(a => a.userId == Id);
-               if(index >= 0) {
-                this.userList.splice(index, 1);
-                this.dataSource = new MatTableDataSource(this.userList);
-               }
+        this._userService.DeleteUser(Id).subscribe((data) => {
+          if (data.success == true) {
+            const index = this.userList.findIndex(a => a.userId == Id);
+            if (index >= 0) {
+              this.userList.splice(index, 1);
+              this.dataSource = new MatTableDataSource(this.userList);
             }
-          })
+          }
+        })
       }
     });
   }
