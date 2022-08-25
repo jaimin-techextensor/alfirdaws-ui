@@ -98,11 +98,7 @@ export class UsersComponent implements OnInit {
     this._location.back();
   }
 
-  /**
-       * Delete the selected user using the form data
-       */
-  deleteSelectedUser(): void {
-    // Open the confirmation dialog
+  deleteSelectedUser(Id): void {
     const confirmation = this._fuseConfirmationService.open({
       title: 'Delete user',
       message: 'Are you sure you want to remove this user? This action cannot be undone!',
@@ -112,22 +108,18 @@ export class UsersComponent implements OnInit {
         }
       }
     });
-
-    // Subscribe to the confirmation dialog closed action
     confirmation.afterClosed().subscribe((result) => {
-
-      // If the confirm button pressed...
       if (result === 'confirmed') {
-        /*
-          // Get the user object
-          const product = this.selectedProductForm.getRawValue();
-
-          // Delete the user on the server
-          this._inventoryService.deleteProduct(product.id).subscribe(() => {
-
-            // Refresh the user list
-            //this.closeDetails();
-          });*/
+          this._userService.DeleteUser(Id).subscribe((data) => {
+            if(data.success == true)
+            {
+               const index = this.userList.findIndex(a => a.userId == Id);
+               if(index >= 0) {
+                this.userList.splice(index, 1);
+                this.dataSource = new MatTableDataSource(this.userList);
+               }
+            }
+          })
       }
     });
   }

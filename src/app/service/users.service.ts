@@ -31,5 +31,11 @@ export class UsersService {
       })
     );
   }
-
+ DeleteUser(Id: string): Observable<any> {
+  return this._httpClient.delete(environment.APIUrl + 'users/' + Id).pipe(
+    switchMap((response: any) => {
+      return of(response);
+    })
+  );
+}
 }
