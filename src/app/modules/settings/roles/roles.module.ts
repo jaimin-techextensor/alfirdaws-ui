@@ -10,6 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule} from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseCardModule } from '@fuse/components/card';
@@ -38,6 +39,7 @@ import { AddRoleComponent } from './add-role/add-role.component';
         MatProgressSpinnerModule,
         MatMenuModule,
         MatSelectModule,
+        MatTabsModule,
         FuseCardModule,
         FuseAlertModule,
         SharedModule,

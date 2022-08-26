@@ -12,9 +12,9 @@ export const rolesRoutes: Route[] = [
         path: 'add-role',
         component: AddRoleComponent
     },
-    /*
+    
     {
-        path: 'edit-user/:userId',
-        component: AddUserComponent
-    }*/
+        path: 'edit-role/:roleId',
+        component: AddRoleComponent
+    }
 ];

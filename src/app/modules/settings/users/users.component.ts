@@ -17,6 +17,9 @@ import { UserList } from './user-list';
     /* language=SCSS */
     `
         tr.mat-row { height: 75px; }
+        .mat-row:hover {
+          background-color: #F1F5F9;
+        }
         .inventory-grid {
             grid-template-columns: 48px auto 40px;
 

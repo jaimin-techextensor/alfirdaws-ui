@@ -28,61 +28,72 @@
         </div>
 
     </div>
-
-      <!-- Form-->
-      <div class="shadow-lg overflow-auto">
-        <div class="flex border-b">
-            <!-- Add Role form -->
-            <form
-                class="flex flex-col w-full"
-                [formGroup]="roleForm">
-                <div class="flex flex-col sm:flex-row p-8">
-                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
-                        
-                        <div class="flex">
-                            <mat-form-field class="w-full mr-3">
-                                <mat-label>Role name</mat-label>
-                                <input matInput [formControlName]="'name'"> 
-                                <mat-error *ngIf="roleForm.get('name').hasError('required')">
-                                        Role name  is required
-                                </mat-error>
-                            </mat-form-field>
+    <div class="flex min-h-10"></div>
+    
+    <mat-tab-group animationDuration="0ms" >
+        <mat-tab label="Role">
+            <!-- Form-->
+            <div class="shadow-lg overflow-auto">
+                <div class="flex border-b">
+                    <!-- Add Role form -->
+                    <form  class="flex flex-col w-full" [formGroup]="roleForm">
+                        <div class="flex flex-col sm:flex-row p-8">
+                            <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                <!--Role name field-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full mr-3">
+                                        <mat-label>Role name</mat-label>
+                                        <input matInput [formControlName]="'name'"> 
+                                        <mat-error *ngIf="roleForm.get('name').hasError('required')">
+                                                Role name  is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!--Role type field-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full mr-3">
+                                        <mat-label>Role type</mat-label>
+                                        <mat-select [formControlName]="'isStatic'" >
+                                            <mat-option value="true">Static</mat-option>
+                                            <mat-option value="false">Dynamic</mat-option>
+                                            <mat-error *ngIf="roleForm.get('isStatic').hasError('required')">
+                                                Type  is required
+                                            </mat-error>  
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!--Role description field-->
+                                <div class="flex mb-3">
+                                    <mat-form-field class="w-full mr-3">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput rows="5"  [formControlName]="'description'"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <!--Buttons -->
+                                <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
+                                    <button (click)="navigateBack()" class="mr-4" mat-flat-button >
+                                        <span class="ml-2 mr-1">Cancel</span>
+                                    </button>
+                                    <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="roleForm.disabled" (click)="editRole()">
+                                        <span class="ml-2 mr-1">Update</span>
+                                    </button>
+                                    <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="roleForm.disabled" (click)="addRole()">
+                                        <span class="ml-2 mr-1">Save</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="flex">
-                            <mat-form-field class="w-full mr-3">
-                                <mat-label>Role type</mat-label>
-                                <mat-select [formControlName]="'isStatic'" >
-                                    <mat-option value="true">Static</mat-option>
-                                    <mat-option value="false">Dynamic</mat-option>
-                                    <mat-error *ngIf="roleForm.get('isStatic').hasError('required')">
-                                        Type  is required
-                                    </mat-error>  
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="flex mb-3">
-                            <mat-form-field class="w-full mr-3">
-                                <mat-label>Description</mat-label>
-                                <textarea matInput rows="5"  [formControlName]="'description'"></textarea>
-                            </mat-form-field>
-                        </div>
-                        
-                        <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
-                            <button (click)="navigateBack()" class="mr-4" mat-flat-button >
-                                <span class="ml-2 mr-1">Cancel</span>
-                            </button>
-                            <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="roleForm.disabled" (click)="editRole()">
-                                <span class="ml-2 mr-1">Update</span>
-                            </button>
-                            <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="roleForm.disabled" (click)="addRole()">
-                                <span class="ml-2 mr-1">Save</span>
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        </mat-tab>    
+        <mat-tab label="Permissions">
+            <div class="shadow-lg overflow-auto">
+                <div class="flex border-b">
+                    <span>Permissions</span>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
 </div>

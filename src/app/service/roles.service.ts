@@ -33,6 +33,29 @@ export class RolesService {
     );
   }
 
+   /*
+   * Edits an  role in the the back-end 
+  */
+  EditRole(data: any): Observable<any> {
+    debugger
+    return this._httpClient.put(environment.APIUrl + 'roles', data).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+
+ /*
+   * Gets a  role from the the back-end 
+  */
+  GetRole(Id: string): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + 'roles/' + Id).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+
   /*
    * Deletes a specific role from the back-end 
   */
