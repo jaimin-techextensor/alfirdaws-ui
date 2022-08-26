@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { RolesService } from 'app/service/roles.service';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { UserList } from '../users/user-list';
 
 @Component({
   selector: 'app-settings',
@@ -21,6 +22,7 @@ export class RolesComponent implements OnInit {
   rolesList: any[] = [];
   isLoggedIn: boolean = false;
 
+  roleListModel: UserList = new UserList();
   searchTextForModerator: any;
   displayedColumns: string[] = ['RoleName', 'Type', 'Description', 'Action'];
   dataSource: any;
@@ -51,8 +53,25 @@ export class RolesComponent implements OnInit {
   getRolesList(event: any) {
     this.rolesList = [];
 
-    this._roleService.GetRolesList().subscribe(res => {
+    this.roleListModel.PageSize = event?.pageSize ? event.pageSize : this.roleListModel.PageSize;
+    this.roleListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.roleListModel.PageNumber;
+
+    this._roleService.GetRolesList(this.roleListModel.PageNumber, this.roleListModel.PageSize).subscribe(res => {
       if (res.success == true) { 
+
+        if (res.pageInfo) {
+          if (event?.pageIndex >= 0) {
+            this.roleListModel.PageNumber = res.pageInfo.currentPage - 1;
+          } 
+          else {
+            this.roleListModel.PageNumber = res.pageInfo.currentPage;
+          }
+          
+          this.roleListModel.PageSize = res.pageInfo.pageSize;
+          this.roleListModel.TotalPages = res.pageInfo.totalPages;
+          this.roleListModel.TotalCount = res.pageInfo.totalCount;
+        }
+
         this.rolesList = res.data;
         this.dataSource = new MatTableDataSource(this.rolesList);
       }

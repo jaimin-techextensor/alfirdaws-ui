@@ -12,10 +12,10 @@ export class RolesService {
 
 
   /*
-   * Retrieves all the available roles from the back-end 
+   * Retrieves all the available roles from the back-end for a specific pageIndex and pageSize
   */
-  GetRolesList(): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + "roles").pipe(
+  GetRolesList(pageIndex: number, pageSize: number): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + "roles?PageNumber=" + pageIndex + "&PageSize=" + pageSize).pipe(
       switchMap((response: any) => {
         return of(response);
       })
