@@ -8,6 +8,7 @@ import { AuthSignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { SettingsComponent } from "./modules/settings/settings.component";
 import { UsersComponent } from "./modules/settings/users/users.component";
 import { RolesComponent } from "./modules/settings/roles/roles.component";
+import { ModlsComponent } from "./modules/settings/modls/modls.component";
 import { DashboardComponent } from './modules/admin/example/dashboard/dashboard.component';
 import { AddUserComponent } from './modules/settings/users/add-user/add-user.component';
 
@@ -87,6 +88,8 @@ export const appRoutes: Route[] = [
             { path: 'settings', title: 'Setting', loadChildren: () => import('app/modules/settings/settings.module').then(m => m.SettingsModule) },
             { path: 'users', title: 'Users', loadChildren: () => import('app/modules/settings/users/users.module').then(m => m.UsersModule) },
             { path: 'roles', title: 'Roles', loadChildren: () => import('app/modules/settings/roles/roles.module').then(m => m.RolesModule) },
+            { path: 'modules', title: 'Modules', loadChildren: () => import('app/modules/settings/modls/modls.module').then(m => m.ModlsModule) },
+            { path: 'categories', title: 'Categories', loadChildren: () => import('app/modules/settings/categories/categories.module').then(m => m.CategoriesModule) },
             { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }

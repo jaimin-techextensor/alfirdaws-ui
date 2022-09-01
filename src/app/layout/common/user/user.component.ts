@@ -49,6 +49,7 @@ export class UserComponent implements OnInit, OnDestroy
             .subscribe((user: User) => {
                 this.user = user;
 
+                console.log('user:', this.user);
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });

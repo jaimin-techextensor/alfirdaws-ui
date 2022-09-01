@@ -1,0 +1,215 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        
+        <!-- Header -->
+        <div>
+            <div class="flex flex-auto items-center min-w-0">
+                <mat-icon svgIcon="heroicons_outline:duplicate"></mat-icon>
+                <div class="flex flex-col min-w-0 ml-4">
+                    <ng-container>
+                        <div *ngIf = "!isEditMode"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                        Create new category</div>
+                        <div *ngIf = "isEditMode && categoryData"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                        Edit category : {{categoryData.name}}</div>
+                    </ng-container>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button (click)="navigateBack()" class="ml-4" mat-flat-button [color]="'accent'">
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                <span class="ml-2 mr-1">Back</span>
+            </button>
+        </div>
+
+
+        
+    </div>
+
+    <div class="flex min-h-5"></div>
+
+    <div class="flex-auto overflow-hidden sm:overflow-y-auto">
+        <mat-tab-group  animationDuration="0ms" (selectedTabChange)="tabChanged($event)" [selectedIndex]="selectedIndex" >
+            <mat-tab label="Category information">
+                <!-- Form-->
+                <div class="shadow-lg  overflow-auto">
+                    <div class="flex border-b  border-t border-l border-r">
+                        <!-- Add Category form -->
+                        <form class="flex flex-col w-full" [formGroup]="categoryForm">
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                    <div class="flex mb-4">
+                                        <div class="box pr-4">
+                                            <div *ngIf="!imageData" class="js--image-preview"></div>
+                                            <div *ngIf="imageData"> 
+                                                <img [src]="imageData" />
+                                            </div>
+                                            <div class="upload-options">
+                                                <label>Load Picture
+                                                    <input type="file" class="image-upload" accept="image/*" (change)="onFileSelect($event)" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="right-content">
+                                            <mat-form-field class="w-full mr-3">
+                                                <mat-label>Category name</mat-label>
+                                                <input matInput [formControlName]="'name'">
+                                                <mat-error *ngIf="categoryForm.get('name').hasError('required')">
+                                                        Category name  is required
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <mat-form-field class="w-full">
+                                                <mat-label>Sequence</mat-label>
+                                                <input matInput [formControlName]="'sequence'">
+                                                    <mat-error *ngIf="categoryForm.get('sequence').hasError('required')">
+                                                       Sequence is required
+                                                    </mat-error>
+                                            </mat-form-field>
+                                            <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'active'">
+                                               Active
+                                            </mat-checkbox>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
+                                        <button (click)="navigateBack()" class="mr-4" mat-flat-button >
+                                            <span class="ml-2 mr-1">Cancel</span>
+                                        </button>
+                                        <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="categoryForm.disabled" (click)="editCategory()">
+                                            <span class="ml-2 mr-1">Update</span>
+                                        </button>
+                                        <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="categoryForm.disabled" (click)="addCategory()">
+                                            <span class="ml-2 mr-1">Save</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab *ngIf="isEditMode">
+                <ng-template mat-tab-label>
+                    <span>Sub Categories:  </span>
+                    <button mat-mini-fab  [color]="'primary'" [ngStyle]="{transform: 'scale(0.7)'}" >
+                        <span> {{subcategoriesList?.length}}</span>
+                    </button>
+                </ng-template>
+                <div class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg ">
+                    <!-- Actions -->
+
+                    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-3 px-6 md:px-8 ">
+                        <div>
+                        </div>
+                        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                            <button class="ml-4" mat-flat-button [color]="'primary'"[routerLink]="['add-subcategory']">
+                                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                <span class="ml-2 mr-1"> Sub category</span>
+                            </button>  
+                        </div>
+                    </div>
+
+                    <!-- SubCategories table list-->
+                    <div class="flex flex-auto overflow-hidden">
+                        <!-- Categories list -->
+                        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+                            <div class="grid">
+                                <table *ngIf="subcategoriesList.length > 0;  else noSubcategories" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                
+                                    <!-- Icon column-->
+                                    <ng-container matColumnDef="Icon">
+                                        <th mat-header-cell *matHeaderCellDef>Picture</th>
+                                        <td mat-cell *matCellDef="let element">
+                                        <div class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border">
+                                            <img class="w-12" *ngIf="element.icon" [src]="element.icon"/>
+                                            <img class="w-12" *ngIf="element.icon == null" src="../../../../assets/images/logo/noimage.png"/>
+                                        </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Sequence Column -->
+                                    <ng-container matColumnDef="Sequence">
+                                        <th mat-header-cell *matHeaderCellDef>Sequence</th>
+                                        <td mat-cell *matCellDef="let element">
+                                        {{ element.sequence }}
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Category name column-->
+                                    <ng-container matColumnDef="Name">
+                                        <th mat-header-cell *matHeaderCellDef>Category name</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <span>{{ element.name }}</span> 
+                                        </td>
+                                    </ng-container>
+                                    
+
+                                    <!-- Is Active Column -->
+                                    <ng-container matColumnDef="Active">
+                                        <th mat-header-cell *matHeaderCellDef>Is Active</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <ng-container *ngIf="element.active">
+                                                <mat-icon class="text-green-400 icon-size-6" [svgIcon]="'heroicons_solid:check'">
+                                                </mat-icon>
+                                            </ng-container>
+                                            <ng-container *ngIf="!element.active">
+                                                <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'">
+                                                </mat-icon>
+                                            </ng-container>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Drop down actions -->
+                                    <ng-container matColumnDef="Action">
+                                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="hidden sm:block">
+                                                <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button [matMenuTriggerFor]="summaryMenu">
+                                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-down'">
+                                                    </mat-icon>
+                                                </button>
+
+                                                <mat-menu #summaryMenu="matMenu">
+                                                    <button mat-menu-item [routerLink]="['edit-subcategory', element.subCategoryId]">
+                                                    <mat-icon svgIcon="heroicons_outline:pencil-alt">
+                                                    </mat-icon>
+                                                    <span>Edit</span>
+                                                </button>
+                                                <button mat-menu-item (click)="deleteSelectedSubCategory(element.subCategoryId)">
+                                                    <mat-icon svgIcon="heroicons_outline:folder-remove">
+                                                    </mat-icon>
+                                                    <span>Delete</span>
+                                                </button>
+                                                </mat-menu>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                                </table>
+                    
+                                <!-- No subcategories -->
+                                <ng-template #noSubcategories>
+                                    <div class="p-8 sm:p-16 border-t text-3xl font-semibold tracking-tight text-center">There are no sub categories!</div>
+                                </ng-template>
+
+                    
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+</div>

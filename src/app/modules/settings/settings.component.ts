@@ -42,4 +42,12 @@ export class SettingsComponent implements OnInit {
   navigateToRoles() {
     this.router.navigateByUrl('/roles');
   }
+
+  navigateToModules() {
+    this.router.navigateByUrl('/modules');
+  }
+
+  navigateToCategories() {
+    this.router.navigateByUrl('/categories');
+  }
 }

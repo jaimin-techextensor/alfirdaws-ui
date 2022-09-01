@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToModules();">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:collection" class="user_mat-icon"></mat-icon>
                         </div>
@@ -75,38 +75,32 @@
                 <!-- Al.firdaws settings-->
                 <div class="ml-1.5 text-2xl font-semibold tracking-tight leading-12">Al.firdaws settings</div>
                 <div class="flex flex-auto">
-
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
-
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"  (click)="navigateToCategories();">
+                        <div class="text-3xl font-medium  w-13 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:duplicate" class="user_mat-icon"></mat-icon>
                         </div>
-                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
+                        <div class="flex flex-col usr_label">
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.categoriesCount}}</div>
-                            <div class="text-md text-secondary">Categories</div>
+                            <div class="ml-1.0 text-md text-secondary">Categories</div>
                         </div>
+                        <div class="w-10"></div>
+                        <div class=" leading-0 truncate flex flex-col usr_label">
+                            <div class="text-2xl font-semibold leading-tight">{{ counterList?.subCategoriesCount}}</div>
+                            <div class="ml-1.0 text-md text-secondary">Sub categories</div>
+                        </div>                      
                     </div>
 
+                    
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
-                            <mat-icon svgIcon="heroicons_outline:duplicate" class="user_mat-icon"></mat-icon>
-                        </div>
-                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">{{ counterList?.subCategoriesCount}}</div>
-                            <div class="text-md text-secondary">SubCategories</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
+                        <div class="text-3xl font-medium  w-13 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:flag" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.countriesCount}}</div>
                             <div class="text-md text-secondary">Countries</div>
                         </div>
-                    </div>
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
-                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
+                        <div class="w-10"></div>
+                        <div class="text-3xl font-medium  w-13 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="mat_outline:location_on" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
@@ -114,8 +108,6 @@
                             <div class="text-md text-secondary">Regions</div>
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-auto">
 
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
 
@@ -127,6 +119,9 @@
                             <div class="text-md text-secondary">Campaign Types</div>
                         </div>
                     </div>
+
+                </div>
+                <div class="flex flex-auto">
 
                     <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">

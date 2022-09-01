@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,46 +11,51 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule} from '@angular/material/tabs';
-import { MatSelectModule } from '@angular/material/select';
+import { MatBadgeModule} from '@angular/material/badge'
 import { RouterModule } from '@angular/router';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseCardModule } from '@fuse/components/card';
-import { UsersComponent } from 'app/modules/settings/users/users.component';
-import { usersRoutes } from 'app/modules/settings/users/users.routing';
-import { UsersService } from 'app/service/users.service';
 import { SharedModule } from 'app/shared/shared.module';
-import { AddUserComponent } from './add-user/add-user.component';
+import { CategoriesService } from 'app/service/categories.service';
+import { CategoriesComponent } from "app/modules/settings/categories/categories.component";
+import { categoriesRoutes } from 'app/modules/settings/categories/categories.routing';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.component';
+
 
 @NgModule({
     declarations: [
-        UsersComponent,
-        AddUserComponent
+        CategoriesComponent,
+        AddCategoryComponent,
+        AddSubCategoryComponent
     ],
     imports: [
-        RouterModule.forChild(usersRoutes),
+        RouterModule.forChild(categoriesRoutes),
         MatIconModule,
         MatButtonModule,
         MatFormFieldModule,
         MatSortModule,
         MatPaginatorModule,
-        // RouterModule.forChild(authSignInRoutes),
         MatCheckboxModule,
         MatInputModule,
         MatProgressSpinnerModule,
         MatMenuModule,
+        MatSelectModule,
         MatTabsModule,
+        MatBadgeModule,
         FuseCardModule,
         FuseAlertModule,
         SharedModule,
-        MatTableModule,
-        MatSelectModule
+        MatTableModule
     ],
     exports: [
-        AddUserComponent
+        AddCategoryComponent,
+        AddSubCategoryComponent
     ],
     providers: [
-        UsersService
+        CategoriesService
     ]
+    
 })
 
-export class UsersModule { }
+export class CategoriesModule { }

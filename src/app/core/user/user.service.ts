@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, ReplaySubject, tap } from 'rxjs';
+import { switchMap, map, Observable, ReplaySubject, tap } from 'rxjs';
 import { User } from 'app/core/user/user.types';
+import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService
 {
+    Id: string;
     private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
 
     /**
@@ -43,7 +45,7 @@ export class UserService
 
     /**
      * Get the current logged in user data
-     */
+     
     get(): Observable<User>
     {
         return this._httpClient.get<User>('api/common/user').pipe(
@@ -51,7 +53,19 @@ export class UserService
                 this._user.next(user);
             })
         );
+    }*/
+
+
+    get(): Observable<User>
+    {
+        this.Id = localStorage.getItem('userId');
+        return this._httpClient.get<User>(environment.APIUrl + 'users/' + this.Id + '?isAvatar=true').pipe(
+            tap((user) => {
+                this._user.next(user);
+            })
+        );
     }
+
 
     /**
      * Update the user
@@ -62,6 +76,7 @@ export class UserService
     {
         return this._httpClient.patch<User>('api/common/user', {user}).pipe(
             map((response) => {
+                
                 this._user.next(response);
             })
         );

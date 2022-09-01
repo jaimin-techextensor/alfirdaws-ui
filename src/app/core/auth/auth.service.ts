@@ -39,7 +39,7 @@ export class AuthService
             email: email,
             password: password
           } 
-        return this._httpClient.post(environment.APIUrl +'Authenticate/ResetPassword', resetpassword_model);
+        return this._httpClient.post(environment.APIUrl +'authenticate/ResetPassword', resetpassword_model);
     }
 
      /**
@@ -63,7 +63,7 @@ export class AuthService
        const forgetpassword_cred = {
         email: email.email,
       } 
-        return  this._httpClient.post(environment.APIUrl + 'Authenticate/ForgotPassword',forgetpassword_cred);
+        return  this._httpClient.post(environment.APIUrl + 'authenticate/ForgotPassword',forgetpassword_cred);
      }
 
     /**
@@ -82,11 +82,12 @@ export class AuthService
             UserName: credentials.email,
             Password: credentials.password
           }
-          return this._httpClient.post(environment.APIUrl + '/authenticate/login', login_cred).pipe(
+          return this._httpClient.post(environment.APIUrl + 'authenticate/login', login_cred).pipe(
             switchMap((response: any) => {
               localStorage.setItem('token', response.token)
               this._authenticated = true;
               localStorage.setItem('user', JSON.stringify(response));
+              localStorage.setItem('userId', response.token.id);
               return of(response);
             })
           );

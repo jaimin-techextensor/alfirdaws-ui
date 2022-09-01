@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,46 +11,45 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule} from '@angular/material/tabs';
-import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseCardModule } from '@fuse/components/card';
-import { UsersComponent } from 'app/modules/settings/users/users.component';
-import { usersRoutes } from 'app/modules/settings/users/users.routing';
-import { UsersService } from 'app/service/users.service';
 import { SharedModule } from 'app/shared/shared.module';
-import { AddUserComponent } from './add-user/add-user.component';
+import { ModlsService } from 'app/service/modls.services';
+import { ModlsComponent } from "app/modules/settings/modls/modls.component";
+import { modlsRoutes } from 'app/modules/settings/modls/modls.routing';
+
 
 @NgModule({
     declarations: [
-        UsersComponent,
-        AddUserComponent
+        ModlsComponent,
+
     ],
     imports: [
-        RouterModule.forChild(usersRoutes),
+        RouterModule.forChild(modlsRoutes),
         MatIconModule,
         MatButtonModule,
         MatFormFieldModule,
         MatSortModule,
         MatPaginatorModule,
-        // RouterModule.forChild(authSignInRoutes),
         MatCheckboxModule,
         MatInputModule,
         MatProgressSpinnerModule,
         MatMenuModule,
+        MatSelectModule,
         MatTabsModule,
         FuseCardModule,
         FuseAlertModule,
         SharedModule,
-        MatTableModule,
-        MatSelectModule
+        MatTableModule
     ],
-    exports: [
-        AddUserComponent
-    ],
+   /* exports: [
+        AddRoleComponent
+    ],*/
     providers: [
-        UsersService
+        ModlsService
     ]
+    
 })
 
-export class UsersModule { }
+export class ModlsModule { }

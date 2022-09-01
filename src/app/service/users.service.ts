@@ -46,7 +46,29 @@ export class UsersService {
     );
   }
   activateDeactivateUser(id: number, isActive: boolean): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + 'activateDeactivateUser?id=' + id + '&isActive=' + isActive).pipe(
+    return this._httpClient.put(environment.APIUrl + 'users/' + id + '?isActive=' + isActive,null).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+
+  /*
+  * Assigns a role to a specific user in the back-end
+  */
+  AssignRole(userId: string, roleId:string): Observable<any> {
+    return this._httpClient.post(environment.APIUrl + 'users/'+ userId + '/assignrole/' + roleId,null).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+
+   /*
+   * Removes a role for a specific user in the back-end
+   */
+  RemoveRole(userId: string, roleId:string): Observable<any> {
+    return this._httpClient.delete(environment.APIUrl + 'users/'+ userId + '/removerole/' + roleId).pipe(
       switchMap((response: any) => {
         return of(response);
       })
