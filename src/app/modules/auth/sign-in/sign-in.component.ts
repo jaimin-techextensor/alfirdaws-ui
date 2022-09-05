@@ -75,7 +75,6 @@ export class AuthSignInComponent implements OnInit {
         this._authService.signIn(this.signInForm.value)
             .subscribe(
                 (data) => {
-                    console.log(data.status);
                     if (data.status == "User Not Found") {
                         console.log('wrong')
                         this.signInForm.enable();

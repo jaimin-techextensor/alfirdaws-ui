@@ -65,7 +65,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUsersList(null);
+    this.getUsersList(null, false);
   }
 
   backToSettings(): void {
@@ -74,11 +74,21 @@ export class UsersComponent implements OnInit {
 
   }
 
-  getUsersList(event: any) {
-    this.userList = [];
+  getUsersList(event: any, isSearch: boolean = false) {
     this.userListModel.PageSize = event?.pageSize ? event.pageSize : this.userListModel.PageSize;
     this.userListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.userListModel.PageNumber;
-    this._userService.GetUserList(this.userListModel.PageNumber, this.userListModel.PageSize).subscribe(res => {
+    if (isSearch) {
+      debugger
+      if (this.searchTextForModerator.length > 0 && this.searchTextForModerator.length <=2) {
+        return;
+      } else {
+        this.userListModel.SearchText = this.searchTextForModerator ? this.searchTextForModerator : null;
+      }
+    }
+    else {
+      this.userListModel.SearchText = null;
+    }
+    this._userService.GetUserList(this.userListModel.PageNumber, this.userListModel.PageSize, this.userListModel.SearchText).subscribe(res => {
       if (res.success == true) {
         if (res.pageInfo) {
           if (event?.pageIndex >= 0) {
@@ -148,10 +158,10 @@ export class UsersComponent implements OnInit {
             message: 'User updated successfully!!'
           };
           this.showAlert = true;
-          setTimeout(()=>{
+          setTimeout(() => {
             this.showAlert = false;
-          },2000);
-         
+          }, 2000);
+
         }
       })
   }

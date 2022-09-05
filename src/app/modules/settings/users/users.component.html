@@ -57,6 +57,7 @@
           [autocomplete]="'off'"
           [placeholder]="'Search User'"
           [(ngModel)]="searchTextForModerator"
+          (ngModelChange)="getUsersList(null, true)"
           [ngModelOptions]="{ standalone: true }"
         />
       </mat-form-field>
@@ -238,7 +239,7 @@
           [pageSizeOptions]="[5, 10, 15, 20]"
           [pageIndex]="userListModel.PageNumber"
           [pageSize]="userListModel.PageSize"
-          (page)="getUsersList($event)"
+          (page)="getUsersList($event, false)"
           [length]="userListModel.TotalCount"
           showFirstLastButtons
         >

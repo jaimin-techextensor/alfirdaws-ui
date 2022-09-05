@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class UsersService {
 
   constructor(private _httpClient: HttpClient,) { }
 
-  GetUserList(pageIndex: number, pageSize: number): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + "users?PageNumber=" + pageIndex + "&PageSize=" + pageSize).pipe(
+  GetUserList(pageIndex: number, pageSize: number, searchText: string): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + "users?PageNumber=" + pageIndex + "&PageSize=" + pageSize + "&SearchText=" + searchText).pipe(
       switchMap((response: any) => {
         return of(response);
       })
@@ -46,7 +46,7 @@ export class UsersService {
     );
   }
   activateDeactivateUser(id: number, isActive: boolean): Observable<any> {
-    return this._httpClient.put(environment.APIUrl + 'users/' + id + '?isActive=' + isActive,null).pipe(
+    return this._httpClient.put(environment.APIUrl + 'users/' + id + '?isActive=' + isActive, null).pipe(
       switchMap((response: any) => {
         return of(response);
       })
@@ -56,19 +56,19 @@ export class UsersService {
   /*
   * Assigns a role to a specific user in the back-end
   */
-  AssignRole(userId: string, roleId:string): Observable<any> {
-    return this._httpClient.post(environment.APIUrl + 'users/'+ userId + '/assignrole/' + roleId,null).pipe(
+  AssignRole(userId: string, roleId: string): Observable<any> {
+    return this._httpClient.post(environment.APIUrl + 'users/' + userId + '/assignrole/' + roleId, null).pipe(
       switchMap((response: any) => {
         return of(response);
       })
     );
   }
 
-   /*
-   * Removes a role for a specific user in the back-end
-   */
-  RemoveRole(userId: string, roleId:string): Observable<any> {
-    return this._httpClient.delete(environment.APIUrl + 'users/'+ userId + '/removerole/' + roleId).pipe(
+  /*
+  * Removes a role for a specific user in the back-end
+  */
+  RemoveRole(userId: string, roleId: string): Observable<any> {
+    return this._httpClient.delete(environment.APIUrl + 'users/' + userId + '/removerole/' + roleId).pipe(
       switchMap((response: any) => {
         return of(response);
       })
