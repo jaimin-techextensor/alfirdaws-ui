@@ -50,4 +50,8 @@ export class SettingsComponent implements OnInit {
   navigateToCategories() {
     this.router.navigateByUrl('/categories');
   }
+
+  navigateToCountries() {
+    this.router.navigateByUrl('/countries');
+  }
 }
