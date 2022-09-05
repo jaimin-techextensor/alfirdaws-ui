@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
   userListModel: UserList = new UserList();
-  displayedColumns: string[] = ['Picture', 'UserName', 'Name', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
+  displayedColumns: string[] = ['Picture', 'Name','UserName',  'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
   alert: { type: FuseAlertType; message: string } = {
