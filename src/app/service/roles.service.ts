@@ -37,7 +37,6 @@ export class RolesService {
   * Edits an  role in the the back-end 
  */
   EditRole(data: any): Observable<any> {
-    debugger
     return this._httpClient.put(environment.APIUrl + 'roles', data).pipe(
       switchMap((response: any) => {
         return of(response);

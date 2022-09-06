@@ -1,13 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Subject, takeUntil } from 'rxjs';
-import { User } from 'app/core/user/user.types';
-import { UserService } from 'app/core/user/user.service';
-import { UsersService } from 'app/service/users.service';
-import { ThisReceiver } from '@angular/compiler';
-import { UserList } from 'app/modules/settings/users/user-list';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { UserService } from 'app/core/user/user.service';
+import { User } from 'app/core/user/user.types';
+import { PageRequestModel } from 'app/modules/settings/users/page-request';
+import { UsersService } from 'app/service/users.service';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -27,7 +26,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
     userName: string;
     email: string;
     userPicture: string;
-    userListModel: UserList = new UserList();
+    userListModel: PageRequestModel = new PageRequestModel();
     searchTextForModerator: any;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     userList: any[] = [];
@@ -49,9 +48,10 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
             this.user = new User();
             this.email = user.token.email;
             this.userName = user.token.userName;
-            debugger;
-            let objectURL = user.token.picture
-            this.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            if (user.token.picture) {
+                let objectURL = user.token.picture;
+                this.picture = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            }
         }
 
 

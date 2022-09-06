@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
-import { PageRequestModel } from './user-list';
+import { PageRequestModel } from './page-request';
 
 @Component({
   selector: 'app-settings',

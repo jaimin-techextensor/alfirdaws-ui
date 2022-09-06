@@ -1,16 +1,10 @@
 import { Route } from '@angular/router';
+import { InitialDataResolver } from 'app/app.resolvers';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
-import { InitialDataResolver } from 'app/app.resolvers';
-import { ExampleComponent } from './modules/admin/example/example.component';
-import { AuthSignInComponent } from './modules/auth/sign-in/sign-in.component';
-import { SettingsComponent } from "./modules/settings/settings.component";
-import { UsersComponent } from "./modules/settings/users/users.component";
-import { RolesComponent } from "./modules/settings/roles/roles.component";
-import { ModlsComponent } from "./modules/settings/modls/modls.component";
 import { DashboardComponent } from './modules/admin/example/dashboard/dashboard.component';
-import { AddUserComponent } from './modules/settings/users/add-user/add-user.component';
+import { AuthSignInComponent } from './modules/auth/sign-in/sign-in.component';
 
 
 // @formatter:off
@@ -19,7 +13,8 @@ import { AddUserComponent } from './modules/settings/users/add-user/add-user.com
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    { path: '', pathMatch: 'full', redirectTo: 'example', title: 'Home' },
+    { path: '', pathMatch: 'full', redirectTo: 'sign-in', title: 'Login' },
+    { path: 'sign-in', component: AuthSignInComponent },
 
     // Redirect signed in user to the '/example'
     //

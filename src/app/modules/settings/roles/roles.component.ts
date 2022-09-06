@@ -1,3 +1,4 @@
+import { PageRequestModel } from './../users/page-request';
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -6,7 +7,6 @@ import { Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { RolesService } from 'app/service/roles.service';
-import { PageRequestModel } from '../users/user-list';
 
 @Component({
   selector: 'app-settings',
