@@ -1,15 +1,19 @@
 <!-- Button -->
-<button mat-icon-button [matMenuTriggerFor]="userActions">
-    <span class="relative">
-        <img class="w-7 h-7 rounded-full" *ngIf="showAvatar && user.picture" [src]="user.picture">
-        <mat-icon *ngIf="!showAvatar || !user.picture" [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
-        <span class="absolute right-0 bottom-0 w-2 h-2 rounded-full" [ngClass]="{'mr-px mb-px': !showAvatar || !user.picture,
-                          'bg-green-500': user.status === 'online',
-                          'bg-amber-500': user.status === 'away',
-                          'bg-red-500': user.status === 'busy',
-                          'bg-gray-400': user.status === 'not-visible'}"></span>
-    </span>
-</button>
+<div>
+    <button mat-icon-button [matMenuTriggerFor]="userActions">
+        <span class="relative">
+            <img class="w-7 h-7 rounded-full" *ngIf="picture" [src]="picture">
+            <img class="w-12  rounded-full" *ngIf="picture == null"
+                src="../../../../assets/images/avatars/nopicture.png" />
+            <!-- <mat-icon *ngIf="!showAvatar || !user.picture" [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+            <span class="absolute right-0 bottom-0 w-2 h-2 rounded-full" [ngClass]="{'mr-px mb-px': !showAvatar || !user.picture,
+                              'bg-green-500': user.status === 'online',
+                              'bg-amber-500': user.status === 'away',
+                              'bg-red-500': user.status === 'busy',
+                              'bg-gray-400': user.status === 'not-visible'}"></span> -->
+        </span>
+    </button>
+</div>
 
 <mat-menu [xPosition]="'before'" #userActions="matMenu">
     <button mat-menu-item>
