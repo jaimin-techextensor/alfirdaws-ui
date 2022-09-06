@@ -213,7 +213,7 @@ export class AddUserComponent implements OnInit {
   */
   GetRoles()
   {
-    this._roleService.GetRolesList(1 , 20).subscribe((data) => {
+    this._roleService.getRolesList(1 , 20, null).subscribe((data) => {
         if(data.success == true)
         {
           this.roleData = data.data;

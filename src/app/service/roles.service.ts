@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +14,17 @@ export class RolesService {
   /*
    * Retrieves all the available roles from the back-end for a specific pageIndex and pageSize
   */
-  GetRolesList(pageIndex: number, pageSize: number): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + "roles?PageNumber=" + pageIndex + "&PageSize=" + pageSize).pipe(
+  getRolesList(pageIndex: number, pageSize: number, searchText: string): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + "roles?PageNumber=" + pageIndex + "&PageSize=" + pageSize + "&SearchText=" + searchText).pipe(
       switchMap((response: any) => {
         return of(response);
       })
     );
   }
- 
- /*
-   * Creates an new role in the the back-end 
-  */
+
+  /*
+    * Creates an new role in the the back-end 
+   */
   AddRole(data: any): Observable<any> {
     return this._httpClient.post(environment.APIUrl + 'roles', data).pipe(
       switchMap((response: any) => {
@@ -33,9 +33,9 @@ export class RolesService {
     );
   }
 
-   /*
-   * Edits an  role in the the back-end 
-  */
+  /*
+  * Edits an  role in the the back-end 
+ */
   EditRole(data: any): Observable<any> {
     debugger
     return this._httpClient.put(environment.APIUrl + 'roles', data).pipe(
@@ -45,9 +45,9 @@ export class RolesService {
     );
   }
 
- /*
-   * Gets a  role from the the back-end 
-  */
+  /*
+    * Gets a  role from the the back-end 
+   */
   GetRole(Id: string): Observable<any> {
     return this._httpClient.get(environment.APIUrl + 'roles/' + Id).pipe(
       switchMap((response: any) => {

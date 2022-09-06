@@ -48,6 +48,7 @@
           [autocomplete]="'off'"
           [placeholder]="'Search role'"
           [(ngModel)]="searchTextForModerator"
+          (ngModelChange)="getRolesList(null,true)"
           [ngModelOptions]="{ standalone: true }"/>
       </mat-form-field>
       <button class="ml-4" mat-flat-button [color]="'primary'"[routerLink]="['add-role']">

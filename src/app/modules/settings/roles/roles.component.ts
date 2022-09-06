@@ -1,14 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
-import { RolesService } from 'app/service/roles.service';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { UserList } from '../users/user-list';
+import { RolesService } from 'app/service/roles.service';
+import { PageRequestModel } from '../users/user-list';
 
 @Component({
   selector: 'app-settings',
@@ -22,7 +20,7 @@ export class RolesComponent implements OnInit {
   rolesList: any[] = [];
   isLoggedIn: boolean = false;
 
-  roleListModel: UserList = new UserList();
+  roleListModel: PageRequestModel = new PageRequestModel();
   searchTextForModerator: any;
   displayedColumns: string[] = ['RoleName', 'Type', 'Description', 'Action'];
   dataSource: any;
@@ -35,9 +33,7 @@ export class RolesComponent implements OnInit {
   showAlert = false;
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private sanitizer: DomSanitizer,
     private _fuseConfirmationService: FuseConfirmationService,
     private _location: Location,
     private _roleService: RolesService
@@ -50,45 +46,48 @@ export class RolesComponent implements OnInit {
   /*
     Retrieves the list of all roles from the back-end
   */
-  getRolesList(event: any) {
+  getRolesList(event: any, isSearch: boolean = false) {
     this.rolesList = [];
-
     this.roleListModel.PageSize = event?.pageSize ? event.pageSize : this.roleListModel.PageSize;
     this.roleListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.roleListModel.PageNumber;
-
-    this._roleService.GetRolesList(this.roleListModel.PageNumber, this.roleListModel.PageSize).subscribe(res => {
-      if (res.success == true) { 
+    if (isSearch) {
+      if (this.searchTextForModerator.length > 0 && this.searchTextForModerator.length <= 2) {
+        return;
+      } else {
+        this.roleListModel.SearchText = this.searchTextForModerator ? this.searchTextForModerator : null
+      }
+    } else {
+      this.roleListModel.SearchText = null;
+    }
+    this._roleService.getRolesList(this.roleListModel.PageNumber, this.roleListModel.PageSize, this.roleListModel.SearchText).subscribe(res => {
+      if (res.success == true) {
 
         if (res.pageInfo) {
           if (event?.pageIndex >= 0) {
             this.roleListModel.PageNumber = res.pageInfo.currentPage - 1;
-          } 
+          }
           else {
             this.roleListModel.PageNumber = res.pageInfo.currentPage;
           }
-          
           this.roleListModel.PageSize = res.pageInfo.pageSize;
           this.roleListModel.TotalPages = res.pageInfo.totalPages;
           this.roleListModel.TotalCount = res.pageInfo.totalCount;
         }
-
         this.rolesList = res.data;
         this.dataSource = new MatTableDataSource(this.rolesList);
       }
       else {
-        console.log("Data not found")
+        //console.log("Data not found")
       }
     });
-
   }
 
- /*
-    Navigate to the create role screen 
-  */
+  /*
+     Navigate to the create role screen 
+   */
   createRole() {
     this._router.navigate(['roles/add']);
   }
-
 
   /*
     Navigate back to the previous screen
@@ -100,7 +99,7 @@ export class RolesComponent implements OnInit {
   /*
     Deletes the selected role and its permissions
   */
-    deleteSelectedRole(Id): void {
+  deleteSelectedRole(Id): void {
     const confirmation = this._fuseConfirmationService.open({
       title: 'Delete role',
       message: 'Are you sure you want to remove this role? This action cannot be undone!',

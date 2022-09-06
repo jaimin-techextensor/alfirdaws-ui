@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
-import { UserList } from './user-list';
+import { PageRequestModel } from './user-list';
 
 @Component({
   selector: 'app-settings',
@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
   isLoggedIn: boolean = false;
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
-  userListModel: UserList = new UserList();
+  userListModel: PageRequestModel = new PageRequestModel();
   displayedColumns: string[] = ['Picture', 'Name','UserName',  'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
@@ -78,7 +78,6 @@ export class UsersComponent implements OnInit {
     this.userListModel.PageSize = event?.pageSize ? event.pageSize : this.userListModel.PageSize;
     this.userListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.userListModel.PageNumber;
     if (isSearch) {
-      debugger
       if (this.searchTextForModerator.length > 0 && this.searchTextForModerator.length <=2) {
         return;
       } else {
