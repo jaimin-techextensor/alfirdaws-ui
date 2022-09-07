@@ -9,6 +9,7 @@ import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
 import { PageRequestModel } from './page-request';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +27,7 @@ import { PageRequestModel } from './page-request';
             @screen sm {
                 grid-template-columns: 48px auto 112px 72px;
             }
-
+            
             @screen md {
                 grid-template-columns: 48px 112px auto 112px 72px 40px;
             }
@@ -40,15 +41,20 @@ import { PageRequestModel } from './page-request';
 })
 /* grid-template-columns: 48px 112px auto 112px 96px 96px 72px; */
 export class UsersComponent implements OnInit {
+  @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   userList: any[] = [];
   isLoggedIn: boolean = false;
   selectedProductForm: UntypedFormGroup;
   searchTextForModerator: any;
   userListModel: PageRequestModel = new PageRequestModel();
-  displayedColumns: string[] = ['Picture', 'Name','UserName',  'Email', 'IsActive', 'LastLoginTime', 'Action'];
+  displayedColumns: string[] = ['Picture', 'Name', 'UserName', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
+  drawerMode: 'side' | 'over';
+  editMode: boolean = false;
+  visible: boolean = false
+
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
     message: ''
@@ -78,7 +84,7 @@ export class UsersComponent implements OnInit {
     this.userListModel.PageSize = event?.pageSize ? event.pageSize : this.userListModel.PageSize;
     this.userListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.userListModel.PageNumber;
     if (isSearch) {
-      if (this.searchTextForModerator.length > 0 && this.searchTextForModerator.length <=2) {
+      if (this.searchTextForModerator.length > 0 && this.searchTextForModerator.length <= 2) {
         return;
       } else {
         this.userListModel.SearchText = this.searchTextForModerator ? this.searchTextForModerator : null;
@@ -164,4 +170,14 @@ export class UsersComponent implements OnInit {
         }
       })
   }
+
+  onBackdropClicked() {
+    this.visible = !this.visible
+  }
+  onRowClick(event: any) {
+    if (!(event.srcElement instanceof SVGElement)) {
+      this.visible = !this.visible
+    }
+  }
+
 }
