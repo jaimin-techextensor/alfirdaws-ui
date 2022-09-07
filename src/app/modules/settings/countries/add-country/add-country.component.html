@@ -1,0 +1,96 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        
+        <!-- Header -->
+        <div>
+            <div class="flex flex-auto items-center min-w-0">
+                <mat-icon svgIcon="heroicons_outline:duplicate"></mat-icon>
+                <div class="flex flex-col min-w-0 ml-4">
+                    <ng-container>
+                        <div *ngIf = "!isEditMode"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                         Create Country</div>
+                        <div *ngIf = "isEditMode && countryData"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                        Edit country : {{countryData?.name}}</div>
+                    </ng-container>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button (click)="navigateBack()" class="ml-4" mat-flat-button [color]="'accent'">
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                <span class="ml-2 mr-1">Back</span>
+            </button>
+        </div>
+
+
+        
+    </div>
+
+    <div class="flex min-h-5"></div>
+
+    <div class="flex-auto overflow-hidden sm:overflow-y-auto">
+        <mat-tab-group  animationDuration="0ms" (selectedTabChange)="tabChanged($event)" [selectedIndex]="selectedIndex" >
+            <mat-tab label="Country information">
+                <!-- Form-->
+                <div class="shadow-lg  overflow-auto">
+                    <div class="flex border-b  border-t border-l border-r">
+                        <!-- Add Category form -->
+                        <form class="flex flex-col w-full" [formGroup]="countryForm">
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                    <div class="flex mb-4">
+                                        <div class="box pr-4">
+                                            <div *ngIf="!imageData" class="js--image-preview"></div>
+                                            <div *ngIf="imageData" class=" justify-center items-center w-20 h-20"> 
+                                                <img [src]="imageData" />
+                                            </div>
+                                            <div class="upload-options">
+                                                <label>Load Picture
+                                                    <input type="file" class="image-upload" accept="image/*" (change)="onFileSelect($event)" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="right-content">
+                                            <mat-form-field class="w-full mr-3">
+                                                <mat-label>Country name</mat-label>
+                                                <input matInput [formControlName]="'name'">
+                                                <mat-error *ngIf="countryForm.get('name').hasError('required')">
+                                                        Country name  is required
+                                                </mat-error>
+                                            </mat-form-field>
+                                           
+                                            <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'active'">
+                                               Active
+                                            </mat-checkbox>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
+                                        <button (click)="navigateBack()" class="mr-4" mat-flat-button >
+                                            <span class="ml-2 mr-1">Cancel</span>
+                                        </button>
+                                        <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" [disabled]="countryForm.disabled" (click)="editCountry()">
+                                            <span class="ml-2 mr-1">Update</span>
+                                        </button>
+                                        <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'" [disabled]="countryForm.disabled" (click)="addCountry()">
+                                            <span class="ml-2 mr-1">Save</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+</div>

@@ -1,7 +1,6 @@
 import { Route } from '@angular/router';
 import { CountriesComponent } from './countries.component';
-//import { AddCategoryComponent } from './add-category/add-category.component';
-//import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.component';
+import { AddCountryComponent } from './add-country/add-country.component';
 
 
 export const countriesRoutes: Route[] = [
@@ -9,14 +8,14 @@ export const countriesRoutes: Route[] = [
         path: '',
         component: CountriesComponent
     },
-   /* {
-        path: 'add-category',
-        component: AddCategoryComponent
+    {
+        path: 'add-country',
+        component: AddCountryComponent
     },
     {
-        path: 'edit-category/:categoryId',
-        component: AddCategoryComponent
-    },
+        path: 'edit-country/:countryId',
+        component: AddCountryComponent
+    },/*
     {
         path: 'edit-category/:categoryId/add-subcategory',
         component: AddSubCategoryComponent
