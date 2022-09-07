@@ -5,4 +5,5 @@ export class User
     email: string;
     picture?: string;
     status?: string;
+    userName?: string
 }
