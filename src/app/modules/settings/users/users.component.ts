@@ -53,7 +53,8 @@ export class UsersComponent implements OnInit {
   pageEvent: PageEvent;
   drawerMode: 'side' | 'over';
   editMode: boolean = false;
-  visible: boolean = false
+  visible: boolean = false;
+  selectedRow: any;
 
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
@@ -172,11 +173,15 @@ export class UsersComponent implements OnInit {
   }
 
   onBackdropClicked() {
-    this.visible = !this.visible
+    this.visible = !this.visible;
   }
-  onRowClick(event: any) {
+
+  onRowClick(event: any, rowData: any) {
     if (!(event.srcElement instanceof SVGElement)) {
-      this.visible = !this.visible
+      this.visible = !this.visible;
+      if (rowData) {
+        this.selectedRow = rowData;
+      }
     }
   }
 
