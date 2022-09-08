@@ -82,3 +82,8 @@
   .right-content{
     width: 60%;
   }
+
+  tr.mat-row { height: 55px; }
+  .mat-row:hover {
+    background-color: #F1F5F9;
+  }

@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['Picture', 'Name', 'UserName', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
-  drawerMode: 'side' | 'over';
+  drawerMode:  'over';
   editMode: boolean = false;
   visible: boolean = false;
   selectedRow: any;
@@ -178,7 +178,7 @@ export class UsersComponent implements OnInit {
 
   onRowClick(event: any, rowData: any) {
     if (!(event.srcElement instanceof SVGElement)) {
-      this.visible = !this.visible;
+      this.visible =  true;//!this.visible;
       if (rowData) {
         this.selectedRow = rowData;
       }

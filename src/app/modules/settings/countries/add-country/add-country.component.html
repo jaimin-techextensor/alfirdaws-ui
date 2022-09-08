@@ -7,14 +7,13 @@
                 <mat-icon svgIcon="heroicons_outline:duplicate"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
-                        <div *ngIf = "!isEditMode"
-                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                         Create Country</div>
-                        <div *ngIf = "isEditMode && countryData"
-                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                        Edit country : {{countryData?.name}}</div>
-                    </ng-container>
-                    
+                        <div *ngIf = "!isEditMode" class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            Create Country
+                        </div>
+                        <div *ngIf = "isEditMode && countryData" class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            Edit country : {{countryData?.name}}
+                        </div>
+                    </ng-container>   
                 </div>
             </div>
         </div>
@@ -26,9 +25,7 @@
                 <span class="ml-2 mr-1">Back</span>
             </button>
         </div>
-
-
-        
+   
     </div>
 
     <div class="flex min-h-5"></div>
@@ -90,6 +87,105 @@
 
             </mat-tab>
 
+            <mat-tab *ngIf="isEditMode">
+                <ng-template mat-tab-label>
+                    <span>Regions:  </span>
+                    <button mat-mini-fab  [color]="'primary'" [ngStyle]="{transform: 'scale(0.7)'}" >
+                        <span> {{regionsList?.length}}</span>
+                    </button>
+                </ng-template>
+
+                <div class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg ">
+                    <!-- Region input form -->
+                    <div class="flex flex-col">
+                        <!-- Assign role form -->
+                        <form  class="flex flex-col w-full" [formGroup]="regionForm">
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                    <!--Role names field-->
+                                    <div class="flex flex-row items-center ">
+                                        <mat-form-field class="w-full mr-3">
+                                            <mat-label>Region: </mat-label>
+                                            <input matInput [formControlName]="'name'">
+                                            <mat-error *ngIf="regionForm.get('name').hasError('required')">
+                                                Region name  is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <ng-container>
+                                            <button (click)="addRegion()" *ngIf = "!isRegionSelected" class="ml-4" mat-flat-button [color]="'primary'">
+                                                <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                <span class="ml-2 mr-1">Add</span>
+                                            </button>
+                                            <button (click)="cancel()" *ngIf = "isRegionSelected" class="ml-4" mat-flat-button >
+                                                <span class="ml-2 mr-1">Cancel</span>
+                                            </button>
+                                            <button (click)="editRegion()" *ngIf = "isRegionSelected" class="ml-4" mat-flat-button [color]="'primary'">
+                                                <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                <span class="ml-2 mr-1">Update</span>
+                                            </button>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                   
+
+                    <div class="flex flex-auto overflow-hidden">
+                        <!-- Regions list -->
+                        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+                            <div class="grid">
+                                <table *ngIf="regionsList.length > 0; else noRegions" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                    
+                                    <!-- Region name column-->
+                                    <ng-container matColumnDef="Region">
+                                        <th mat-header-cell *matHeaderCellDef>Region</th>
+                                        <td mat-cell *matCellDef="let element" >
+                                        <div class="flex flex-auto items-center min-w-5">
+                                            <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
+                                            <span class="ml-1.5 "> <b>{{ element.name }}</b></span> 
+                                        </div>               
+                                        </td>
+                                    </ng-container>
+                        
+                                    <!-- Drop down actions column -->
+                                    <ng-container matColumnDef="Action">
+                                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="hidden sm:block">
+                                                
+                                                <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button [matMenuTriggerFor]="summaryMenu">
+                                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-down'">
+                                                    </mat-icon>
+                                                </button>
+                            
+                                                <mat-menu #summaryMenu="matMenu">
+                                                    <button mat-menu-item (click)="deleteSelectedRegion(element.regionId)">
+                                                        <mat-icon  class="text-red-600" svgIcon="heroicons_outline:folder-remove">
+                                                        </mat-icon>
+                                                        <span  class="text-red-600">Remove</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                    
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns" 
+                                    (click)="onRowClick($event, row)"></tr>
+                                </table>
+                                
+                                <!-- No regions -->
+                                <ng-template #noRegions>
+                                    <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">There are no regions!</div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-tab>
         </mat-tab-group>
     </div>
 

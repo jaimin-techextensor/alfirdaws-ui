@@ -65,4 +65,39 @@ export class CountriesService {
         );
     }
 
+
+  /*
+    Creates an new region for a specific country in the the back-end 
+  */
+  AddRegion(Id: string, data: any): Observable<any> {
+    return this._httpClient.post(environment.APIUrl + 'countries/' + Id + '/regions', data).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
+  }
+
+   /*
+    Updates the region for a specific country in the the back-end 
+  */
+    EditRegion(countryId: string, regionId:string, data: any): Observable<any> {
+      return this._httpClient.put(environment.APIUrl + 'countries/' + countryId + '/regions/' + regionId, data).pipe(
+        switchMap((response: any) => {
+          return of(response);
+        })
+      );
+    }
+  
+
+  /*
+    Deletes a region by its unique id from the the back-end 
+  */
+    DeleteRegion(Id: string): Observable<any> {
+      return this._httpClient.delete(environment.APIUrl + 'countries/regions/' + Id).pipe(
+        switchMap((response: any) => {
+          return of(response);
+        })
+      );
+  }
+
 }
