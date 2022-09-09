@@ -19,6 +19,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { RolesService } from 'app/service/roles.service';
 import { RolesComponent } from "app/modules/settings/roles/roles.component";
 import { AddRoleComponent } from './add-role/add-role.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AddRoleComponent } from './add-role/add-role.component';
     ],
     imports: [
         RouterModule.forChild(rolesRoutes),
+        FormsModule,
         MatIconModule,
         MatButtonModule,
         MatFormFieldModule,

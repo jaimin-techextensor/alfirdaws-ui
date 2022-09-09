@@ -37,7 +37,6 @@ export class RolesService {
   * Edits an  role in the the back-end 
  */
   EditRole(data: any): Observable<any> {
-    debugger
     return this._httpClient.put(environment.APIUrl + 'roles', data).pipe(
       switchMap((response: any) => {
         return of(response);
@@ -54,6 +53,7 @@ export class RolesService {
         return of(response);
       })
     );
+
   }
 
   /*
@@ -67,4 +67,15 @@ export class RolesService {
     );
   }
 
+  // get Role models
+
+  getRolesModels(): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + 'modules/').pipe(
+      switchMap((response: any) => {
+        console.log('responseresponse', response);
+        return of(response);
+      })
+    );
+
+  }
 }
