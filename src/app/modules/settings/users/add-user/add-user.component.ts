@@ -104,7 +104,6 @@ export class AddUserComponent implements OnInit {
   addUser(): void {
     this.isLoginerror = false;
     this.submitted = true
-    localStorage.clear();
     // Return if the form is invalid
     if (this.userForm.invalid) {
         return;
@@ -141,7 +140,6 @@ export class AddUserComponent implements OnInit {
   editUser(): void {
     this.isLoginerror = false;
     this.submitted = true
-    localStorage.clear();
     // Return if the form is invalid
     if (this.userForm.invalid) {
         return;

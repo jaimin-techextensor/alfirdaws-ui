@@ -68,7 +68,6 @@ export class AddRoleComponent implements OnInit {
     addRole() {
         this.isLoginerror = false;
         this.submitted = true
-        localStorage.clear();
         // Return if the form is invalid
         if (this.roleForm.invalid) {
             return;
@@ -103,7 +102,6 @@ export class AddRoleComponent implements OnInit {
     editRole(): void {
         this.isLoginerror = false;
         this.submitted = true
-        localStorage.clear();
         // Return if the form is invalid
         if (this.roleForm.invalid) {
             return;

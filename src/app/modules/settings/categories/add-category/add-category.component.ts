@@ -88,7 +88,6 @@ export class AddCategoryComponent implements OnInit {
     */
     navigateBack()
     {
-        localStorage.clear();
         this._location.back();
     }
 
@@ -99,7 +98,6 @@ export class AddCategoryComponent implements OnInit {
     {
         this.isLoginerror = false;
         this.submitted = true
-        localStorage.clear();
 
         // Return if the form is invalid
         if (this.categoryForm.invalid) {
@@ -137,7 +135,6 @@ export class AddCategoryComponent implements OnInit {
     {
         this.isLoginerror = false;
         this.submitted = true
-        localStorage.clear();
 
         // Return if the form is invalid
         if (this.categoryForm.invalid) {

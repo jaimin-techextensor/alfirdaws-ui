@@ -81,8 +81,6 @@ export class AddSubCategoryComponent implements OnInit {
     {
         this.isLoginerror = false;
         this.submitted = true
-        //localStorage.clear();
-
         // Return if the form is invalid
         if (this.subcategoryForm.invalid) {
             return;
@@ -128,7 +126,6 @@ export class AddSubCategoryComponent implements OnInit {
     {
         this.isLoginerror = false;
         this.submitted = true
-        //localStorage.clear();
 
         // Return if the form is invalid
         if (this.subcategoryForm.invalid) {
