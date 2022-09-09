@@ -24,10 +24,6 @@ export class SettingsComponent implements OnInit {
       async (data: any) => {
         if (data.success == true) {
           this.counterList = await data.data;
-          console.log(data);
-        }
-        else{
-          console.log("Data not found")
         }
       });
   }

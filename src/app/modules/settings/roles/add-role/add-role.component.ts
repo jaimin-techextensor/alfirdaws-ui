@@ -100,7 +100,7 @@ export class AddRoleComponent implements OnInit {
     }
 
     // Edit an existing role
-    editRole(): void {    
+    editRole(): void {
         this.isLoginerror = false;
         this.submitted = true
         localStorage.clear();
@@ -117,7 +117,7 @@ export class AddRoleComponent implements OnInit {
             name: this.roleForm.value["name"],
             isStatic: this.roleForm.value["isStatic"] == "true" ? true : false,
             description: this.roleForm.value["description"],
-            permissions: this.rolePermissions
+            permissions: this.roleForm.value['permissions']
         }
         //Edit the role through the API
         this._rolesService.EditRole(RoleModel).subscribe(
@@ -147,7 +147,8 @@ export class AddRoleComponent implements OnInit {
                             create: element.create,
                             update: element.update,
                             read: element.read,
-                            delete: element.delete
+                            delete: element.delete,
+                            permissionId : element.permissionId
                         };
                         this.rolePermissions.push(permission);
                     });
@@ -160,6 +161,7 @@ export class AddRoleComponent implements OnInit {
                 this.roleForm.patchValue({ roleId: this.roleData.roleId });
                 this.roleForm.patchValue({ description: this.roleData.description });
                 this.roleForm.patchValue({ isStatic: this.roleData.isStatic == true ? "true" : "false" });
+                this.roleForm.patchValue({ permissions: this.rolePermissions });
             }
         }
         )

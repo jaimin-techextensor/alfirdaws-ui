@@ -11,11 +11,10 @@ import { User } from 'app/core/user/user.types';
     exportAs: 'user'
 })
 export class UserComponent implements OnInit {
-    user: User;
+    user: User = new User();
 
-   
     constructor(
-        private _router: Router    ) {
+        private _router: Router) {
         let user: any = localStorage.getItem('user');
         if (user) {
             user = JSON.parse(user);
@@ -36,7 +35,7 @@ export class UserComponent implements OnInit {
      *
      * @param status
      */
-     updateUserStatus(status: string): void {
+    updateUserStatus(status: string): void {
         // Return if user is not available
         if (!this.user) {
             return;
