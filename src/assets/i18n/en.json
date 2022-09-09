@@ -1,5 +1,28 @@
 {
     "welcome-back": "Welcome back",
-    "Project": "Project",
-    "Analytics": "Analytics"
+    "Project": "Projects - EN",
+    "Analytics": "Analytics",
+    "settings": {
+        "settings": "Settings",
+        "settings-overview": "Overview of general settings of the Al.firdaws platform",
+        "users-settings": "Users, Roles & Security",
+        "ui-settings": "UI settings & Languages",
+        "alfirdaws-settings": "Al.firdaws settings",
+        "users-registered": "Users Registered",
+        "roles-defined": "Roles Defined",
+        "modules": "Modules",
+        "languages": "Languages",
+        "user-interface": "User Interface",
+        "categories": "Categories",
+        "subcategories": "Sub categories",
+        "countries": "Countries",
+        "regions": "Regions",
+        "campaigntypes": "Campaign Types",
+        "subscriptionmodels": "Subscription models",
+        "addresstypes": "Address Types",
+        "paymenttypes": "Payment Types",
+        "invoicetypes": "Invoice Types",
+        "vattypes": "VAT Types",
+        "casemanagement": "Case Management"
+      }
 }

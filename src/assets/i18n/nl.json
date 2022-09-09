@@ -1,5 +1,28 @@
 {
     "welcome-back": "Welcome back",
-    "Project": "Project",
-    "Analytics": "Analytics"
+    "Project": "Projecten",
+    "Analytics": "Analytics",
+    "settings": {
+        "settings": "Instellingen",
+        "settings-overview": "Overzicht van de algemene instellingen van het Al.firdaws platform",
+        "users-settings": "Gebruikers, Rollen & Beveiliging",
+        "ui-settings": "UI instellingen & Talen",
+        "alfirdaws-settings": "Al.firdaws instellingen",
+        "users-registered": "Gebruikers geregistreerd",
+        "roles-defined": "Rollen gedefinieerd",
+        "modules": "Modules",
+        "languages": "Talen",
+        "user-interface": "Gebruikers Interface",
+        "categories": "Categorieën",
+        "subcategories": "Sub categorieën",
+        "countries": "Landen",
+        "regions": "Regio's",
+        "campaigntypes": "Campagnetypes",
+        "subscriptionmodels": "Abonnement modellen",
+        "addresstypes": "Adrestypes",
+        "paymenttypes": "Betalingstypes",
+        "invoicetypes": "Factuurtypes",
+        "vattypes": "BTW types",
+        "casemanagement": "Case Management"
+      }
 }
