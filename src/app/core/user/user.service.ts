@@ -56,17 +56,6 @@ export class UserService
     }*/
 
 
-    get(): Observable<User>
-    {
-        this.Id = localStorage.getItem('userId');
-        return this._httpClient.get<User>(environment.APIUrl + 'users/' + this.Id + '?isAvatar=true').pipe(
-            tap((user) => {
-                this._user.next(user);
-            })
-        );
-    }
-
-
     /**
      * Update the user
      *

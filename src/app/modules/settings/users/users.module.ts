@@ -9,7 +9,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { FuseAlertModule } from '@fuse/components/alert';
@@ -19,11 +19,14 @@ import { usersRoutes } from 'app/modules/settings/users/users.routing';
 import { UsersService } from 'app/service/users.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { AddUserComponent } from './add-user/add-user.component';
+import { DetailUserComponent } from './detail-user/detail-user.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
     declarations: [
         UsersComponent,
-        AddUserComponent
+        AddUserComponent,
+        DetailUserComponent
     ],
     imports: [
         RouterModule.forChild(usersRoutes),
@@ -42,7 +45,8 @@ import { AddUserComponent } from './add-user/add-user.component';
         FuseAlertModule,
         SharedModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSidenavModule
     ],
     exports: [
         AddUserComponent

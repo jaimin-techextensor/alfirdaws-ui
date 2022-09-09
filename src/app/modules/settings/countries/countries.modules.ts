@@ -19,6 +19,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { CountriesService } from 'app/service/countries.service';
 import { CountriesComponent } from "app/modules/settings/countries/countries.component";
 import { countriesRoutes } from './countries.routing';
+import { AddCountryComponent } from './add-country/add-country.component';
 //import { AddCategoryComponent } from './add-category/add-category.component';
 //import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.component';
 
@@ -26,7 +27,7 @@ import { countriesRoutes } from './countries.routing';
 @NgModule({
     declarations: [
         CountriesComponent,
-  //      AddCategoryComponent,
+        AddCountryComponent,
     //    AddSubCategoryComponent
     ],
     imports: [
@@ -49,7 +50,7 @@ import { countriesRoutes } from './countries.routing';
         MatTableModule
     ],
     exports: [
-      //  AddCategoryComponent,
+        AddCountryComponent,
       //  AddSubCategoryComponent
     ],
     providers: [

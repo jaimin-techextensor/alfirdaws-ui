@@ -84,9 +84,9 @@ export class AuthService
           }
           return this._httpClient.post(environment.APIUrl + 'authenticate/login', login_cred).pipe(
             switchMap((response: any) => {
-              localStorage.setItem('token', response.token)
+              localStorage.setItem('token', response.token.token)
               this._authenticated = true;
-              localStorage.setItem('user', JSON.stringify(response));
+              localStorage.setItem('user', JSON.stringify(response.token));
               localStorage.setItem('userId', response.token.id);
               return of(response);
             })
