@@ -401,8 +401,8 @@
                           <span>Delete</span>
                         </button>
                         <mat-divider class="my-2"></mat-divider>
-                        <ng-container *ngIf="!element.active">
-                          <button *ngIf="isEditPermission"
+                        <ng-container *ngIf="!element.active && isEditPermission">
+                          <button
                             mat-menu-item
                             (click)="ngActivateDeactivateUser(element)"
                           >
@@ -414,7 +414,7 @@
                             <span>Activate</span>
                           </button>
                         </ng-container>
-                        <ng-container *ngIf="element.active">
+                        <ng-container *ngIf="element.active && isEditPermission">
                           <button
                             mat-menu-item
                             (click)="ngActivateDeactivateUser(element)"
