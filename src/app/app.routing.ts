@@ -76,14 +76,14 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'example', title: 'Home', canLoad: [AuthGuard], loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
+            { path: 'example', title: 'Home', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
             { path: 'settings', title: 'Setting', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/settings.module').then(m => m.SettingsModule) },
             { path: 'users', title: 'Users', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/users/users.module').then(m => m.UsersModule) },
             { path: 'roles', title: 'Roles', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/roles/roles.module').then(m => m.RolesModule) },
             { path: 'modules', title: 'Modules', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/modls/modls.module').then(m => m.ModlsModule) },
             { path: 'categories', title: 'Categories', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/categories/categories.module').then(m => m.CategoriesModule) },
             { path: 'countries', title: 'Countries', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/countries/countries.modules').then(m => m.CountriesModule) },
-            { path: 'dashboard', title: 'Dashboard', canLoad: [AuthGuard], loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) }
+            { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }
 ];
