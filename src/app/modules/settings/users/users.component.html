@@ -383,7 +383,7 @@
                         </mat-icon>
                       </button>
 
-                      <mat-menu #summaryMenu="matMenu" *ngIf="isEditPermission || isDeletePermission">
+                      <mat-menu #summaryMenu="matMenu" [hidden]="!(isEditPermission || isDeletePermission)">
                         <button *ngIf="isEditPermission"
                           mat-menu-item
                           [routerLink]="['edit-user', element.userId]"

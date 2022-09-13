@@ -112,8 +112,7 @@
                     <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-down'">
                     </mat-icon>
                   </button>
-
-                  <mat-menu #summaryMenu="matMenu" *ngIf="isEditPermission || isDeletePermission">
+                  <mat-menu #summaryMenu="matMenu" [hidden]="!(isEditPermission || isDeletePermission)">
                     <button *ngIf="isEditPermission" mat-menu-item [routerLink]="['edit-role', element.roleId]">
                       <mat-icon svgIcon="heroicons_outline:pencil-alt">
                       </mat-icon>
