@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { RolesService } from 'app/service/roles.service';
+import { checkValidPermission } from 'app/core/auth/auth-permission';
 
 @Component({
   selector: 'app-settings',
@@ -31,6 +32,9 @@ export class RolesComponent implements OnInit {
     message: ''
   };
   showAlert = false;
+  isDeletePermission = false;
+  isEditPermission = false;
+  isAddPermission = false;
 
   constructor(
     private _router: Router,
@@ -41,6 +45,9 @@ export class RolesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRolesList(null);
+    this.isDeletePermission = checkValidPermission(this._router.url, 'delete');
+    this.isEditPermission = checkValidPermission(this._router.url, 'edit');
+    this.isAddPermission = checkValidPermission(this._router.url, 'add');
   }
 
   /*
@@ -123,5 +130,4 @@ export class RolesComponent implements OnInit {
       }
     });
   }
-
 }

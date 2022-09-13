@@ -258,7 +258,7 @@
                 [ngModelOptions]="{ standalone: true }"
               />
             </mat-form-field>
-            <button
+            <button *ngIf="isAddPermission"
               class="ml-4"
               mat-flat-button
               [color]="'primary'"
@@ -383,8 +383,8 @@
                         </mat-icon>
                       </button>
 
-                      <mat-menu #summaryMenu="matMenu">
-                        <button
+                      <mat-menu #summaryMenu="matMenu" *ngIf="isEditPermission || isDeletePermission">
+                        <button *ngIf="isEditPermission"
                           mat-menu-item
                           [routerLink]="['edit-user', element.userId]"
                         >
@@ -392,7 +392,7 @@
                           </mat-icon>
                           <span>Edit</span>
                         </button>
-                        <button
+                        <button *ngIf="isDeletePermission"
                           mat-menu-item
                           (click)="deleteSelectedUser(element.userId)"
                         >
@@ -402,7 +402,7 @@
                         </button>
                         <mat-divider class="my-2"></mat-divider>
                         <ng-container *ngIf="!element.active">
-                          <button
+                          <button *ngIf="isEditPermission"
                             mat-menu-item
                             (click)="ngActivateDeactivateUser(element)"
                           >

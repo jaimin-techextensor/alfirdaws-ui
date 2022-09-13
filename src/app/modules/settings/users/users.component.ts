@@ -10,6 +10,7 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UsersService } from 'app/service/users.service';
 import { PageRequestModel } from './page-request';
 import { MatDrawer } from '@angular/material/sidenav';
+import { checkValidPermission } from 'app/core/auth/auth-permission';
 
 @Component({
   selector: 'app-settings',
@@ -51,7 +52,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['Picture', 'Name', 'UserName', 'Email', 'IsActive', 'LastLoginTime', 'Action'];
   dataSource: any;
   pageEvent: PageEvent;
-  drawerMode:  'over';
+  drawerMode: 'over';
   editMode: boolean = false;
   visible: boolean = false;
   selectedRow: any;
@@ -61,6 +62,9 @@ export class UsersComponent implements OnInit {
     message: ''
   };
   showAlert = false;
+  isDeletePermission = false;
+  isEditPermission = false;
+  isAddPermission = false;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -73,6 +77,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsersList(null, false);
+    this.isDeletePermission = checkValidPermission(this._router.url, 'delete');
+    this.isEditPermission = checkValidPermission(this._router.url, 'edit');
+    this.isAddPermission = checkValidPermission(this._router.url, 'add');
   }
 
   backToSettings(): void {
@@ -178,7 +185,7 @@ export class UsersComponent implements OnInit {
 
   onRowClick(event: any, rowData: any) {
     if (!(event.srcElement instanceof SVGElement)) {
-      this.visible =  true;//!this.visible;
+      this.visible = true;//!this.visible;
       if (rowData) {
         this.selectedRow = rowData;
       }

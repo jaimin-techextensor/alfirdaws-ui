@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { AuthService } from 'app/core/auth/auth.service';
+import { RolesService } from 'app/service/roles.service';
 
 @Component({
     selector: 'auth-sign-in',
@@ -29,7 +30,8 @@ export class AuthSignInComponent implements OnInit {
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private _formBuilder: UntypedFormBuilder,
-        private _router: Router
+        private _router: Router,
+        private roleService: RolesService
     ) {
     }
 
@@ -78,7 +80,7 @@ export class AuthSignInComponent implements OnInit {
                     if (data.status == "User Not Found") {
                         console.log('wrong')
                         this.signInForm.enable();
-                        this.signInNgForm.resetForm();  
+                        this.signInNgForm.resetForm();
                         this.alert = {
                             type: 'error',
                             message: 'Wrong email or password'
@@ -86,13 +88,33 @@ export class AuthSignInComponent implements OnInit {
                         this.showAlert = true;
                         // this._router.navigate(['sign-in']);
                     } else {
+                        this.roleService.getRolePermissionByUser(data?.token?.id).subscribe(res => {
+                            if (res && res.success) {
+                                var permissions = [];
+                                if (res.data.length > 0) {
+                                    var i = 0;
+                                    res.data.forEach(role_permission => {
+                                        if (role_permission && role_permission.permissions.length > 0) {
+                                            if (i == 0) {
+                                                permissions = role_permission.permissions;
+                                            } else {
+                                                permissions = [...permissions, role_permission.permissions];
+                                            }
+                                        }
+                                        i++;
+                                    });
+                                    localStorage.setItem('role-permissions', JSON.stringify(permissions));
+
+                                }
+                            }
+                        });
                         // localStorage.setItem('token', data.token)
                         // Set the redirect url.
                         // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
                         // to the correct page after a successful sign in. This way, that url can be set via
                         // routing file and we don't have to touch here.
                         const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
-                       //const redirectURL = '/settingspage'
+                        //const redirectURL = '/settingspage'
 
                         // Navigate to the redirect url
                         this._router.navigateByUrl(redirectURL);

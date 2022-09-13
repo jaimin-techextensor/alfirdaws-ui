@@ -51,7 +51,7 @@
           (ngModelChange)="getRolesList(null,true)"
           [ngModelOptions]="{ standalone: true }"/>
       </mat-form-field>
-      <button class="ml-4" mat-flat-button [color]="'primary'"[routerLink]="['add-role']">
+      <button *ngIf="isAddPermission" class="ml-4" mat-flat-button [color]="'primary'"[routerLink]="['add-role']">
         <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
         <span class="ml-2 mr-1">Create new role</span>
       </button>
@@ -113,13 +113,13 @@
                     </mat-icon>
                   </button>
 
-                  <mat-menu #summaryMenu="matMenu">
-                    <button mat-menu-item [routerLink]="['edit-role', element.roleId]">
+                  <mat-menu #summaryMenu="matMenu" *ngIf="isEditPermission || isDeletePermission">
+                    <button *ngIf="isEditPermission" mat-menu-item [routerLink]="['edit-role', element.roleId]">
                       <mat-icon svgIcon="heroicons_outline:pencil-alt">
                       </mat-icon>
                       <span>Edit</span>
                     </button>
-                    <button mat-menu-item (click)="deleteSelectedRole(element.roleId)">
+                    <button *ngIf="isDeletePermission" mat-menu-item (click)="deleteSelectedRole(element.roleId)">
                       <mat-icon svgIcon="heroicons_outline:folder-remove">
                       </mat-icon>
                       <span>Delete</span>

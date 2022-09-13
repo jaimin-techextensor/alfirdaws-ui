@@ -72,10 +72,17 @@ export class RolesService {
   getRolesModels(): Observable<any> {
     return this._httpClient.get(environment.APIUrl + 'modules/').pipe(
       switchMap((response: any) => {
-        console.log('responseresponse', response);
         return of(response);
       })
     );
 
+  }
+
+  getRolePermissionByUser(userId: number) {
+    return this._httpClient.get(environment.APIUrl + 'role-permission/' + userId).pipe(
+      switchMap((response: any) => {
+        return of(response);
+      })
+    );
   }
 }
