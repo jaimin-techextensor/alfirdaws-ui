@@ -1,8 +1,6 @@
 export function getModule(route: string) {
-    if (route.includes('role') || route.includes('settings')) {
+    if (route.includes('role') || route.includes('settings') || route.includes('user')) {
         return 'Settings';
-    } else if (route.includes('user')) {
-        return 'Customer Management';
     } else if (route.includes('dashboard')) {
         return 'Dashboard';
     } else if (route.includes('search')) {
