@@ -108,9 +108,11 @@
     <!-- Title & Subtitle -->
     <div class="fuse-vertical-navigation-item-title-wrapper">
         <div class="fuse-vertical-navigation-item-title">
-            <span [ngClass]="item.classes?.title">
-                {{item.title}}
-            </span>
+            <ng-container *transloco="let t;read:'menu'">
+                <span [ngClass]="item.classes?.title">
+                    {{t(item.title)}}
+                </span>
+            </ng-container>
         </div>
         <ng-container *ngIf="item.subtitle">
             <div class="fuse-vertical-navigation-item-subtitle">
