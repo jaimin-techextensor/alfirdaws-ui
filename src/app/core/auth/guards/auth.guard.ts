@@ -97,23 +97,20 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                 const module = getModule(redirectURL);
                 if (module) {
                     if (permissions.filter(b => b.moduleName == module)?.length > 0) {
-                        var modulePermisisons = permissions.filter(b => b.moduleName == module);
-                        modulePermisisons.forEach(module_permission => {
-                            if (redirectURL.includes('add')) {
-                                if (module_permission.create) {
-                                    valid = true;
-                                }
-                            } else if (redirectURL.includes('edit')) {
-                                if (module_permission.update) {
-                                    valid = true;
-                                }
+                        var modulePermissions = permissions.filter(b => b.moduleName == module);
+                        if (redirectURL.includes('add')) {
+                            if (modulePermissions.filter(a => a.create).length > 0) {
+                                valid = true;
                             }
-                            else {
-                                if (module_permission.read) {
-                                    valid = true;
-                                }
+                        } else if (redirectURL.includes('edit')) {
+                            if (modulePermissions.filter(a => a.update).length > 0) {
+                                valid = true;
                             }
-                        });
+                        } else {
+                            if (modulePermissions.filter(a => a.read).length > 0) {
+                                valid = true;
+                            }
+                        }
                     }
                 }
             }

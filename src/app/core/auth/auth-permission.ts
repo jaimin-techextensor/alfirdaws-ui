@@ -17,15 +17,19 @@ export function checkValidPermission(route: string, type: string) {
         if (module) {
             if (permissions.filter(a => a.moduleName == module)?.length > 0) {
                 var modulePermissions = permissions.filter(a => a.moduleName == module);
-                modulePermissions.forEach(module_permission => {
-                    if (type == 'delete' && module_permission.delete) {
-                        valid = true;
-                    } else if (type == 'edit' && module_permission.update) {
-                        valid = true;
-                    } else if (type == 'add' && module_permission.create) {
+                if (type == 'delete') {
+                    if (modulePermissions.filter(a => a.delete).length > 0) {
                         valid = true;
                     }
-                });
+                } else if (type == 'edit') {
+                    if (modulePermissions.filter(a => a.update).length > 0) {
+                        valid = true;
+                    }
+                } else if (type == 'add') {
+                    if (modulePermissions.filter(a => a.create).length > 0) {
+                        valid = true;
+                    }
+                }
             }
         }
         return valid;

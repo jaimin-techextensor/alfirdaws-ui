@@ -21,7 +21,7 @@
         <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
 
             <!-- Skip the hidden items -->
-            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+            <ng-container *ngIf="!item.hidden">
 
                 <!-- Aside -->
                 <ng-container *ngIf="item.type === 'aside'">
@@ -104,7 +104,7 @@
         <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
 
             <!-- Skip the hidden items -->
-            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+            <ng-container *ngIf="!item.hidden">
 
                 <!-- Aside -->
                 <ng-container *ngIf="item.type === 'aside' && item.id === activeAsideItemId">

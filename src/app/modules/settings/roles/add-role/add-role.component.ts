@@ -126,12 +126,39 @@ export class AddRoleComponent implements OnInit {
                         message: 'Role updated Successfully!!'
                     };
                     this.showAlert = true;
+                    this.getLatestRolePermissions();
                     this._location.back();
                 }
             }
         )
     }
 
+    getLatestRolePermissions() {
+        var user: any = localStorage.getItem('user');
+        if (user) {
+            user = JSON.parse(user);
+            this._rolesService.getRolePermissionByUser(user.id).subscribe(res => {
+                if (res && res.success) {
+                    var permissions = [];
+                    if (res.data.length > 0) {
+                        var i = 0;
+                        res.data.forEach(role_permission => {
+                            if (role_permission && role_permission.permissions.length > 0) {
+                                if (i == 0) {
+                                    permissions = role_permission.permissions;
+                                } else {
+                                    Array.prototype.push.apply(permissions, role_permission.permissions);
+                                }
+                            }
+                            i++;
+                        });
+                        localStorage.setItem('role-permissions', JSON.stringify(permissions));
+
+                    }
+                }
+            });
+        }
+    }
     // Retrieve the data of a specific role
     getRole(Id: string) {
         this._rolesService.GetRole(Id).subscribe((data) => {
@@ -146,7 +173,7 @@ export class AddRoleComponent implements OnInit {
                             update: element.update,
                             read: element.read,
                             delete: element.delete,
-                            permissionId : element.permissionId
+                            permissionId: element.permissionId
                         };
                         this.rolePermissions.push(permission);
                     });

@@ -98,7 +98,7 @@ export class AuthSignInComponent implements OnInit {
                                             if (i == 0) {
                                                 permissions = role_permission.permissions;
                                             } else {
-                                                permissions = [...permissions, role_permission.permissions];
+                                                Array.prototype.push.apply(permissions, role_permission.permissions);
                                             }
                                         }
                                         i++;
