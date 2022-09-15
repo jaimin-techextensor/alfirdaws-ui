@@ -104,7 +104,7 @@ export class AuthSignInComponent implements OnInit {
                                         i++;
                                     });
                                     localStorage.setItem('role-permissions', JSON.stringify(permissions));
-
+                                    this.roleService.roleUpdateEvent.emit(true);
                                 }
                             }
                         });

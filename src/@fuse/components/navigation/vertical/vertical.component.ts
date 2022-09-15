@@ -9,6 +9,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FuseScrollbarDirective } from '@fuse/directives/scrollbar/scrollbar.directive';
 import { FuseUtilsService } from '@fuse/services/utils/utils.service';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { RolesService } from 'app/service/roles.service';
 
 @Component({
     selector: 'fuse-vertical-navigation',
@@ -56,6 +57,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
     private _fuseScrollbarDirectives!: QueryList<FuseScrollbarDirective>;
     private _fuseScrollbarDirectivesSubscription: Subscription;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    showNavigations = false;
 
     /**
      * Constructor
@@ -68,7 +70,8 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         private _router: Router,
         private _scrollStrategyOptions: ScrollStrategyOptions,
         private _fuseNavigationService: FuseNavigationService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
+        private roleService: RolesService
     ) {
         this._handleAsideOverlayClick = (): void => {
             this.closeAside();
@@ -76,6 +79,11 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         this._handleOverlayClick = (): void => {
             this.close();
         };
+        this.roleService.roleUpdateEvent.subscribe(res => {
+            if (res) {
+                this.updateNavigations();
+            }
+        })
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -271,21 +279,8 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
      * On init
      */
     ngOnInit(): void {
+        this.updateNavigations();
         // Make sure the name input is not an empty string
-        if (this.navigation.length > 0) {
-            var permissions: any = localStorage.getItem("role-permissions");
-            if (permissions) {
-                permissions = JSON.parse(permissions);
-                this.navigation.forEach(menu => {
-                    var moudule_permission = permissions.filter(a => a.moduleName == menu.meta);
-                    if (moudule_permission && moudule_permission.length > 0) {
-                        if (moudule_permission.filter(a => a.read)?.length <= 0) {
-                            menu.hidden = true;
-                        }
-                    }
-                })
-            }
-        }
         if (this.name === '') {
             this.name = this._fuseUtilsService.randomId();
         }
@@ -313,6 +308,25 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
                     this.closeAside();
                 }
             });
+    }
+
+    updateNavigations() {
+        if (this.navigation.length > 0) {
+            var permissions: any = localStorage.getItem("role-permissions");
+            if (permissions) {
+                permissions = JSON.parse(permissions);
+                this.navigation.forEach(menu => {
+                    var moudule_permission = permissions.filter(a => a.moduleName == menu.meta);
+                    if (moudule_permission && moudule_permission.length > 0) {
+                        if (moudule_permission.filter(a => a.read)?.length <= 0) {
+                            menu.hidden = true;
+                        }
+                    }
+                })
+                this.showNavigations = true;
+            }
+            this.refresh();
+        }
     }
 
     /**
