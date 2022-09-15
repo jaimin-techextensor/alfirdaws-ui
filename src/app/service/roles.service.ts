@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable, of, switchMap } from 'rxjs';
 
@@ -7,6 +7,7 @@ import { Observable, of, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class RolesService {
+  @Output() roleUpdateEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private _httpClient: HttpClient,) { }
 
