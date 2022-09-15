@@ -21,6 +21,7 @@ import { checkValidPermission } from 'app/core/auth/auth-permission';
         tr.mat-row { height: 75px; }
         .mat-row:hover {
           background-color: #F1F5F9;
+          cursor:pointer;
         }
         .inventory-grid {
             grid-template-columns: 48px auto 40px;

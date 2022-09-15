@@ -1,189 +1,49 @@
-<div
+<div 
   class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent"
->
+  >
   <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent" [hasBackdrop]="false">
     <!-- Drawser -->
-    <mat-drawer
-      class="w-full md:w-160 dark:bg-gray-900"
-      [mode]="drawerMode"
-      [opened]="true"
-      [position]="'end'"
-      [disableClose]="false"
-      #matDrawer
+    <mat-drawer 
+    class="w-full md:w-160 dark:bg-gray-900" 
+    [mode]="drawerMode" 
+    [opened]="true" 
+    [position]="'end'"
+      [disableClose]="false" 
+      #matDrawer 
       *ngIf="visible"
-    >
+      >
       <div class="">
         <div class="flex flex-col w-full">
           <!-- View mode -->
           <ng-container>
             <!-- Header -->
-            <div
-              class="relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700"
+            <div 
+            class="relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700"
             >
               <!-- Background -->
               <ng-container>
-                <img
-                  class="absolute inset-0 object-cover w-full h-full"
-                  src="../../../../assets/images/DImages/background.jpeg"
-                />
+                <img 
+                class="absolute inset-0 object-cover w-full h-full"
+                  src="../../../../assets/images/DImages/background.jpeg" 
+                  />
               </ng-container>
 
               <!-- Close button -->
-              <div
-                class="flex items-center justify-end w-full max-w-3xl mx-auto pt-6"
-                (click)="onBackdropClicked()"
+              <div 
+              class="flex items-center justify-end w-full max-w-3xl mx-auto pt-6" 
+              (click)="onBackdropClicked()"
               >
                 <a mat-icon-button>
-                  <mat-icon
-                    class="text-white"
-                    [svgIcon]="'heroicons_outline:x'"
+                  <mat-icon 
+                  class="text-white" 
+                  [svgIcon]="'heroicons_outline:x'"
                   ></mat-icon>
                 </a>
               </div>
             </div>
 
-            <!-- Contact -->
-            <div
-              class="relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0"
-            >
-              <div class="w-full max-w-3xl">
-                <!-- Avatar and actions -->
-                <div class="flex flex-auto items-end -mt-16">
-                  <!-- Avatar -->
-                  <div
-                    class="flex items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card"
-                  >
-                    <!-- <img
-                      class="object-cover w-full h-full"
-                      src="../../../../assets/images/avatars/nopicture.png"
-                    /> -->
-                    <img
-                      class="object-cover w-full h-full"
-                      *ngIf="selectedRow.picture"
-                      [src]="selectedRow.picture"
-                    />
-                    <img
-                      class="object-cover w-full h-full"
-                      *ngIf="selectedRow.picture == null"
-                      src="../../../assets/images/avatars/nopicture.png"
-                    />
-                  </div>
-
-                  <!-- Actions -->
-                  <div class="flex items-center ml-auto mb-1">
-                    <button
-                      mat-stroked-button
-                      [routerLink]="['edit-user', selectedRow.userId]"
-                    >
-                      <mat-icon
-                        class="icon-size-5"
-                        [svgIcon]="'heroicons_solid:pencil-alt'"
-                      ></mat-icon>
-                      <span class="ml-2">Edit</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Name -->
-                <div class="mt-3 text-4xl font-bold truncate">
-                  {{ selectedRow.name }} {{ selectedRow.lastName }}
-                </div>
-
-                <div class="flex flex-col mt-4 pt-6 border-t space-y-8">
-                  <!-- username -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon
-                        [svgIcon]="'heroicons_outline:briefcase'"
-                      ></mat-icon>
-                      <div class="ml-6 leading-6">{{ selectedRow.userName }}</div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Emails -->
-                  <ng-container>
-                    <div class="flex">
-                      <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
-                      <ng-container>
-                        <div class="flex sm:items-center">
-                          <div class="ml-6 leading-6">{{ selectedRow.email }}</div>
-                        </div>
-                      </ng-container>
-                    </div>
-                  </ng-container>
-
-                  <!-- Status -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon
-                        [svgIcon]="'heroicons_outline:dots-circle-horizontal'"
-                      ></mat-icon>
-                      <div class="ml-6 leading-6">
-                        <mat-icon
-                          *ngIf="selectedRow.active"
-                          class="text-green-400 icon-size-6"
-                          [svgIcon]="'heroicons_solid:check'"
-                        >
-                        </mat-icon>
-                        <mat-icon
-                          *ngIf="!selectedRow.active"
-                          class="text-red-400 icon-size-5"
-                          [svgIcon]="'heroicons_solid:x'"
-                        >
-                        </mat-icon>
-                      </div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Last Login Time -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon
-                        [svgIcon]="'heroicons_outline:clock'"
-                      ></mat-icon>
-                      <div class="ml-6 leading-6">
-                        {{
-                          selectedRow.lastLoginTime | date: "dd-MM-yyyy hh:mm:ss a"
-                        }}
-                      </div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Password Changed -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon [svgIcon]="'heroicons_outline:key'"></mat-icon>
-                      <div class="ml-6 leading-6">
-                        <b>Password Changed : </b>
-                        {{ selectedRow.isPasswordChanged ? "Yes" : "No" }}
-                      </div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Send Activation Mail -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
-                      <div class="ml-6 leading-6">
-                        <b>Send Activation Email : </b>
-                        {{ selectedRow.sendActivationEmail ? "Yes" : "No" }}
-                      </div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Change Password on next Login -->
-                  <ng-container>
-                    <div class="flex sm:items-center">
-                      <mat-icon [svgIcon]="'heroicons_outline:key'"></mat-icon>
-                      <div class="ml-6 leading-6">
-                        <b>Change Password on next Login : </b>
-                        {{ selectedRow.changePwdAtNextLogin ? "Yes" : "No" }}
-                      </div>
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
+            <!-- User Detail -->
+            <app-user-detail-dialog [userDetail]="selectedRow"></app-user-detail-dialog>
           </ng-container>
         </div>
       </div>
@@ -193,18 +53,18 @@
       <!-- Main -->
       <div class="flex-auto">
         <!-- Header -->
-        <div
-          class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b"
+        <div 
+        class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b"
         >
           <div class="ml-4 w-80">
-            <fuse-alert
-              class="mt-8 -mb-4"
-              *ngIf="showAlert"
-              [appearance]="'outline'"
+            <fuse-alert 
+              class="mt-8 -mb-4" 
+              *ngIf="showAlert" 
+              [appearance]="'outline'" 
               [showIcon]="true"
-              [type]="alert.type"
+              [type]="alert.type" 
               [@shake]="alert.type === 'error'"
-            >
+              >
               {{ alert.message }}
             </fuse-alert>
           </div>
@@ -213,7 +73,7 @@
         <!-- Header -->
         <div
           class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b"
-        >
+          >
           <!-- Loader -->
 
           <!-- Title -->
@@ -223,9 +83,9 @@
               </mat-icon>
               <div class="flex flex-col min-w-0 ml-4">
                 <ng-container>
-                  <div
+                  <div 
                     class="text-2xl md:text-3xl font-semibold tracking-tight leading-0 md:leading-snug truncate"
-                  >
+                    >
                     Users
                   </div>
                 </ng-container>
@@ -240,38 +100,38 @@
 
           <!-- Actions -->
           <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <mat-form-field
+            <mat-form-field 
               class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64"
-            >
-              <mat-icon
-                class="icon-size-5"
-                matPrefix
-                [svgIcon]="'heroicons_solid:search'"
+              >
+              <mat-icon 
+              class="icon-size-5" 
+              matPrefix 
+              [svgIcon]="'heroicons_solid:search'"
               >
               </mat-icon>
-              <input
-                matInput
-                [autocomplete]="'off'"
-                [placeholder]="'Search User'"
-                [(ngModel)]="searchTextForModerator"
-                (ngModelChange)="getUsersList(null, true)"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input 
+              matInput 
+              [autocomplete]="'off'" 
+              [placeholder]="'Search User'" 
+              [(ngModel)]="searchTextForModerator"
+                (ngModelChange)="getUsersList(null, true)" 
+                [ngModelOptions]="{ standalone: true }" 
+                />
             </mat-form-field>
-            <button *ngIf="isAddPermission"
-              class="ml-4"
-              mat-flat-button
-              [color]="'primary'"
+            <button *ngIf="isAddPermission" 
+            class="ml-4" 
+            mat-flat-button 
+            [color]="'primary'"
               [routerLink]="['add-user']"
-            >
+              >
               <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
               <span class="ml-2 mr-1">Create new user</span>
             </button>
-            <button
-              (click)="back()"
-              class="ml-4"
-              mat-flat-button
-              [color]="'accent'"
+            <button 
+            (click)="back()" 
+            class="ml-4" 
+            mat-flat-button 
+            [color]="'accent'"
             >
               <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
               <span class="ml-2 mr-1">Back</span>
@@ -282,15 +142,15 @@
         <!-- User table list-->
         <div class="flex flex-auto overflow-hidden">
           <!-- Users list -->
-          <div
-            class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+          <div 
+          class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
           >
             <div class="grid coustom-grid-box">
-              <table
-                *ngIf="userList.length > 0"
-                mat-table
-                [dataSource]="dataSource"
-                class="mat-elevation-z8"
+              <table 
+              *ngIf="userList.length > 0" 
+              mat-table 
+              [dataSource]="dataSource" 
+              class="mat-elevation-z8"
               >
                 <!-- Picture column-->
                 <ng-container matColumnDef="Picture">
@@ -298,17 +158,17 @@
                   <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.userId == element.userId}">
                     <div
                       class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded-full overflow-hidden border"
-                    >
-                      <img
-                        class="w-12"
-                        *ngIf="element.picture"
-                        [src]="element.picture"
+                      >
+                      <img 
+                      class="w-12" 
+                      *ngIf="element.picture" 
+                      [src]="element.picture" 
                       />
                       <img
-                        class="w-12"
-                        *ngIf="element.picture == null"
-                        src="../../../assets/images/avatars/nopicture.png"
-                      />
+                      class="w-12" 
+                      *ngIf="element.picture == null"
+                        src="../../../assets/images/avatars/nopicture.png" 
+                        />
                     </div>
                   </td>
                 </ng-container>
@@ -342,16 +202,16 @@
                   <th mat-header-cell *matHeaderCellDef>Is Active</th>
                   <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.userId == element.userId}">
                     <ng-container *ngIf="element.active">
-                      <mat-icon
-                        class="text-green-400 icon-size-6"
-                        [svgIcon]="'heroicons_solid:check'"
+                      <mat-icon 
+                      class="text-green-400 icon-size-6" 
+                      [svgIcon]="'heroicons_solid:check'"
                       >
                       </mat-icon>
                     </ng-container>
                     <ng-container *ngIf="!element.active">
-                      <mat-icon
-                        class="text-red-400 icon-size-5"
-                        [svgIcon]="'heroicons_solid:x'"
+                      <mat-icon 
+                      class="text-red-400 icon-size-5" 
+                      [svgIcon]="'heroicons_solid:x'"
                       >
                       </mat-icon>
                     </ng-container>
@@ -371,30 +231,30 @@
                   <th mat-header-cell *matHeaderCellDef>Action</th>
                   <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.userId == element.userId}">
                     <div class="hidden sm:block">
-                      <button
-                        class="min-w-10 min-h-7 h-7 px-2 leading-6"
-                        mat-stroked-button
+                      <button 
+                      class="min-w-10 min-h-7 h-7 px-2 leading-6" 
+                      mat-stroked-button
                         [matMenuTriggerFor]="summaryMenu"
-                      >
-                        <mat-icon
-                          class="icon-size-5"
-                          [svgIcon]="'heroicons_solid:chevron-down'"
+                        >
+                        <mat-icon 
+                        class="icon-size-5" 
+                        [svgIcon]="'heroicons_solid:chevron-down'"
                         >
                         </mat-icon>
                       </button>
 
                       <mat-menu #summaryMenu="matMenu" [hidden]="!(isEditPermission || isDeletePermission)">
-                        <button *ngIf="isEditPermission"
-                          mat-menu-item
-                          [routerLink]="['edit-user', element.userId]"
+                        <button *ngIf="isEditPermission" 
+                        mat-menu-item 
+                        [routerLink]="['edit-user', element.userId]"
                         >
                           <mat-icon svgIcon="heroicons_outline:pencil-alt">
                           </mat-icon>
                           <span>Edit</span>
                         </button>
-                        <button *ngIf="isDeletePermission"
-                          mat-menu-item
-                          (click)="deleteSelectedUser(element.userId)"
+                        <button *ngIf="isDeletePermission" 
+                        mat-menu-item 
+                        (click)="deleteSelectedUser(element.userId)"
                         >
                           <mat-icon svgIcon="heroicons_outline:user-remove">
                           </mat-icon>
@@ -402,26 +262,26 @@
                         </button>
                         <mat-divider class="my-2"></mat-divider>
                         <ng-container *ngIf="!element.active && isEditPermission">
-                          <button
-                            mat-menu-item
-                            (click)="ngActivateDeactivateUser(element)"
+                          <button 
+                          mat-menu-item 
+                          (click)="ngActivateDeactivateUser(element)"
                           >
-                            <mat-icon
-                              class="text-green-400"
-                              svgIcon="heroicons_outline:check"
+                            <mat-icon 
+                            class="text-green-400" 
+                            svgIcon="heroicons_outline:check"
                             >
                             </mat-icon>
                             <span>Activate</span>
                           </button>
                         </ng-container>
                         <ng-container *ngIf="element.active && isEditPermission">
-                          <button
-                            mat-menu-item
-                            (click)="ngActivateDeactivateUser(element)"
+                          <button 
+                          mat-menu-item 
+                          (click)="ngActivateDeactivateUser(element)"
                           >
-                            <mat-icon
-                              class="text-red-400"
-                              svgIcon="heroicons_outline:x-circle"
+                            <mat-icon 
+                            class="text-red-400" 
+                            svgIcon="heroicons_outline:x-circle"
                             >
                             </mat-icon>
                             <span>De-activate</span>
@@ -433,22 +293,22 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let row; columns: displayedColumns"
-                  (click)="onRowClick($event, row)"
+                <tr 
+                mat-row 
+                *matRowDef="let row; columns: displayedColumns" 
+                (click)="onRowClick($event, row)"
                 ></tr>
               </table>
-              <mat-paginator
-                *ngIf="userList.length > 0"
+              <mat-paginator 
+              *ngIf="userList.length > 0"
                 class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent coustom-paginator-box"
-                [pageSizeOptions]="[5, 10, 15, 20]"
+                [pageSizeOptions]="[5, 10, 15, 20]" 
                 [pageIndex]="userListModel.PageNumber"
-                [pageSize]="userListModel.PageSize"
+                [pageSize]="userListModel.PageSize" 
                 (page)="getUsersList($event, false)"
-                [length]="userListModel.TotalCount"
+                [length]="userListModel.TotalCount" 
                 showFirstLastButtons
-              >
+                >
               </mat-paginator>
             </div>
           </div>

@@ -21,12 +21,14 @@ import { SharedModule } from 'app/shared/shared.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
 
 @NgModule({
     declarations: [
         UsersComponent,
         AddUserComponent,
-        DetailUserComponent
+        DetailUserComponent,
+        UserDetailDialogComponent
     ],
     imports: [
         RouterModule.forChild(usersRoutes),
