@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent} from '@angular/material/tabs';
@@ -15,7 +15,7 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.scss']
 })
-export class AddCategoryComponent implements OnInit {
+export class AddCategoryComponent implements OnInit, OnDestroy {
     @ViewChild('userNgForm') userNgForm: NgForm;
     @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
 
@@ -75,25 +75,26 @@ export class AddCategoryComponent implements OnInit {
          })
     }
 
-    /*
-    * Tab changed event that holds the index of the chosen tab
-    */
+   // -------------------------------------------------------------------------
+   // Tab changed event that holds the index of the chosen tab
+   // -------------------------------------------------------------------------
     tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
         console.log('index => ', tabChangeEvent.index); 
         localStorage.setItem('selectedTab',tabChangeEvent.index.toString());
     }
 
-    /*
-     * Navigate back to the previous screen
-    */
+    // -------------------------------------------------------------------------
+    // Navigate back to the previous screen
+    // -------------------------------------------------------------------------
     navigateBack()
     {
-        this._location.back();
+      localStorage.removeItem('selectedTab'); 
+      this._location.back();
     }
 
-     /*
-       Edits the current category
-    */
+    // -------------------------------------------------------------------------
+    //   Edits the current category
+    // -------------------------------------------------------------------------
      editCategory()
     {
         this.isLoginerror = false;
@@ -123,14 +124,15 @@ export class AddCategoryComponent implements OnInit {
                     message: 'Category updated Successfully!!'
                 };
                 this.showAlert = true;
+                localStorage.removeItem('selectedTab');
                 this._location.back();
             }
         })
     }
-    
-    /*
-       Adds a new  category
-    */
+
+    // -------------------------------------------------------------------------
+    //   Adds a new  category
+    // -------------------------------------------------------------------------
     addCategory()
     {
         this.isLoginerror = false;
@@ -164,14 +166,15 @@ export class AddCategoryComponent implements OnInit {
                 message: 'Category created Successfully!!'
             };
             this.showAlert = true;
+            localStorage.removeItem('selectedTab');
             this._location.back();
             }
         })
     }
 
-     /*
-       Gets the category by its unique id
-    */
+    // -------------------------------------------------------------------------
+    //   Gets the category by its unique id
+    // -------------------------------------------------------------------------
     getCategoryById(Id: string)
     { 
       this._categoriesService.GetCategoryById(Id).subscribe((data) => {
@@ -185,9 +188,9 @@ export class AddCategoryComponent implements OnInit {
       })
     }
 
-    /*
-        Retrieves the list of all subcategories for the current category
-    */
+    // -------------------------------------------------------------------------
+    //    Retrieves the list of all subcategories for the current category
+    // -------------------------------------------------------------------------
     getSubCategoriesList(Id:string) {
         this.subcategoriesList = [];
 
@@ -209,9 +212,9 @@ export class AddCategoryComponent implements OnInit {
     }
 
 
- /*
-    Deletes a subcategory from the list
-  */
+   // -------------------------------------------------------------------------
+   // Deletes a subcategory from the list
+   // -------------------------------------------------------------------------
     deleteSelectedSubCategory(Id): void {
         const confirmation = this._fuseConfirmationService.open({
           title: 'Delete user',
@@ -237,9 +240,9 @@ export class AddCategoryComponent implements OnInit {
         });
       }
 
-     /*
-       Opens an image file from the browser.
-    */
+    // -------------------------------------------------------------------------
+    //   Opens an image file from the browser.
+    // -------------------------------------------------------------------------
     onFileSelect(e) {
         const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
         const pattern = /image-*/;
@@ -252,13 +255,17 @@ export class AddCategoryComponent implements OnInit {
         reader.readAsDataURL(file);
     }
 
-    /*
-        Reads the file from disk into memory
-    */
+    // -------------------------------------------------------------------------
+    //    Reads the file from disk into memory
+    // -------------------------------------------------------------------------
     handleFileLoaded(e) {
         const reader = e.target;
         this.imageData =reader.result;
         this.imageSrc= reader.result.split(',')[1];
         var j= this.categoryForm;
+    }
+
+
+    ngOnDestroy(){
     }
 }

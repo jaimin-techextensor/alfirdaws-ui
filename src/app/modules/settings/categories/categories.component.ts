@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { CategoriesService } from 'app/service/categories.service';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { MatDrawer } from '@angular/material/sidenav';
+import { checkValidPermission } from 'app/core/auth/auth-permission';
 
 @Component({
   selector: 'app-settings',
@@ -14,11 +16,16 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+    @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     categoriesList: any[] = [];
     displayedColumns: string[] = ['Icon', 'Sequence', 'Name', 'countSubcategories', 'Active', 'Action'];
     dataSource: any;
+
+    drawerMode: 'over';
+    selectedCategory:any;
+    visible: boolean = false;
 
     searchTextForModerator: any;
     alert: { type: FuseAlertType; message: string } = {
@@ -26,6 +33,11 @@ export class CategoriesComponent implements OnInit {
               message: ''
      };
     showAlert = false;
+
+    //Permision properties
+    isDeletePermission = false;
+    isEditPermission = false;
+    isAddPermission = false;
 
   constructor(
         private _activatedRoute: ActivatedRoute,
@@ -37,19 +49,28 @@ export class CategoriesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+      
+      // Retrieves the list of all categories
       this.getCategoriesList();
+      
+      // Sets the permissions for the CRUD actions
+      this.isDeletePermission = checkValidPermission(this._router.url, 'delete');
+      this.isEditPermission = checkValidPermission(this._router.url, 'edit');
+      this.isAddPermission = checkValidPermission(this._router.url, 'add');
    }
 
-    /*
-        Navigate back to the previous screen
-    */
+
+  // -------------------------------------------------------------------------
+  // Navigate back to the previous screen
+  // -------------------------------------------------------------------------
   navigateback() {
         this._location.back();
     }
 
-  /*
-    Retrieves the list of all modules from the back-end
-  */
+
+  // -------------------------------------------------------------------------
+  //  Retrieves the list of all modules from the back-end
+  // -------------------------------------------------------------------------
   getCategoriesList() {
     this.categoriesList = [];
 
@@ -70,9 +91,9 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  /*
-    Deletes a category from the list
-  */
+  // -------------------------------------------------------------------------
+  //  Deletes a category from the list
+  // -------------------------------------------------------------------------
   deleteSelectedCategory(Id): void {
     const confirmation = this._fuseConfirmationService.open({
       title: 'Delete user',
@@ -96,6 +117,25 @@ export class CategoriesComponent implements OnInit {
         })
       }
     });
+  }
+
+  // -------------------------------------------------------------------------
+  // Closed the overlay screen.
+  // -------------------------------------------------------------------------
+  onBackdropClicked() {
+    this.visible = !this.visible;
+  }
+
+  // -------------------------------------------------------------------------
+  // Click event when a row is clicked
+  // -------------------------------------------------------------------------
+  onRowClick(event: any, rowData: any) { 
+    if (!(event.srcElement instanceof SVGElement)) {
+      this.visible = true;
+      if (rowData) {
+        this.selectedCategory = rowData;
+      }
+    }
   }
 
 }

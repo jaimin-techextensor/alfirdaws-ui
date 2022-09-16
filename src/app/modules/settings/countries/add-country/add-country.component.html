@@ -140,7 +140,7 @@
                                     <!-- Region name column-->
                                     <ng-container matColumnDef="Region">
                                         <th mat-header-cell *matHeaderCellDef>Region</th>
-                                        <td mat-cell *matCellDef="let element" >
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRegion?.regionId == element.regionId}">
                                         <div class="flex flex-auto items-center min-w-5">
                                             <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
                                             <span class="ml-1.5 "> <b>{{ element.name }}</b></span> 
@@ -151,7 +151,7 @@
                                     <!-- Drop down actions column -->
                                     <ng-container matColumnDef="Action">
                                         <th mat-header-cell *matHeaderCellDef>Action</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRegion?.regionId == element.regionId}">
                                             <div class="hidden sm:block">
                                                 
                                                 <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button [matMenuTriggerFor]="summaryMenu">

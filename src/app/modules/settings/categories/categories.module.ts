@@ -21,13 +21,16 @@ import { CategoriesComponent } from "app/modules/settings/categories/categories.
 import { categoriesRoutes } from 'app/modules/settings/categories/categories.routing';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DetailCategoryComponent } from 'app/modules/settings/categories/detail-category/detail-category.component';
 
 
 @NgModule({
     declarations: [
         CategoriesComponent,
         AddCategoryComponent,
-        AddSubCategoryComponent
+        AddSubCategoryComponent,
+        DetailCategoryComponent
     ],
     imports: [
         RouterModule.forChild(categoriesRoutes),
@@ -46,7 +49,8 @@ import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.compo
         FuseCardModule,
         FuseAlertModule,
         SharedModule,
-        MatTableModule
+        MatTableModule,
+        MatSidenavModule
     ],
     exports: [
         AddCategoryComponent,

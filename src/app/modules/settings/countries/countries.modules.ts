@@ -20,6 +20,8 @@ import { CountriesService } from 'app/service/countries.service';
 import { CountriesComponent } from "app/modules/settings/countries/countries.component";
 import { countriesRoutes } from './countries.routing';
 import { AddCountryComponent } from './add-country/add-country.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DetailCountryComponent } from 'app/modules/settings/countries/detail-country/detail-country.component';
 //import { AddCategoryComponent } from './add-category/add-category.component';
 //import { AddSubCategoryComponent } from './add-subcategory/add-subcategory.component';
 
@@ -28,6 +30,7 @@ import { AddCountryComponent } from './add-country/add-country.component';
     declarations: [
         CountriesComponent,
         AddCountryComponent,
+        DetailCountryComponent,
     //    AddSubCategoryComponent
     ],
     imports: [
@@ -47,7 +50,8 @@ import { AddCountryComponent } from './add-country/add-country.component';
         FuseCardModule,
         FuseAlertModule,
         SharedModule,
-        MatTableModule
+        MatTableModule,
+        MatSidenavModule
     ],
     exports: [
         AddCountryComponent,

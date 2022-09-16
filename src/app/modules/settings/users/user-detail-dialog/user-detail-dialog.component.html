@@ -11,7 +11,7 @@
 
             <!-- Actions -->
             <div class="flex items-center ml-auto mb-1">
-                <button mat-stroked-button [routerLink]="['edit-user', userDetail.userId]">
+                <button *ngIf="isEditPermission" mat-stroked-button [routerLink]="['edit-user', userDetail.userId]">
                     <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
                     <span class="ml-2">Edit</span>
                 </button>
