@@ -19,18 +19,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { Route, RouterModule } from '@angular/router';
 import { CampaignTypeComponent } from './campaign-type/campaign-type.component';
 import { CampaignsComponent } from './campaigns.component';
+import { ReachTypeComponent } from './reach-type/reach-type.component';
 
 const campaignRoute: Route[] = [
   {
     path: '',
     component: CampaignsComponent,
   },
-  { path: 'add-campaign', component: CampaignTypeComponent }
+  { path: 'add-campaign', component: CampaignTypeComponent },
+  { path: 'reach-type', component: ReachTypeComponent }
 ];
 
 @NgModule({
   declarations: [
-    CampaignTypeComponent
+    CampaignTypeComponent,
+    ReachTypeComponent
   ],
   imports: [
     RouterModule.forChild(campaignRoute),
