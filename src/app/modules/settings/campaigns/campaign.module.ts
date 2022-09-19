@@ -26,8 +26,8 @@ const campaignRoute: Route[] = [
     path: '',
     component: CampaignsComponent,
   },
-  { path: 'add-campaign', component: CampaignTypeComponent },
-  { path: 'reach-type', component: ReachTypeComponent }
+  { path: 'reach-type', component: ReachTypeComponent },
+  { path: 'campaign-type', component: CampaignTypeComponent }
 ];
 
 @NgModule({

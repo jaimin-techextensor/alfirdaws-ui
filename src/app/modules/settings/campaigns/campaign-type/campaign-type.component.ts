@@ -4,6 +4,7 @@ import { campaignService } from 'app/service/campaign.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-type',
@@ -17,7 +18,8 @@ export class CampaignTypeComponent implements OnInit {
     private _location: Location,
     private _campaignService: campaignService,
     private _formBuilder: UntypedFormBuilder,
-    private _fuseConfirmationService: FuseConfirmationService
+    private _fuseConfirmationService: FuseConfirmationService,
+    private router: Router
   ) { }
 
   dataSource: any;
@@ -40,7 +42,7 @@ export class CampaignTypeComponent implements OnInit {
   }
 
   navigateBack() {
-    this._location.back()
+    this.router.navigate(['campaigns']);
   }
 
   addCampaginType() {
