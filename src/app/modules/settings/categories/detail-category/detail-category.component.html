@@ -1,0 +1,69 @@
+<div class="relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0">
+    <div class="w-full max-w-3xl">
+        <!-- Icon and actions -->
+        <div class="flex flex-auto items-end -mt-16">
+            <!-- Icon of Category -->
+            <div class="flex items-center justify-center w-28 h-28 rounded-full overflow-hidden  ring-bg-card">
+                <img class="object-cover w-full h-full" *ngIf="categoryDetail.icon" [src]="categoryDetail.icon" />
+                <img class="object-cover w-full h-full" *ngIf="categoryDetail.icon == null"
+                    src="../../../assets/images/avatars/nopicture.png" />
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center ml-auto mb-1">
+                <button *ngIf="isEditPermission" mat-stroked-button [routerLink]="['edit-category', categoryDetail.categoryId]">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+                    <span class="ml-2">Edit</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Name & Status -->
+        <div class=" flex flex-row items-end ">
+            <div class="basis-3/4 mt-3 text-3xl font-bold truncate">
+                {{ categoryDetail.name }}
+            </div>
+            <ng-container *ngIf="categoryDetail.active">
+                <div class="basis-1/4  mt-3 text-0.5xl truncate flex items-end gap-1">
+                    <mat-icon class="text-green-400 icon-size-6 items-end" [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                    <span class="text-green-400">Active</span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!categoryDetail.active">
+                <div class="basis-1/4  mt-3 text-0.5xl  truncate flex items-end gap-1">
+                    <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                    <span class="text-red-400">Inactive</span>
+                </div>
+            </ng-container>
+
+        </div>
+
+        <div class="flex flex-col mt-4 pt-6 border-t space-y-4">
+            <!-- List of subcategories -->
+            <ng-container>
+                <div class="flex sm:items-center" *ngFor="let sub of categoryDetail.subcategories">
+                    <!--Sub Sequence-->
+                    <div class="w-6 ">{{ sub.sequence }}</div>
+                    <!--Sub Icon-->
+                    <img class="object-cover w-full h-full  w-15 h-15" [src]="sub.icon" />
+                    <!--Sub Name-->
+                    <div class="ml-6 leading-6 w-40">{{ sub.name }}</div>
+                    <!--Sub Active-->
+                    <ng-container *ngIf="sub.active">
+                        <mat-icon class="text-green-400 icon-size-6 items-end" [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                    </ng-container>
+                    <ng-container *ngIf="!sub.active">
+                        <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                    </ng-container>
+                </div>
+            </ng-container>  
+
+            <!-- List of subcategories is empty -->
+            <ng-container *ngIf="categoryDetail.subcategories?.length == 0">
+                <div class="flex sm:items-center">
+                    <mat-icon [svgIcon]="'mat_outline:cancel'"></mat-icon>
+                    <div class="ml-6 leading-6">No subcategories configured!</div>
+                </div>
+            </ng-container>  
+    </div>
+</div>
