@@ -83,7 +83,8 @@ export const appRoutes: Route[] = [
             { path: 'modules', title: 'Modules', loadChildren: () => import('app/modules/settings/modls/modls.module').then(m => m.ModlsModule) },
             { path: 'categories', title: 'Categories', loadChildren: () => import('app/modules/settings/categories/categories.module').then(m => m.CategoriesModule) },
             { path: 'countries', title: 'Countries', loadChildren: () => import('app/modules/settings/countries/countries.modules').then(m => m.CountriesModule) },
-            { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) }
+            { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) },
+            { path: 'campaign', title: 'Campaign', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule)}
         ]
     }
 ];

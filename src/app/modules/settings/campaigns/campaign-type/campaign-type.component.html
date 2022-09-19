@@ -1,0 +1,134 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+
+        <div>
+            <div class="flex flex-auto items-center min-w-0">
+                <mat-icon svgIcon="heroicons_outline:duplicate"></mat-icon>
+                <div class="flex flex-col min-w-0 ml-4">
+                    <ng-container>
+                        <div
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            Campaigns
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button (click)="navigateBack()" class="ml-4" mat-flat-button color="accent">
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                <span class="ml-2 mr-1">Back</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex min-h-5"></div>
+
+    <div class="flex-auto overflow-hidden sm:overflow-y-auto">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Campaigns Information"></mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span>Campaign Types </span>
+                    <button mat-mini-fab [color]="'primary'" [ngStyle]="{transform: 'scale(0.7)'}">
+                        <span> {{campaginTypes?.length}}</span>
+                    </button>
+                </ng-template>
+                <div
+                    class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg">
+                    <div
+                        class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg ">
+                        <div class="flex flex-col">
+                            <form class="flex flex-col w-full" [formGroup]="campaignTypeForm">
+                                <div class="flex flex-col sm:flex-row p-8">
+                                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                        <div class="flex flex-row items-center ">
+                                            <mat-form-field class="w-full mr-3">
+                                                <mat-label>Campaign Type</mat-label>
+                                                <input matInput [formControlName]="'name'">
+                                                <mat-error *ngIf="campaignTypeForm.get('name').hasError('required')">
+                                                    Campaign type is required
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <ng-container>
+                                                <button (click)="addCampaginType()" *ngIf="!isCampaginTypeSelected"
+                                                    class="ml-4" mat-flat-button color="primary">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                    <span class="ml-2 mr-1">Add</span>
+                                                </button>
+                                                <button (click)="cancel()" *ngIf="isCampaginTypeSelected" class="ml-4"
+                                                    mat-flat-button>
+                                                    <span class="ml-2 mr-1">Cancel</span>
+                                                </button>
+                                                <button (click)="editCampagin()" *ngIf="isCampaginTypeSelected"
+                                                    class="ml-4" mat-flat-button [color]="'primary'">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                    <span class="ml-2 mr-1">Update</span>
+                                                </button>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex flex-auto overflow-hidden">
+                        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+                            <div class="grid">
+                                <table *ngIf="campaginTypes.length > 0; else noCampagins" mat-table
+                                    [dataSource]="dataSource" class="mat-elevation-z8">
+                                    <ng-container matColumnDef="Campaign">
+                                        <th mat-header-cell *matHeaderCellDef>Campaigns Types</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="flex flex-auto items-center min-w-5">
+                                                <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
+                                                <span class="ml-1.5 "> <b>{{ element.name }}</b></span>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Action">
+                                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="hidden sm:block">
+
+                                                <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
+                                                    [matMenuTriggerFor]="summaryMenu">
+                                                    <mat-icon class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:chevron-down'">
+                                                    </mat-icon>
+                                                </button>
+
+                                                <mat-menu #summaryMenu="matMenu">
+                                                    <button mat-menu-item
+                                                        (click)="deleteSelectedCampagin(element.campaignTypeId)">
+                                                        <mat-icon class="text-red-600"
+                                                            svgIcon="heroicons_outline:folder-remove">
+                                                        </mat-icon>
+                                                        <span class="text-red-600">Remove</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        (click)="onRowClick($event, row)"></tr>
+                                </table>
+
+                                <ng-template #noCampagins>
+                                    <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">
+                                        There are no Campagins</div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

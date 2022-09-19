@@ -1,5 +1,5 @@
 export function getModule(route: string) {
-    if (route.includes('role') || route.includes('settings') || route.includes('user')) {
+    if (route.includes('role') || route.includes('settings') || route.includes('user') || route.includes('campaign')) {
         return 'Settings';
     } else if (route.includes('dashboard')) {
         return 'Dashboard';
