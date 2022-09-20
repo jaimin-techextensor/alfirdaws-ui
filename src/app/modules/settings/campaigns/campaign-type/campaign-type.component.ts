@@ -29,7 +29,8 @@ export class CampaignTypeComponent implements OnInit {
   isCampaginTypeSelected: boolean = false;
   selecetedCampaginType: any;
   campaginTypeId: string;
-  
+  message: string = "";
+
   ngOnInit(): void {
     this._campaignService.getCampaginTypes().subscribe(data => {
       this.campaginTypes = data.data;
@@ -53,7 +54,6 @@ export class CampaignTypeComponent implements OnInit {
     if (this.campaignTypeForm.invalid) {
       return;
     }
-    this.campaignTypeForm.disable();
     this._campaignService.createCampaignType(campaginModel).subscribe((data) => {
       if (data.success == true) {
         this.campaginTypes.push(campaginModel);
@@ -61,6 +61,9 @@ export class CampaignTypeComponent implements OnInit {
         this.campaignTypeForm.clearValidators();
         this.campaignTypeForm.reset();
         this.campaignTypeForm.enable();
+      } else {
+        this.message = data.message ? data.message : '';
+        this.campaignTypeForm.get('name').setErrors({ 'duplicate': this.message });
       }
     })
   }
@@ -69,7 +72,6 @@ export class CampaignTypeComponent implements OnInit {
     if (this.campaignTypeForm.invalid) {
       return;
     }
-    this.campaignTypeForm.disable();
     let campaginModel = {
       name: this.campaignTypeForm.value["name"],
       campaignTypeId: this.campaginTypeId
@@ -85,6 +87,9 @@ export class CampaignTypeComponent implements OnInit {
           this.campaginTypes[index] = campaginData;
           this.dataSource = new MatTableDataSource(this.campaginTypes);
         }
+      } else {
+        this.message = data.message ? data.message : '';
+        this.campaignTypeForm.get('name').setErrors({ 'duplicate': this.message });
       }
     })
   }
