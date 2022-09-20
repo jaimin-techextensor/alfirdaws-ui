@@ -110,7 +110,7 @@ export class PeriodTypeComponent implements OnInit {
     this.isSelectedPeriodType = false;
     this.selectedPeriodType = null;
     this.periodTypeId = "";
-    this.periodTypeForm.setValue({ name: null, no: null });
+    this.periodTypeForm.setValue({ name: null, numberOfDays: null });
   }
 
   deletePeriodType(id: string) {
