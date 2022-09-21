@@ -14,7 +14,6 @@
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
                         Edit user : {{userData.name}} {{userData.lastName}}</div> -->
                     </ng-container>
-
                 </div>
             </div>
         </div>
@@ -58,9 +57,6 @@
                                                     [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                                                 <textarea matInput [formControlName]="'description'" [rows]="5"
                                                     [spellcheck]="false" matTextareaAutosize></textarea>
-                                                <!-- <mat-error *ngIf="campaignForm('description').hasError('required')">
-                                                        Description  is required
-                                                    </mat-error> -->
                                             </mat-form-field>
 
                                             <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full mt-1">
@@ -69,10 +65,6 @@
                                                     [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                                                 <textarea matInput [formControlName]="'impactPosition'" [rows]="5"
                                                     [spellcheck]="false" matTextareaAutosize></textarea>
-                                                <!-- <mat-error
-                                                    *ngIf="campaignFormet('impactPosition').hasError('required')">
-                                                    Impact campaign on position is required
-                                                </mat-error> -->
                                             </mat-form-field>
 
                                             <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full mt-1">
@@ -81,78 +73,87 @@
                                                     [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                                                 <textarea matInput [formControlName]="'impactViews '" [rows]="5"
                                                     [spellcheck]="false" matTextareaAutosize></textarea>
-                                                <!-- <mat-error *ngIf="campaignFormet('impactViews').hasError('required')">
-                                                    Impact campaign on views is required
-                                                </mat-error> -->
                                             </mat-form-field>
+
                                         </div>
                                         <div class="right-content">
-
 
                                             <mat-form-field class=" w-full ">
                                                 <mat-label>Select a campaign type</mat-label>
                                                 <mat-select [formControlName]="'campaigntype'"
                                                     (selectionChange)="selectedCampaignType($event)">
-                                                    <!-- <mat-option>campaigntype name</mat-option> -->
+                                                    <mat-option *ngFor="let campaign of campaginTypes"
+                                                        [value]="campaign.campaignTypeId">
+                                                        {{campaign.name}}
+                                                    </mat-option>
                                                 </mat-select>
+                                                <mat-error
+                                                    *ngIf="campaignForm.get('campaigntype').hasError('required')">
+                                                    Campaign type is required
+                                                </mat-error>
                                             </mat-form-field>
 
                                             <mat-form-field class="w-full ">
                                                 <mat-label>Select a reach type</mat-label>
                                                 <mat-select [formControlName]="'reachtype'"
                                                     (selectionChange)="selectedReachType($event)">
-                                                    <!-- <mat-option>reachtype name</mat-option> -->
+                                                    <mat-option *ngFor="let reachType of reachTypes"
+                                                        [value]="reachType.reachTypeId">
+                                                        {{reachType.name}}
+                                                    </mat-option>
                                                 </mat-select>
+                                                <mat-error *ngIf="campaignForm.get('reachtype').hasError('required')">
+                                                    Reach type is required
+                                                </mat-error>
                                             </mat-form-field>
 
                                             <mat-form-field class="w-full ">
                                                 <mat-label>Select period type</mat-label>
                                                 <mat-select [formControlName]="'periodtype'"
                                                     (selectionChange)="selectedPeriodType($event)">
-                                                    <!-- <mat-option>period type issue</mat-option> -->
+                                                    <mat-option *ngFor="let periodType of periodTypes"
+                                                        [value]="periodType.periodTypeId">
+                                                        {{periodType.name}}
+                                                    </mat-option>
                                                 </mat-select>
+                                                <mat-error *ngIf="campaignForm.get('periodtype').hasError('required')">
+                                                    Period type is required
+                                                </mat-error>
                                             </mat-form-field>
 
                                             <mat-form-field class="w-full">
                                                 <mat-label>Price</mat-label>
-                                                <input matInput [formControlName]="'price'">
-                                                <!-- <mat-error *ngIf="campaignFormet('price').hasError('required')">
+                                                <input type="number" matInput [formControlName]="'price'">
+                                                <mat-error *ngIf="campaignForm.get('price').hasError('required')">
                                                     Price is required
-                                                </mat-error> -->
+                                                </mat-error>
                                             </mat-form-field>
 
                                             <mat-form-field class="w-full">
                                                 <mat-label>Discount percentage</mat-label>
-                                                <input matInput [formControlName]="'discountPercentage'">
-                                                <!-- <mat-error
-                                                    *ngIf="campaignFormet('discountPercentage').hasError('required')">
+                                                <input type="number" matInput [formControlName]="'discountPercentage'"
+                                                    (blur)='onBlurCalculate()'>
+                                                <mat-error
+                                                    *ngIf="campaignForm.get('discountPercentage').hasError('required')">
                                                     Discount percentage is required
-                                                </mat-error> -->
+                                                </mat-error>
                                             </mat-form-field>
 
                                             <div class="flex">
+
                                                 <mat-form-field class="w-1/3 pr-2">
                                                     <mat-label>Net price</mat-label>
-                                                    <input matInput [formControlName]="'netPrice'">
-                                                    <!-- <mat-error *ngIf="campaignFormet('netPrice').hasError('required')">
-                                                        Net price is required
-                                                    </mat-error> -->
+                                                    <input matInput [formControlName]="'netPrice'" readonly>
                                                 </mat-form-field>
 
                                                 <mat-form-field class="w-1/3 px-2">
                                                     <mat-label>Saving</mat-label>
-                                                    <input matInput [formControlName]="'saving'">
-                                                    <!-- <mat-error *ngIf="campaignFormet('saving').hasError('required')">
-                                                        Saving is required
-                                                </mat-error> -->
+                                                    <input matInput [formControlName]="'saving'" readonly>
                                                 </mat-form-field>
 
                                                 <mat-form-field class="w-1/3 pl-2">
                                                     <mat-label>Price/day</mat-label>
-                                                    <input matInput [formControlName]="'pricePerDay'">
-                                                    <!-- <mat-error *ngIf="campaignFormet('pricePerDay').hasError('required')">
-                                                   Price per day is required
-                                                </mat-error> -->
+                                                    <input matInput [formControlName]="'pricePerDay'" readonly>
                                                 </mat-form-field>
 
                                             </div>
@@ -166,20 +167,17 @@
                                                     <span class="ml-2 mr-1">Cancel</span>
                                                 </button>
 
-                                                <!-- <button mat-flat-button [color]="'primary'" (click)="editCampaign()">
+                                                <!-- <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" (click)="editCampaign()">
                                                     <span class="ml-2 mr-1">Edit</span>
                                                 </button> -->
 
                                                 <button mat-flat-button [color]="'primary'" (click)="addCampaign()">
                                                     <span class="ml-2 mr-1">Save</span>
                                                 </button>
+
                                             </div>
                                         </div>
-
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </form>

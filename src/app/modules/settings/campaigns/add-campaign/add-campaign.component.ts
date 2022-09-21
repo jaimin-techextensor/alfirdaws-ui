@@ -3,11 +3,13 @@ import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angul
 import { Location } from '@angular/common'
 import { FuseValidators } from '@fuse/validators';
 import { FuseAlertType } from '@fuse/components/alert';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MatSelectChange } from '@angular/material/select';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatOption } from '@angular/material/core';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { AddCampaignService } from 'app/service/add-campaign.service';
+
 
 @Component({
   selector: 'app-add-campaign',
@@ -25,6 +27,19 @@ export class AddCampaignComponent implements OnInit {
   imageSrc: string;
   imageData: string;
 
+  campaginTypes: any = [];
+  periodTypes: any = [];
+  reachTypes: any = []
+
+  selectedCampaignTypeId: string;
+  selectedCampaignTypeName: string;
+
+  selectedReachTypeId: string;
+  selectedReachTypeName: string;
+
+  selectedPeriodTypeId: string;
+  selectedPeriodTypeName: string;
+  message: any = "";
   isEditMode: boolean = false;
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
@@ -35,7 +50,9 @@ export class AddCampaignComponent implements OnInit {
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
     private _fuseConfirmationService: FuseConfirmationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _addCampaignService: AddCampaignService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +67,7 @@ export class AddCampaignComponent implements OnInit {
       periodtype: ['', [Validators.required]],
 
       price: ['', [Validators.required]],
-      discountPercentage: [''],
+      discountPercentage: ['', [Validators.required]],
       netPrice: [''],
       saving: [''],
       pricePerDay: [''],
@@ -58,6 +75,19 @@ export class AddCampaignComponent implements OnInit {
       active: ['']
       //  picture: [''],
       // CampaignId: ['']
+    })
+
+    this._addCampaignService.getCampaginTypes().subscribe(data => {
+      debugger;
+      this.campaginTypes = data.data;
+    })
+
+    this._addCampaignService.getPeriodTypes().subscribe(data => {
+      this.periodTypes = data.data;
+    })
+
+    this._addCampaignService.getReachTypes().subscribe(data => {
+      this.reachTypes = data.data
     })
   }
 
@@ -76,20 +106,101 @@ export class AddCampaignComponent implements OnInit {
     reader.onload = this.handleFileLoaded.bind(this);
     reader.readAsDataURL(file);
   }
+
   handleFileLoaded(e) {
     const reader = e.target;
     this.imageData = reader.result;
     this.imageSrc = reader.result.split(',')[1];
     var j = this.campaignForm;
   }
-  selectedCampaignType(event: MatSelectChange) { }
 
-  selectedReachType(event: MatSelectChange) { }
+  selectedCampaignType(event: MatSelectChange) {
+    const selectedData = {
+      text: (event.source.selected as MatOption).viewValue,
+      value: event.source.value
+    };
+    this.selectedCampaignTypeId = selectedData.value;
+    this.selectedCampaignTypeName = selectedData.text
+    console.log(selectedData);
+  }
 
-  selectedPeriodType(event: MatSelectChange) { }
+  selectedReachType(event: MatSelectChange) {
+    const selectedData = {
+      text: (event.source.selected as MatOption).viewValue,
+      value: event.source.value
+    }
+    this.selectedReachTypeId = selectedData.value;
+    this.selectedReachTypeName = selectedData.text
+    console.log(selectedData)
+  }
 
-  addCampaign() { }
+  selectedPeriodType(event: MatSelectChange) {
+    const selectedData = {
+      text: (event.source.selected as MatOption).viewValue,
+      value: event.source.value
+    }
+    this.selectedPeriodTypeId = selectedData.value;
+    this.selectedPeriodTypeName = selectedData.text;
+    console.log(selectedData)
+  }
 
-  editCampaign() { }
+  addCampaign(): void {
+    debugger;
+    this.isLoginerror = false;
+    this.submitted = true
+
+    if (this.campaignForm.invalid) {
+      return;
+    }
+    this.campaignForm.disable();
+    this.showAlert = false;
+    let campaignModel = {
+      description: this.campaignForm.value["description"],
+      impactPosition: this.campaignForm.value["impactPosition"],
+      impactViews: this.campaignForm.value["impactViews"],
+      campaignTypeId: this.campaignForm.value["campaigntype"],
+      reachTypeId: this.campaignForm.value["reachtype"],
+      periodTypeId: this.campaignForm.value["periodtype"],
+      price: this.campaignForm.value["price"],
+      discountPercentage: this.campaignForm.value["discountPercentage"],
+      netPrice: this.campaignForm.value["netPrice"],
+      saving: this.campaignForm.value["saving"],
+      pricePerDay: this.campaignForm.value["pricePerDay"],
+      active: this.campaignForm.value["active"],
+      visual: this.imageData
+    }
+    this._addCampaignService.createCampaign(campaignModel).subscribe(
+      (data) => {
+        if (data.success == true) {
+          this.alert = {
+            type: 'success',
+            message: 'Campaign Created Successfully!!'
+          };
+          this.showAlert = true;
+          this._router.navigateByUrl('/settings')
+          //this._location.back();
+        }
+        else {
+          this.message = data.message ? data.message : '';
+        }
+      }
+    )
+  }
+
+  editCampaign(): void {
+    this.isLoginerror = false;
+    this.submitted = true
+
+    if (this.campaignForm.invalid) {
+      return;
+    }
+    this.campaignForm.disable();
+    this.showAlert = false;
+  }
+
+  onBlurCalculate(): void {
+    debugger;
+    console.log("ABCCCCCCC")
+  }
 
 } 
