@@ -20,6 +20,7 @@ import { Route, RouterModule } from '@angular/router';
 import { CampaignTypeComponent } from './campaign-type/campaign-type.component';
 import { CampaignsComponent } from './campaigns.component';
 import { ReachTypeComponent } from './reach-type/reach-type.component';
+import { AddCampaignComponent } from './add-campaign/add-campaign.component';
 
 const campaignRoute: Route[] = [
   {
@@ -27,13 +28,15 @@ const campaignRoute: Route[] = [
     component: CampaignsComponent,
   },
   { path: 'reach-type', component: ReachTypeComponent },
-  { path: 'campaign-type', component: CampaignTypeComponent }
+  { path: 'campaign-type', component: CampaignTypeComponent },
+  { path: 'add-campaign', component: AddCampaignComponent }
 ];
 
 @NgModule({
   declarations: [
     CampaignTypeComponent,
-    ReachTypeComponent
+    ReachTypeComponent,
+    AddCampaignComponent
   ],
   imports: [
     RouterModule.forChild(campaignRoute),
