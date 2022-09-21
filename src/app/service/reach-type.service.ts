@@ -6,7 +6,7 @@ import { Observable, of, switchMap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ReachService {
+export class ReachTypeService {
 
   constructor(private _HttpClient: HttpClient) { }
 

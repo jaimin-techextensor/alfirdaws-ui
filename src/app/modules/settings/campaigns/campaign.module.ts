@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Route, RouterModule } from '@angular/router';
 import { CampaignTypeComponent } from './campaign-type/campaign-type.component';
 import { CampaignsComponent } from './campaigns.component';
+import { PeriodTypeComponent } from './period-type/period-type.component';
 import { ReachTypeComponent } from './reach-type/reach-type.component';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
 
@@ -29,12 +30,14 @@ const campaignRoute: Route[] = [
   },
   { path: 'reach-type', component: ReachTypeComponent },
   { path: 'campaign-type', component: CampaignTypeComponent },
+  { path: 'period-type', component: PeriodTypeComponent },
   { path: 'add-campaign', component: AddCampaignComponent }
 ];
 
 @NgModule({
   declarations: [
     CampaignTypeComponent,
+    PeriodTypeComponent,
     ReachTypeComponent,
     AddCampaignComponent
   ],

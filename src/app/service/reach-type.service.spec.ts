@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReachService } from './reach.service';
+import { ReachTypeService } from './reach-type.service';
 
 describe('ReachService', () => {
-  let service: ReachService;
+  let service: ReachTypeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReachService);
+    service = TestBed.inject(ReachTypeService);
   });
 
   it('should be created', () => {

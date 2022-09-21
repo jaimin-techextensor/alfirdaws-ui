@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { MatTableDataSource } from '@angular/material/table';
-import { UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { ReachService } from 'app/service/reach.service';
+import { ReachTypeService } from 'app/service/reach-type.service';
 
 @Component({
   selector: 'app-reach-type',
@@ -16,7 +16,7 @@ export class ReachTypeComponent implements OnInit {
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
     private _fuseConfirmationService: FuseConfirmationService,
-    private _reachService: ReachService
+    private _reachService: ReachTypeService
   ) { }
 
   dataSource: any;
@@ -75,6 +75,7 @@ export class ReachTypeComponent implements OnInit {
       name: this.reachTypeForm.value["name"],
       reachtypeId: this.reachTypeId
     }
+   
     this._reachService.updateReachType(reachModel).subscribe((data: any) => {
       if (data.success == true) {
         const index = this.reachTypes.findIndex(a => a.reachTypeId == this.reachTypeId)
@@ -137,7 +138,7 @@ export class ReachTypeComponent implements OnInit {
       this.isReachTypeSelected = true;
       if (rowData) {
         this.selectedReachType = rowData;
-        this.reachTypeId = rowData.reachTypeId
+        this.reachTypeId = rowData.reachTypeId;
         this.reachTypeForm.setValue({ name: this.selectedReachType.name });
       }
     }

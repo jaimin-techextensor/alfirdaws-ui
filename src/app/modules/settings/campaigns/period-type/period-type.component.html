@@ -9,7 +9,7 @@
                     <ng-container>
                         <div
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                            Campaign Types
+                            Period Types
                         </div>
                     </ng-container>
                 </div>
@@ -29,9 +29,9 @@
         <mat-tab-group animationDuration="0ms">
             <mat-tab>
                 <ng-template mat-tab-label>
-                    <span>Campaign Types </span>
+                    <span>Period Types </span>
                     <button mat-mini-fab [color]="'primary'" [ngStyle]="{transform: 'scale(0.7)'}">
-                        <span> {{campaginTypes?.length}}</span>
+                        <span>{{periodTypes?.length}}</span>
                     </button>
                 </ng-template>
                 <div
@@ -39,35 +39,48 @@
                     <div
                         class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg ">
                         <div class="flex flex-col">
-                            <form class="flex flex-col w-full" [formGroup]="campaignTypeForm">
+                            <form class="flex flex-col w-full" [formGroup]="periodTypeForm">
                                 <div class="flex flex-col sm:flex-row p-8">
                                     <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
-                                        <div class="flex flex-row items-center ">
+                                        <div class="flex flex-col items-start">
                                             <mat-form-field class="w-full mr-3">
-                                                <mat-label>Campaign Type</mat-label>
+                                                <mat-label>Name</mat-label>
                                                 <input matInput [formControlName]="'name'">
-                                                <mat-error *ngIf="campaignTypeForm.get('name').hasError('required')">
-                                                    Campaign Type is required
+                                                <mat-error *ngIf="periodTypeForm.get('name').hasError('required')">
+                                                    Period type is required
                                                 </mat-error>
-                                                <mat-error *ngIf="campaignTypeForm.get('name').hasError('duplicate')">
-                                                   {{message}}
+                                                <mat-error *ngIf="periodTypeForm.get('name').hasError('duplicate')">
+                                                    {{errorMessage}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <mat-form-field class="w-full mr-3">
+                                                <mat-label>Number of Days</mat-label>
+                                                <input matInput type="number" [formControlName]="'numberOfDays'">
+                                                <mat-error *ngIf="periodTypeForm.get('numberOfDays').hasError('required')">
+                                                    Period number is required
+                                                </mat-error>
+                                                <mat-error *ngIf="periodTypeForm.get('numberOfDays').hasError('notZero')">
+                                                    {{errorMessage}}
                                                 </mat-error>
                                             </mat-form-field>
                                             <ng-container>
-                                                <button (click)="addCampaginType()" *ngIf="!isCampaginTypeSelected"
-                                                    class="ml-4" mat-flat-button color="primary">
+                                                <button class="" (click)="addPeriodType()" *ngIf="!isSelectedPeriodType"
+                                                    mat-flat-button color="primary">
                                                     <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
                                                     <span class="ml-2 mr-1">Add</span>
                                                 </button>
-                                                <button (click)="cancel()" *ngIf="isCampaginTypeSelected" class="ml-4"
-                                                    mat-flat-button>
-                                                    <span class="ml-2 mr-1">Cancel</span>
-                                                </button>
-                                                <button (click)="editCampagin()" *ngIf="isCampaginTypeSelected" name="upd"
-                                                    class="ml-4" mat-flat-button [color]="'primary'">
-                                                    <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
-                                                    <span class="ml-2 mr-1">Update</span>
-                                                </button>
+                                                <div class="flex flex-row">
+                                                    <button class="mr-5" (click)="cancel()" mat-flat-button
+                                                        *ngIf="isSelectedPeriodType">
+                                                        <span class="ml-2 mr-1">Cancel</span>
+                                                    </button>
+                                                    <button class="" mat-flat-button [color]="'primary'"
+                                                        (click)="editPeriodType()" *ngIf="isSelectedPeriodType">
+                                                        <mat-icon [svgIcon]="'heroicons_outline:arrow-right'">
+                                                        </mat-icon>
+                                                        <span class="ml-2 mr-1">Update</span>
+                                                    </button>
+                                                </div>
                                             </ng-container>
                                         </div>
                                     </div>
@@ -75,18 +88,26 @@
                             </form>
                         </div>
                     </div>
+
                     <div class="flex flex-auto overflow-hidden">
                         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
                             <div class="grid">
-                                <table *ngIf="campaginTypes.length > 0; else noCampaginTypes" mat-table
+                                <table *ngIf="periodTypes.length > 0; else noCampagins" mat-table
                                     [dataSource]="dataSource" class="mat-elevation-z8">
-                                    <ng-container matColumnDef="Campaign">
-                                        <th mat-header-cell *matHeaderCellDef>Campaign Types</th>
+                                    <ng-container matColumnDef="Name">
+                                        <th mat-header-cell *matHeaderCellDef>Name</th>
                                         <td mat-cell *matCellDef="let element">
                                             <div class="flex flex-auto items-center min-w-5">
                                                 <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
                                                 <span class="ml-1.5 "> <b>{{ element.name }}</b></span>
                                             </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NumberOfDays">
+                                        <th mat-header-cell *matHeaderCellDef>Number of days</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="hidden sm:block">{{element.nrOfDays}}</div>
                                         </td>
                                     </ng-container>
 
@@ -104,7 +125,7 @@
 
                                                 <mat-menu #summaryMenu="matMenu">
                                                     <button mat-menu-item
-                                                        (click)="deleteSelectedCampagin(element.campaignTypeId)">
+                                                        (click)="deletePeriodType(element.periodTypeId)">
                                                         <mat-icon class="text-red-600"
                                                             svgIcon="heroicons_outline:folder-remove">
                                                         </mat-icon>
@@ -115,20 +136,21 @@
                                         </td>
                                     </ng-container>
 
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                    <tr mat-header-row *matHeaderRowDef="periodDisplayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: periodDisplayedColumns;"
                                         (click)="onRowClick($event, row)"></tr>
                                 </table>
 
-                                <ng-template #noCampaginTypes>
+                                <ng-template #noCampagins>
                                     <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">
-                                        There are no campagin types available</div>
+                                        There are no period types available</div>
                                 </ng-template>
 
                             </div>
                         </div>
                     </div>
                 </div>
+
             </mat-tab>
         </mat-tab-group>
     </div>
