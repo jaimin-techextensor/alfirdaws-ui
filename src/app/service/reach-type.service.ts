@@ -11,7 +11,7 @@ export class ReachTypeService {
   constructor(private _HttpClient: HttpClient) { }
 
   getReachTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "/reachtypes").pipe(
+    return this._HttpClient.get(environment.APIUrl + "reachtypes").pipe(
       switchMap((response: any) => {
         return of(response)
       })

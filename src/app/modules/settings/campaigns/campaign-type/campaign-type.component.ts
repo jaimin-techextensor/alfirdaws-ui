@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common'
-import { campaignService } from 'app/service/campaign.service';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Router } from '@angular/router';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { CampaignTypeService } from 'app/service/campaign-type.service';
 
 @Component({
   selector: 'app-campaign-type',
@@ -15,8 +14,7 @@ import { Router } from '@angular/router';
 export class CampaignTypeComponent implements OnInit {
 
   constructor(
-    private _location: Location,
-    private _campaignService: campaignService,
+    private _campaignTypeService: CampaignTypeService,
     private _formBuilder: UntypedFormBuilder,
     private _fuseConfirmationService: FuseConfirmationService,
     private router: Router
@@ -32,7 +30,7 @@ export class CampaignTypeComponent implements OnInit {
   message: string = "";
 
   ngOnInit(): void {
-    this._campaignService.getCampaginTypes().subscribe(data => {
+    this._campaignTypeService.getCampaginTypes().subscribe(data => {
       this.campaginTypes = data.data;
       this.dataSource = new MatTableDataSource(this.campaginTypes);
     })
@@ -54,7 +52,7 @@ export class CampaignTypeComponent implements OnInit {
     if (this.campaignTypeForm.invalid) {
       return;
     }
-    this._campaignService.createCampaignType(campaginModel).subscribe((data) => {
+    this._campaignTypeService.createCampaignType(campaginModel).subscribe((data) => {
       if (data.success == true) {
         this.campaginTypes.push(campaginModel);
         this.dataSource = new MatTableDataSource(this.campaginTypes);
@@ -76,7 +74,7 @@ export class CampaignTypeComponent implements OnInit {
       name: this.campaignTypeForm.value["name"],
       campaignTypeId: this.campaginTypeId
     }
-    this._campaignService.updateCampaignType(campaginModel).subscribe((data: any) => {
+    this._campaignTypeService.updateCampaignType(campaginModel).subscribe((data: any) => {
       if (data.success == true) {
         const index = this.campaginTypes.findIndex(a => a.campaignTypeId == this.campaginTypeId)
         if (index >= 0) {
@@ -113,7 +111,7 @@ export class CampaignTypeComponent implements OnInit {
     })
     conformation.afterClosed().subscribe((result) => {
       if (result == "confirmed") {
-        this._campaignService.deleteCampaginType(id).subscribe(data => {
+        this._campaignTypeService.deleteCampaginType(id).subscribe(data => {
           if (data.success == true) {
             const index = this.campaginTypes.findIndex(a => a.campaignTypeId === id);
             if (index >= 0) {

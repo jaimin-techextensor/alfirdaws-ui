@@ -164,7 +164,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToCampaigns()">
 
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
@@ -173,7 +173,7 @@
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.campaignsCount}}</div>
                             <div class="text-md text-secondary">
                                 <ng-container *transloco="let t; read:'settings'">
-                                    <p>{{ t('campaigntypes') }}</p>
+                                    <p>{{ t('campaigns') }}</p>
                                 </ng-container>
                             </div>
                         </div>

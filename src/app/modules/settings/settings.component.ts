@@ -51,4 +51,8 @@ export class SettingsComponent implements OnInit {
   navigateToCountries() {
     this.router.navigateByUrl('/countries');
   }
+
+  navigateToCampaigns() {
+    this.router.navigateByUrl('/campaigns');
+  }
 }
