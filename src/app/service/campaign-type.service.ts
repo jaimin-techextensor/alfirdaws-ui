@@ -7,11 +7,11 @@ import { Observable, of, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 
-export class campaignService {
+export class CampaignTypeService {
   constructor(private _HttpClient: HttpClient) { }
 
   getCampaginTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "/campaigntypes").pipe(
+    return this._HttpClient.get(environment.APIUrl + "campaigntypes").pipe(
       switchMap((response: any) => {
         return of(response)
       })
