@@ -123,6 +123,7 @@
 
                                             <mat-form-field class="w-full">
                                                 <mat-label>Price</mat-label>
+                                                <span matPrefix>€</span>
                                                 <input type="number" matInput [formControlName]="'price'"
                                                     (keyup)='onKeyupCalculate()'>
                                                 <mat-error *ngIf="campaignForm.get('price').hasError('required')">
@@ -132,6 +133,7 @@
 
                                             <mat-form-field class="w-full">
                                                 <mat-label>Discount percentage</mat-label>
+                                                <span matPrefix>%</span>
                                                 <input type="number" matInput [formControlName]="'discountPercentage'"
                                                     (keyup)='onKeyupCalculate()'>
                                                 <mat-error
@@ -144,16 +146,19 @@
 
                                                 <mat-form-field class="w-1/3 pr-2">
                                                     <mat-label>Net price</mat-label>
+                                                    <span matPrefix>€</span>
                                                     <input matInput [formControlName]="'netPrice'" readonly>
                                                 </mat-form-field>
 
                                                 <mat-form-field class="w-1/3 px-2">
                                                     <mat-label>Saving</mat-label>
+                                                    <span matPrefix>€</span>
                                                     <input matInput [formControlName]="'saving'" readonly>
                                                 </mat-form-field>
 
                                                 <mat-form-field class="w-1/3 pl-2">
                                                     <mat-label>Price/day</mat-label>
+                                                    <span matPrefix>€</span>
                                                     <input matInput [formControlName]="'pricePerDay'" readonly>
                                                 </mat-form-field>
 
