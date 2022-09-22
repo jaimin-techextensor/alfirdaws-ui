@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { CampaignService } from 'app/service/campaign.service';
 
@@ -50,7 +50,6 @@ export class AddCampaignComponent implements OnInit {
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
     private campaignService: CampaignService,
-    private _router: Router,
     private _route: ActivatedRoute
   ) { }
 
@@ -60,9 +59,9 @@ export class AddCampaignComponent implements OnInit {
       description: [''],
       impactPosition: [''],
       impactViews: [''],
-      campaigntype: ['', [Validators.required]],
-      reachtype: ['', [Validators.required]],
-      periodtype: ['', [Validators.required]],
+      campaigntype: [0, [Validators.required]],
+      reachtype: [0, [Validators.required]],
+      periodtype: [0, [Validators.required]],
       price: ['', [Validators.required]],
       discountPercentage: ['', [Validators.required]],
       netPrice: [''],
@@ -144,12 +143,14 @@ export class AddCampaignComponent implements OnInit {
   }
 
   getCampaign(Id: string): void {
-    debugger;
     this.campaignService.getCampaign(Id).subscribe((data) => {
       if (data.success == true) {
         this.campaignData = data.data;
         this.imageData = this.campaignData.visual;
         this.campaignForm.value["campaignId"] = this.campaignData.campaignId;
+        this.campaignForm.controls["campaigntype"].setValue(this.campaignData.campaignTypeId);
+        this.campaignForm.controls["reachtype"].setValue(this.campaignData.reachTypeId)
+        this.campaignForm.controls["periodtype"].setValue(this.campaignData.periodTypeId)
         this.campaignForm.patchValue(this.campaignData);
       }
     })
@@ -158,7 +159,6 @@ export class AddCampaignComponent implements OnInit {
   addCampaign(): void {
     this.isLoginerror = false;
     this.submitted = true;
-
     if (this.campaignForm.invalid) {
       return;
     }
@@ -199,7 +199,6 @@ export class AddCampaignComponent implements OnInit {
   editCampaign(): void {
     this.isLoginerror = false;
     this.submitted = true;
-
     if (this.campaignForm.invalid) {
       return;
     }
