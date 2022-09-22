@@ -3,8 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { FuseAlertType } from '@fuse/components/alert';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CampaignService } from 'app/service/campaign.service';
 
 @Component({
@@ -16,41 +15,22 @@ import { CampaignService } from 'app/service/campaign.service';
 export class AddCampaignComponent implements OnInit {
   @ViewChild('campaignNgForm') campaignNgForm: NgForm;
   campaignForm: UntypedFormGroup;
-
-  isLoginerror = false;
-  submitted: boolean = false;
-  showAlert: boolean = false;
-
   campaignId: string;
   campaignData: any;
-
   imageSrc: string;
   imageData: string;
-
   campaginTypes: any = [];
   periodTypes: any = [];
   reachTypes: any = [];
-
-  selectedCampaignTypeId: string;
-  selectedCampaignTypeName: string;
-
-  selectedReachTypeId: string;
-  selectedReachTypeName: string;
-
-  selectedPeriodTypeId: string;
-  selectedPeriodTypeName: string;
   message: any = "";
   isEditMode: boolean = false;
-  alert: { type: FuseAlertType; message: string } = {
-    type: 'success',
-    message: ''
-  };
 
   constructor(
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
     private campaignService: CampaignService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -71,17 +51,19 @@ export class AddCampaignComponent implements OnInit {
       visual: [''],
     })
 
-    this.campaignService.getCampaginTypes().subscribe(data => {
-      this.campaginTypes = data.data;
-    })
+    if (this.router.url.includes("add-campaign")) {
+      this.campaignService.getCampaginTypes().subscribe(data => {
+        this.campaginTypes = data.data;
+      })
 
-    this.campaignService.getPeriodTypes().subscribe(data => {
-      this.periodTypes = data.data;
-    })
+      this.campaignService.getPeriodTypes().subscribe(data => {
+        this.periodTypes = data.data;
+      })
 
-    this.campaignService.getReachTypes().subscribe(data => {
-      this.reachTypes = data.data
-    })
+      this.campaignService.getReachTypes().subscribe(data => {
+        this.reachTypes = data.data
+      })
+    }
 
     this._route.paramMap.subscribe((params: ParamMap) => {
       this.campaignId = params.get('campaignId');
@@ -111,8 +93,6 @@ export class AddCampaignComponent implements OnInit {
   handleFileLoaded(e) {
     const reader = e.target;
     this.imageData = reader.result;
-    this.imageSrc = reader.result.split(',')[1];
-    var j = this.campaignForm;
   }
 
   selectedCampaignType(event: MatSelectChange) {
@@ -120,8 +100,6 @@ export class AddCampaignComponent implements OnInit {
       text: (event.source.selected as MatOption).viewValue,
       value: event.source.value
     };
-    this.selectedCampaignTypeId = selectedData.value;
-    this.selectedCampaignTypeName = selectedData.text;
   }
 
   selectedReachType(event: MatSelectChange) {
@@ -129,8 +107,6 @@ export class AddCampaignComponent implements OnInit {
       text: (event.source.selected as MatOption).viewValue,
       value: event.source.value
     }
-    this.selectedReachTypeId = selectedData.value;
-    this.selectedReachTypeName = selectedData.text;
   }
 
   selectedPeriodType(event: MatSelectChange) {
@@ -138,8 +114,6 @@ export class AddCampaignComponent implements OnInit {
       text: (event.source.selected as MatOption).viewValue,
       value: event.source.value
     }
-    this.selectedPeriodTypeId = selectedData.value;
-    this.selectedPeriodTypeName = selectedData.text;
   }
 
   getCampaign(Id: string): void {
@@ -147,9 +121,12 @@ export class AddCampaignComponent implements OnInit {
       if (data.success == true) {
         this.campaignData = data.data;
         this.imageData = this.campaignData.visual;
+        this.campaginTypes = this.campaignData.campaignTypes;
+        this.reachTypes = this.campaignData.reachTypes;
+        this.periodTypes = this.campaignData.periodTypes;
         this.campaignForm.value["campaignId"] = this.campaignData.campaignId;
         this.campaignForm.controls["campaigntype"].setValue(this.campaignData.campaignTypeId);
-        this.campaignForm.controls["reachtype"].setValue(this.campaignData.reachTypeId)
+        this.campaignForm.controls["reachtype"].setValue(this.campaignData.reachTypeId);
         this.campaignForm.controls["periodtype"].setValue(this.campaignData.periodTypeId)
         this.campaignForm.patchValue(this.campaignData);
       }
@@ -157,13 +134,10 @@ export class AddCampaignComponent implements OnInit {
   }
 
   addCampaign(): void {
-    this.isLoginerror = false;
-    this.submitted = true;
     if (this.campaignForm.invalid) {
       return;
     }
     this.campaignForm.disable();
-    this.showAlert = false;
     let campaignModel = {
       description: this.campaignForm.value["description"],
       impactPosition: this.campaignForm.value["impactPosition"],
@@ -182,11 +156,8 @@ export class AddCampaignComponent implements OnInit {
     this.campaignService.createCampaign(campaignModel).subscribe(
       (data) => {
         if (data.success == true) {
-          this.alert = {
-            type: 'success',
-            message: 'Campaign Created Successfully!!'
-          };
-          this.showAlert = true;
+
+
           this._location.back();
         }
         else {
@@ -197,23 +168,34 @@ export class AddCampaignComponent implements OnInit {
   }
 
   editCampaign(): void {
-    this.isLoginerror = false;
-    this.submitted = true;
     if (this.campaignForm.invalid) {
       return;
     }
     this.campaignForm.disable();
-    this.showAlert = false;
+
+
+    let EditCampaignModel = {
+      description: this.campaignForm.value["description"],
+      impactPosition: this.campaignForm.value["impactPosition"],
+      impactViews: this.campaignForm.value["impactViews"],
+      campaignTypeId: this.campaignForm.value["campaigntype"],
+      reachTypeId: this.campaignForm.value["reachtype"],
+      periodTypeId: this.campaignForm.value["periodtype"],
+      price: this.campaignForm.value["price"],
+      discountPercentage: this.campaignForm.value["discountPercentage"],
+      netPrice: this.campaignForm.value["netPrice"],
+      saving: this.campaignForm.value["saving"],
+      pricePerDay: this.campaignForm.value["pricePerDay"],
+      active: this.campaignForm.value["active"],
+      visual: this.imageData,
+      campaignId: this.campaignId
+    }
 
     this.campaignForm.value["visual"] = this.imageData;
-    this.campaignService.updateCampaign(this.campaignForm.value).subscribe(
+    this.campaignService.updateCampaign(EditCampaignModel).subscribe(
       (data) => {
         if (data.success == true) {
-          this.alert = {
-            type: "success",
-            message: "Campaign updated successfully."
-          };
-          this.showAlert = true;
+
           this._location.back();
         }
       }
