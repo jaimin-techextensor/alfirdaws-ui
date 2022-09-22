@@ -12,6 +12,7 @@ import { CampaignService } from 'app/service/campaign.service';
   templateUrl: './add-campaign.component.html',
   styleUrls: ['./add-campaign.component.scss']
 })
+
 export class AddCampaignComponent implements OnInit {
   @ViewChild('campaignNgForm') campaignNgForm: NgForm;
   campaignForm: UntypedFormGroup;
@@ -178,7 +179,6 @@ export class AddCampaignComponent implements OnInit {
           };
           this.showAlert = true;
           this._router.navigateByUrl('/settings');
-          //this._location.back();
         }
         else {
           this.message = data.message ? data.message : '';
@@ -188,7 +188,6 @@ export class AddCampaignComponent implements OnInit {
   }
 
   editCampaign(): void {
-    debugger;
     this.isLoginerror = false;
     this.submitted = true;
 
@@ -208,15 +207,18 @@ export class AddCampaignComponent implements OnInit {
           };
           this.showAlert = true;
           this._router.navigateByUrl('/settings')
-          //this._location.back();
         }
       }
     )
   }
 
   onKeyupCalculate(): void {
-    return;
-
+    if (this.campaignForm.controls['price'].value > 0 && this.campaignForm.controls['discountPercentage'].value > 0) {
+      var netPrice = this.campaignForm.controls['price'].value - (this.campaignForm.controls['price'].value * this.campaignForm.controls['discountPercentage'].value / 100);
+      this.campaignForm.controls['netPrice'].setValue(parseFloat(netPrice.toString()).toFixed(2));
+      this.campaignForm.controls['saving'].setValue(parseFloat((this.campaignForm.controls['price'].value - netPrice).toString()).toFixed(2));
+      this.campaignForm.controls['pricePerDay'].setValue(parseFloat((netPrice / 30).toString()).toFixed(2));
+    }
   }
 
 } 
