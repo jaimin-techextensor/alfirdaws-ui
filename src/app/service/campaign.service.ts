@@ -6,7 +6,8 @@ import { Observable, of, switchMap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AddCampaignService {
+
+export class CampaignService {
 
   constructor(private _HttpClient: HttpClient) { }
 
@@ -54,6 +55,22 @@ export class AddCampaignService {
     return this._HttpClient.put(environment.APIUrl + "campaigns", data).pipe(
       switchMap((response: any) => {
         return of(response);
+      })
+    )
+  }
+
+  getCampaginsList(): Observable<any> {
+    return this._HttpClient.get(environment.APIUrl + "campaigns").pipe(
+      switchMap((response) => {
+        return of(response)
+      })
+    )
+  }
+
+  deleteCampaginByUser(id: string): Observable<any> {
+    return this._HttpClient.delete(environment.APIUrl + "campaigns/" + id).pipe(
+      switchMap((response) => {
+        return of(response)
       })
     )
   }

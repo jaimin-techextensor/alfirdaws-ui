@@ -22,7 +22,7 @@ import { CampaignsComponent } from './campaigns.component';
 import { PeriodTypeComponent } from './period-type/period-type.component';
 import { ReachTypeComponent } from './reach-type/reach-type.component';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 const campaignRoute: Route[] = [
   {
     path: '',
@@ -31,7 +31,8 @@ const campaignRoute: Route[] = [
   { path: 'reach-type', component: ReachTypeComponent },
   { path: 'campaign-type', component: CampaignTypeComponent },
   { path: 'period-type', component: PeriodTypeComponent },
-  { path: 'add-campaign', component: AddCampaignComponent }
+  { path: 'add-campaign', component: AddCampaignComponent },
+  { path: 'edit-campaign/:campaignId', component: AddCampaignComponent }
 ];
 
 @NgModule({
@@ -39,6 +40,7 @@ const campaignRoute: Route[] = [
     CampaignTypeComponent,
     PeriodTypeComponent,
     ReachTypeComponent,
+    CampaignsComponent,
     AddCampaignComponent
   ],
   imports: [
@@ -59,7 +61,8 @@ const campaignRoute: Route[] = [
     FuseAlertModule,
     SharedModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class CampaignsModule { }

@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
-import { TranslocoCoreModule } from 'app/core/transloco/transloco.module';
 import { Router } from '@angular/router';
+import { SettingService } from './../../service/setting.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,21 +12,22 @@ export class SettingsComponent implements OnInit {
   counterList: any;
 
   constructor(
-      private _httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private settingService: SettingService
   ) { }
 
   ngOnInit(): void {
-    // this.settingsCounter();
-    this._httpClient.get(environment.APIUrl + 'settings/counters').subscribe(
-      async (data: any) => {
-        if (data.success == true) {
-          this.counterList = await data.data;
-        }
-      });
+    this.settingsCounter();
+
   }
 
-  async settingsCounter() {
+  settingsCounter() {
+    this.settingService.getCounters().subscribe(res => {
+      if (res.success == true) {
+        this.counterList = res.data;
+        localStorage.setItem("counter-data", JSON.stringify(res.data))
+      }
+    })
   }
 
   navigateToUsers() {

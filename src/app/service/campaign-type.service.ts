@@ -8,10 +8,10 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 
 export class CampaignTypeService {
-  constructor(private _HttpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getCampaginTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "campaigntypes").pipe(
+    return this._httpClient.get(environment.APIUrl + "campaigntypes").pipe(
       switchMap((response: any) => {
         return of(response)
       })
@@ -19,7 +19,7 @@ export class CampaignTypeService {
   }
 
   createCampaignType(data: any): Observable<any> {
-    return this._HttpClient.post(environment.APIUrl + "campaigntypes", data).pipe(
+    return this._httpClient.post(environment.APIUrl + "campaigntypes", data).pipe(
       switchMap((response: any) => {
         return of(response)
       })
@@ -27,7 +27,7 @@ export class CampaignTypeService {
   }
 
   updateCampaignType(data: any): Observable<any> {
-    return this._HttpClient.put(environment.APIUrl + "campaigntypes", data).pipe(
+    return this._httpClient.put(environment.APIUrl + "campaigntypes", data).pipe(
       switchMap((response: any) => {
         return of(response)
       })
@@ -35,7 +35,7 @@ export class CampaignTypeService {
   }
 
   deleteCampaginType(id: string): Observable<any> {
-    return this._HttpClient.delete(environment.APIUrl + "campaigntypes/" + id).pipe(
+    return this._httpClient.delete(environment.APIUrl + "campaigntypes/" + id).pipe(
       switchMap((response: any) => {
         return of(response)
       })
