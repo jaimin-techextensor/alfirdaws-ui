@@ -34,6 +34,14 @@ export class AddCampaignService {
     )
   }
 
+  getCampaign(Id: string): Observable<any> {
+    return this._HttpClient.get(environment.APIUrl + "campaigns/" + Id).pipe(
+      switchMap((response: any) => {
+        return of(response)
+      })
+    )
+  }
+
   createCampaign(data: any): Observable<any> {
     return this._HttpClient.post(environment.APIUrl + "campaigns", data).pipe(
       switchMap((response: any) => {

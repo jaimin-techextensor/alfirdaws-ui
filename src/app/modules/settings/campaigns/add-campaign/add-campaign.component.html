@@ -7,12 +7,12 @@
                 <mat-icon svgIcon="heroicons_outline:speakerphone"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
-                        <div
+                        <div *ngIf="!isEditMode"
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
                             Create new campaign</div>
-                        <!-- <div 
+                        <div *ngIf="isEditMode"
                             class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                        Edit user : {{userData.name}} {{userData.lastName}}</div> -->
+                            Edit campaign </div>
                     </ng-container>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                                                 <mat-label>Impact campaign on views</mat-label>
                                                 <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                                     [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
-                                                <textarea matInput [formControlName]="'impactViews '" [rows]="5"
+                                                <textarea matInput [formControlName]="'impactViews'" [rows]="5"
                                                     [spellcheck]="false" matTextareaAutosize></textarea>
                                             </mat-form-field>
 
@@ -123,7 +123,8 @@
 
                                             <mat-form-field class="w-full">
                                                 <mat-label>Price</mat-label>
-                                                <input type="number" matInput [formControlName]="'price'">
+                                                <input type="number" matInput [formControlName]="'price'"
+                                                    (keyup)='onKeyupCalculate()'>
                                                 <mat-error *ngIf="campaignForm.get('price').hasError('required')">
                                                     Price is required
                                                 </mat-error>
@@ -132,7 +133,7 @@
                                             <mat-form-field class="w-full">
                                                 <mat-label>Discount percentage</mat-label>
                                                 <input type="number" matInput [formControlName]="'discountPercentage'"
-                                                    (blur)='onBlurCalculate()'>
+                                                    (keyup)='onKeyupCalculate()'>
                                                 <mat-error
                                                     *ngIf="campaignForm.get('discountPercentage').hasError('required')">
                                                     Discount percentage is required
@@ -167,11 +168,13 @@
                                                     <span class="ml-2 mr-1">Cancel</span>
                                                 </button>
 
-                                                <!-- <button *ngIf="isEditMode" mat-flat-button [color]="'primary'" (click)="editCampaign()">
-                                                    <span class="ml-2 mr-1">Edit</span>
-                                                </button> -->
+                                                <button *ngIf="isEditMode" mat-flat-button [color]="'primary'"
+                                                    (click)="editCampaign()">
+                                                    <span class="ml-2 mr-1">Update</span>
+                                                </button>
 
-                                                <button mat-flat-button [color]="'primary'" (click)="addCampaign()">
+                                                <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'"
+                                                    (click)="addCampaign()">
                                                     <span class="ml-2 mr-1">Save</span>
                                                 </button>
 
