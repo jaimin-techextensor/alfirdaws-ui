@@ -1,14 +1,11 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common'
-import { FuseValidators } from '@fuse/validators';
-import { FuseAlertType } from '@fuse/components/alert';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MatSelectChange } from '@angular/material/select';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatOption } from '@angular/material/core';
-import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { AddCampaignService } from 'app/service/add-campaign.service';
+import { MatSelectChange } from '@angular/material/select';
+import { Router } from '@angular/router';
+import { FuseAlertType } from '@fuse/components/alert';
+import { CampaignService } from 'app/service/campaign.service';
 
 
 @Component({
@@ -49,9 +46,7 @@ export class AddCampaignComponent implements OnInit {
   constructor(
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
-    private _fuseConfirmationService: FuseConfirmationService,
-    private route: ActivatedRoute,
-    private _addCampaignService: AddCampaignService,
+    private campaignService: CampaignService,
     private _router: Router
   ) { }
 
@@ -77,16 +72,15 @@ export class AddCampaignComponent implements OnInit {
       // CampaignId: ['']
     })
 
-    this._addCampaignService.getCampaginTypes().subscribe(data => {
-      debugger;
+    this.campaignService.getCampaginTypes().subscribe(data => {
       this.campaginTypes = data.data;
     })
 
-    this._addCampaignService.getPeriodTypes().subscribe(data => {
+    this.campaignService.getPeriodTypes().subscribe(data => {
       this.periodTypes = data.data;
     })
 
-    this._addCampaignService.getReachTypes().subscribe(data => {
+    this.campaignService.getReachTypes().subscribe(data => {
       this.reachTypes = data.data
     })
   }
@@ -121,7 +115,6 @@ export class AddCampaignComponent implements OnInit {
     };
     this.selectedCampaignTypeId = selectedData.value;
     this.selectedCampaignTypeName = selectedData.text
-    console.log(selectedData);
   }
 
   selectedReachType(event: MatSelectChange) {
@@ -131,7 +124,6 @@ export class AddCampaignComponent implements OnInit {
     }
     this.selectedReachTypeId = selectedData.value;
     this.selectedReachTypeName = selectedData.text
-    console.log(selectedData)
   }
 
   selectedPeriodType(event: MatSelectChange) {
@@ -141,11 +133,9 @@ export class AddCampaignComponent implements OnInit {
     }
     this.selectedPeriodTypeId = selectedData.value;
     this.selectedPeriodTypeName = selectedData.text;
-    console.log(selectedData)
   }
 
   addCampaign(): void {
-    debugger;
     this.isLoginerror = false;
     this.submitted = true
 
@@ -169,7 +159,7 @@ export class AddCampaignComponent implements OnInit {
       active: this.campaignForm.value["active"],
       visual: this.imageData
     }
-    this._addCampaignService.createCampaign(campaignModel).subscribe(
+    this.campaignService.createCampaign(campaignModel).subscribe(
       (data) => {
         if (data.success == true) {
           this.alert = {
@@ -199,8 +189,6 @@ export class AddCampaignComponent implements OnInit {
   }
 
   onBlurCalculate(): void {
-    debugger;
-    console.log("ABCCCCCCC")
   }
 
 } 

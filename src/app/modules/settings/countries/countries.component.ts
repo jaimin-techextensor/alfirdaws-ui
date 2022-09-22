@@ -136,7 +136,6 @@ export class CountriesComponent implements OnInit {
   // -------------------------------------------------------------------------
   onRowClick(event: any, rowData: any) { 
     if (!(event.srcElement instanceof SVGElement)) {
-     debugger
       this.visible = true;
       this.isCountrySelected =  true;
       if (rowData) {
