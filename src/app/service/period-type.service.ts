@@ -14,7 +14,7 @@ export class PeriodTypeService {
   ) { }
 
   getPeriodTypes(): Observable<any> {
-    return this._httpClient.get(environment.APIUrl + "/periodtypes").pipe(
+    return this._httpClient.get(environment.APIUrl + "periodtypes").pipe(
       switchMap((response: any) => {
         return of(response)
       })

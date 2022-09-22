@@ -1,3 +1,4 @@
+import { CampaignTypeService } from './../../../../service/campaign-type.service';
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -5,6 +6,8 @@ import { MatOption } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CampaignService } from 'app/service/campaign.service';
+import { ReachTypeService } from './../../../../service/reach-type.service';
+import { PeriodTypeService } from './../../../../service/period-type.service';
 
 @Component({
   selector: 'app-add-campaign',
@@ -30,7 +33,10 @@ export class AddCampaignComponent implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private campaignService: CampaignService,
     private _route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private campaignTypeService: CampaignTypeService,
+    private reachTypeService: ReachTypeService,
+    private periodTypeService: PeriodTypeService
   ) { }
 
   ngOnInit(): void {
@@ -52,15 +58,15 @@ export class AddCampaignComponent implements OnInit {
     })
 
     if (this.router.url.includes("add-campaign")) {
-      this.campaignService.getCampaginTypes().subscribe(data => {
+      this.campaignTypeService.getCampaginTypes().subscribe(data => {
         this.campaginTypes = data.data;
       })
 
-      this.campaignService.getPeriodTypes().subscribe(data => {
+      this.periodTypeService.getPeriodTypes().subscribe(data => {
         this.periodTypes = data.data;
       })
 
-      this.campaignService.getReachTypes().subscribe(data => {
+      this.reachTypeService.getReachTypes().subscribe(data => {
         this.reachTypes = data.data
       })
     }

@@ -11,30 +11,6 @@ export class CampaignService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  getCampaginTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "/campaigntypes").pipe(
-      switchMap((response: any) => {
-        return of(response)
-      })
-    )
-  }
-
-  getPeriodTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "/periodtypes").pipe(
-      switchMap((response: any) => {
-        return of(response)
-      })
-    )
-  }
-
-  getReachTypes(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "/reachtypes").pipe(
-      switchMap((response: any) => {
-        return of(response)
-      })
-    )
-  }
-
   getCampaign(Id: string): Observable<any> {
     return this._HttpClient.get(environment.APIUrl + "campaigns/" + Id).pipe(
       switchMap((response: any) => {
