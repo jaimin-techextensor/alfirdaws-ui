@@ -70,6 +70,10 @@
                     </ng-container>
                     <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
                 </button>
+                <button class="ml-4" mat-flat-button [color]="'primary'" [routerLink]="['add-campaign']">
+                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                    <span class="ml-2 mr-1">Create campaign</span>
+                </button>
                 <button (click)="navigateBack()" class="ml-4" mat-flat-button color="accent">
                     <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
                     <span class="ml-2 mr-1">Back</span>
@@ -159,7 +163,7 @@
                                 </button>
 
                                 <mat-menu #summaryMenu="matMenu">
-                                    <button mat-menu-item (click)="editCampaigns(element.campaignId)">
+                                    <button mat-menu-item [routerLink]="['edit-campaign', element.campaignId]">
                                         <mat-icon svgIcon="heroicons_outline:pencil-alt">
                                         </mat-icon>
                                         <span>Edit</span>
@@ -179,8 +183,7 @@
 
                 <mat-paginator *ngIf="campaginsList.length > 0"
                     class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
-                    [pageSizeOptions]="[5, 10, 15, 20]"
-                     showFirstLastButtons>
+                    [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons>
                 </mat-paginator>
             </div>
         </div>

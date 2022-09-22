@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
 import { CampaignService } from 'app/service/campaign.service';
 
@@ -49,7 +49,8 @@ export class AddCampaignComponent implements OnInit {
     private _location: Location,
     private _formBuilder: UntypedFormBuilder,
     private campaignService: CampaignService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +81,14 @@ export class AddCampaignComponent implements OnInit {
 
     this.campaignService.getReachTypes().subscribe(data => {
       this.reachTypes = data.data
+    })
+
+    this._route.paramMap.subscribe((params: ParamMap) => {
+      this.campaignId = params.get('campaignId');
+      if (this.campaignId != null) {
+        this.getCampaign(this.campaignId);
+        this.isEditMode = true;
+      }
     })
   }
 
@@ -177,8 +186,7 @@ export class AddCampaignComponent implements OnInit {
             message: 'Campaign Created Successfully!!'
           };
           this.showAlert = true;
-          this._router.navigateByUrl('/settings');
-          //this._location.back();
+          this._location.back();
         }
         else {
           this.message = data.message ? data.message : '';
@@ -207,8 +215,7 @@ export class AddCampaignComponent implements OnInit {
             message: "Campaign updated successfully."
           };
           this.showAlert = true;
-          this._router.navigateByUrl('/settings')
-          //this._location.back();
+          this._location.back();
         }
       }
     )
