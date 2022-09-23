@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { checkValidPermission } from 'app/core/auth/auth-permission';
 import { SubscriptionModelService } from 'app/service/subscription-model.service';
 import { PageRequestModel } from '../users/page-request';
@@ -33,7 +34,8 @@ export class SubscriptionModelComponent implements OnInit {
   constructor(
     private _router: Router,
     private _location: Location,
-    private _subscriptionModelService: SubscriptionModelService
+    private _subscriptionModelService: SubscriptionModelService,
+    private _fuseConfirmationService: FuseConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -76,15 +78,29 @@ export class SubscriptionModelComponent implements OnInit {
     })
   }
 
-  deleteSubscriptionModel(id:string) {
-    this._subscriptionModelService.deleteSubscriptionModel(id).subscribe(data => {
-      if (data.success == true) {
-        const index = this.subscriptionList.findIndex(a => a.subscriptionModelId == id);
-        if (index >= 0) {
-          this.subscriptionList.splice(index, 1);
-          this.dataSource = new MatTableDataSource(this.subscriptionList);
+  deleteSubscriptionModel(id: string) {
+    const confirmation = this._fuseConfirmationService.open({
+      title: 'Delete subscription model',
+      message: 'Are you sure you want to remove this subscription model? This action cannot be undone!',
+      actions: {
+        confirm: {
+          label: 'Delete'
         }
       }
-    })
+    });
+    confirmation.afterClosed().subscribe((result) => {
+      if (result === 'confirmed') {
+        this._subscriptionModelService.deleteSubscriptionModel(id).subscribe(data => {
+          if (data.success == true) {
+            const index = this.subscriptionList.findIndex(a => a.subscriptionModelId == id);
+            if (index >= 0) {
+              this.subscriptionList.splice(index, 1);
+              this.subscriptionListModel.TotalCount = this.subscriptionList.length;
+              this.dataSource = new MatTableDataSource(this.subscriptionList);
+            }
+          }
+        })
+      }
+    });
   }
 }

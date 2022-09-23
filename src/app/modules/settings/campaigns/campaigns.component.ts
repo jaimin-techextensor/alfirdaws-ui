@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { checkValidPermission } from 'app/core/auth/auth-permission';
 import { CampaignService } from 'app/service/campaign.service';
 import { SettingService } from 'app/service/setting.service';
@@ -37,7 +38,8 @@ export class CampaignsComponent implements OnInit {
     private _location: Location,
     private campaignService: CampaignService,
     private _router: Router,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private _fuseConfirmationService: FuseConfirmationService
   ) {
     var counters = localStorage.getItem("counter-data");
     if (counters) {
@@ -72,15 +74,29 @@ export class CampaignsComponent implements OnInit {
   }
 
   deleteCampaign(id: string) {
-    this.campaignService.deleteCampaignByUser(id).subscribe(data => {
-      if (data.success == true) {
-        const index = this.campaignList.findIndex(a => a.campaignId == id);
-        if (index >= 0) {
-          this.campaignList.splice(index, 1);
-          this.dataSource = new MatTableDataSource(this.campaignList);
+    const confirmation = this._fuseConfirmationService.open({
+      title: 'Delete campaign',
+      message: 'Are you sure you want to remove this campaign? This action cannot be undone!',
+      actions: {
+        confirm: {
+          label: 'Delete'
         }
       }
-    })
+    });
+    confirmation.afterClosed().subscribe((result) => {
+      if (result === 'confirmed') {
+        this.campaignService.deleteCampaignByUser(id).subscribe(data => {
+          if (data.success == true) {
+            const index = this.campaignList.findIndex(a => a.campaignId == id);
+            if (index >= 0) {
+              this.campaignList.splice(index, 1);
+              this.campaignsListModel.TotalCount = this.campaignList.length;
+              this.dataSource = new MatTableDataSource(this.campaignList);
+            }
+          }
+        })
+      }
+    });
   }
 
   editCampaigns(id: string) {
