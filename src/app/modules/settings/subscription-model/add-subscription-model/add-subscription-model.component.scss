@@ -1,0 +1,122 @@
+.upload-options {
+  position: relative;
+  height: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #ccc;
+  transition: background-color ease-in-out 150ms;
+
+  & input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  & label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    backface-visibility: hidden;
+    transition: none;
+    font-weight: 500;
+    --tw-text-opacity: 1 !important;
+    color: rgba(var(--fuse-text-default-rgb), var(--tw-text-opacity)) !important;
+    overflow: hidden;
+
+    & span {
+      display: inline-block;
+      width: 50%;
+      height: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+      text-align: center;
+
+      &:hover i.material-icons {
+        color: lightgray;
+      }
+    }
+  }
+}
+
+.box {
+  width: 40%;
+  padding-right: 40px;
+}
+
+.js--image-preview {
+  height: 150px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+
+  &::after {
+    content: "photo_size_select_actual";
+    font-family: 'Material Icons';
+    position: relative;
+    font-size: 4.5em;
+    color: rgba(230, 230, 230, 1);
+    top: calc(50% - 3rem);
+    left: calc(50% - 2.25rem);
+    z-index: 0;
+  }
+
+  &.js--no-default::after {
+    display: none;
+  }
+
+  &:nth-child(2) {
+    background-image: url('http://bastianandre.at/giphy.gif');
+  }
+}
+
+.mat-form-field.mat-form-field-appearance-fill.mat-form-field-has-label .mat-form-field-wrapper {
+  margin-top: 24px;
+  padding-right: 1em;
+}
+.tick-flex-layout {
+  display: flex;
+}
+.coustom-flex-layout{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flex-button-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.right-content {
+  width: 60%;
+}
+.input-layout-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.flex-input-layout {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+}
