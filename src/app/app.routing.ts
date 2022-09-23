@@ -84,7 +84,8 @@ export const appRoutes: Route[] = [
             { path: 'categories', title: 'Categories', loadChildren: () => import('app/modules/settings/categories/categories.module').then(m => m.CategoriesModule) },
             { path: 'countries', title: 'Countries', loadChildren: () => import('app/modules/settings/countries/countries.modules').then(m => m.CountriesModule) },
             { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) },
-            { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule)}
+            { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule)},
+            { path: 'subscription', title: 'Subscription', loadChildren: () => import('app/modules/settings//subscription-model/subscripton.module').then(m => m.SubscriptonModule) }
         ]
     }
 ];
