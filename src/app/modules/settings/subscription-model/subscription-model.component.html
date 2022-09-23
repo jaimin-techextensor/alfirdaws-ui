@@ -1,1 +1,142 @@
-<p>subscription-model works!</p>
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <div>
+            <div class="flex flex-auto items-center min-w-0">
+                <mat-icon class="icon-size-10" svgIcon="heroicons_outline:collection">
+                </mat-icon>
+                <div class="flex flex-col min-w-0 ml-4">
+                    <ng-container>
+                        <div
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-0 md:leading-snug truncate">
+                            Subscription Model
+                        </div>
+                    </ng-container>
+                    <div class="flex items-center">
+                        <div class="ml-1.0 leading-0 truncate text-secondary">
+                            Manage Subscription Model
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
+                    <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'">
+                    </mat-icon>
+                    <input matInput [autocomplete]="'off'" [placeholder]="'Search Campaign'"
+                        [(ngModel)]="searchTextForSubscription" (ngModelChange)="getSubscriptionModelList(null,true)"
+                        [ngModelOptions]="{ standalone: true }" />
+                </mat-form-field>
+                <button (click)="navigateBack()" class="ml-4" mat-flat-button color="accent">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                    <span class="ml-2 mr-1">Back</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-auto overflow-hidden">
+        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+            <div class="grid">
+                <table *ngIf="subscriptionList.length > 0; else noSubscriptionModel" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.name }}
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="Type">
+                        <th class="" mat-header-cell *matHeaderCellDef>Type</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="flex flex-auto items-center min-w-5">
+                                <span class="ml-1.5 "> {{ element.subscriptionType }}</span>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="UserType">
+                        <th mat-header-cell *matHeaderCellDef>User Type</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.userType }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Ads">
+                        <th mat-header-cell *matHeaderCellDef>No. of Ads</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.nrOfAds }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Pictures">
+                        <th mat-header-cell *matHeaderCellDef>No of Pictures</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.nrOfPictures }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Active">
+                        <th mat-header-cell *matHeaderCellDef>Active</th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.active">
+                                <mat-icon class="text-green-400 icon-size-6" [svgIcon]="'heroicons_solid:check'">
+                                </mat-icon>
+                            </ng-container>
+                            <ng-container *ngIf="!element.active">
+                                <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'">
+                                </mat-icon>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="Action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="hidden sm:block">
+                                <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
+                                    [matMenuTriggerFor]="summaryMenu">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-down'">
+                                    </mat-icon>
+                                </button>
+
+                                <mat-menu #summaryMenu="matMenu" [hidden]="!(isEditPermission || isDeletePermission)">
+                                    <button *ngIf="isEditPermission" mat-menu-item>
+                                        <mat-icon svgIcon="heroicons_outline:pencil-alt">
+                                        </mat-icon>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button mat-menu-item
+                                        (click)="deleteSubscriptionModel(element.subscriptionModelId)">
+                                        <mat-icon svgIcon="heroicons_outline:user-remove">
+                                        </mat-icon>
+                                        <span>Delete</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </td>
+                    </ng-container>
+                   
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                
+                </table>
+                <ng-template #noSubscriptionModel>
+                    <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">There are no subscription model</div>
+                </ng-template>
+            </div>
+
+            <mat-paginator *ngIf="subscriptionList.length > 0"
+                class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent coustom-paginator-box"
+                [pageSizeOptions]="[5, 10, 15, 20]" 
+                [pageIndex]="subscriptionListModel.PageNumber"
+                [pageSize]="subscriptionListModel.PageSize" 
+                (page)="getSubscriptionModelList($event, false)"
+                [length]="subscriptionListModel.TotalCount" 
+                showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </div>
+</div>

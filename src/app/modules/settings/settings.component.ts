@@ -54,6 +54,6 @@ export class SettingsComponent implements OnInit {
     this.router.navigateByUrl('/campaigns');
   }
   navigateTosubscription() {
-    this.router.navigateByUrl('/subscription');
+    this.router.navigateByUrl('/subscription-model');
   }
 }
