@@ -15,6 +15,7 @@ import { Route, RouterModule } from '@angular/router';
 import { SharedModule } from 'app/shared/shared.module';
 import { AddSubscriptionModelComponent } from './add-subscription-model/add-subscription-model.component';
 import { SubscriptionModelComponent } from './subscription-model.component';
+import { MatSelectModule } from '@angular/material/select';
 
 const subscriptModelRought: Route[] = [
   { path: "", component: SubscriptionModelComponent },
@@ -41,7 +42,8 @@ const subscriptModelRought: Route[] = [
     MatMenuModule,
     MatDividerModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
 })
 

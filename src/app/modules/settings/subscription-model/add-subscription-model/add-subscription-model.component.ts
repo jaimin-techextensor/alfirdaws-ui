@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SubscriptionModalService } from 'app/service/subscription-modal.service';
+import { SubscriptionModel } from '../subscription-model';
 
 @Component({
   selector: 'app-add-subscription-model',
@@ -17,8 +18,8 @@ export class AddSubscriptionModelComponent implements OnInit {
   message: any = "";
   imageSrc: string;
   imageData: string;
-  subcriptionId: string;
-  subcriptionModalData: any;
+  subscriptionModelId: string;
+  subcriptionModalData: SubscriptionModel = new SubscriptionModel();
   disabled: boolean = false;
 
   constructor(
@@ -35,26 +36,26 @@ export class AddSubscriptionModelComponent implements OnInit {
       description: [''],
       subscriptionType: ['', [Validators.required]],
       nrOfAds: ['', [Validators.required]],
-      unlimitedAds: [''],
-      unlimitedPictures: [''],
+      unlimitedAds: [false],
+      unlimitedPictures: [false],
       nrOfPictures: [''],
-      searchEngine: [''],
-      vouchers: [''],
-      socialMedia: [''],
-      basicCampaigns: [''],
-      extendedCampaigns: [''],
-      statistics: [''],
-      trends: [''],
-      partnerships: [''],
-      onlineSupport: [''],
-      active: [''],
+      searchEngine: [false],
+      vouchers: [false],
+      socialMedia: [false],
+      basicCampaigns: [false],
+      extendedCampaigns: [false],
+      statistics: [false],
+      trends: [false],
+      partnerships: [false],
+      onlineSupport: [false],
+      active: [false],
       visual: this.imageData
     })
 
     this._route.paramMap.subscribe((params: ParamMap) => {
-      this.subcriptionId = params.get('subcriptionId');
-      if (this.subcriptionId != null) {
-        this.getSubscriptionModal(this.subcriptionId)
+      this.subscriptionModelId = params.get('subscriptionModelId');
+      if (this.subscriptionModelId != null) {
+        this.getSubscriptionModal(this.subscriptionModelId)
         this.isEditMode = true;
       }
     })
@@ -84,16 +85,16 @@ export class AddSubscriptionModelComponent implements OnInit {
   getSubscriptionModal(Id: string): void {
     this._subscriptionModalService.getSubscriptionModal(Id).subscribe((data) => {
       if (data.success == true) {
+        
         this.subcriptionModalData = data.data;
         this.imageData = this.subcriptionModalData.visual;
-        this.subcriptionModalData.value["SubscriptionModelId"] = this.subcriptionId
-        this.subcriptionModalData.patchValue(this.subcriptionModalData);
+        this.subscriptionModalForm.value["subscriptionModelId"] = this.subscriptionModelId;
+        this.subscriptionModalForm.patchValue(this.subcriptionModalData);
       }
     })
   }
 
   addSubscriptionModal(): void {
-    debugger;
     if (this.subscriptionModalForm.invalid) {
       return;
     }
@@ -132,7 +133,7 @@ export class AddSubscriptionModelComponent implements OnInit {
   }
 
   editSubscription(): void {
-    debugger;
+
     if (this.subscriptionModalForm.invalid) {
       return;
     }
@@ -157,7 +158,7 @@ export class AddSubscriptionModelComponent implements OnInit {
       isOnlineSupport: this.subscriptionModalForm.value["onlineSupport"],
       active: this.subscriptionModalForm.value["active"],
       visual: this.imageData,
-      SubscriptionModelId: this.subcriptionId
+      SubscriptionModelId: this.subscriptionModelId
     }
     this.subscriptionModalForm.value["visual"] = this.imageData;
     this._subscriptionModalService.updateSubscriptionModal(EditSubscriptionModalForm).subscribe(
@@ -168,11 +169,5 @@ export class AddSubscriptionModelComponent implements OnInit {
       }
     )
   }
-
-  OnCheckboxClick() {
-    debugger;
-    this.disabled = !this.disabled;
-  }
-
 
 }
