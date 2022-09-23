@@ -55,7 +55,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         title: 'Campaigns',
         type: 'basic',
         icon: 'heroicons_solid:speakerphone',
-        link: '/campaigns',
+        link: '/dashboards/finance',
         meta: "Avertisement Management"
     },
     {
