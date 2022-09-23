@@ -86,7 +86,7 @@
     <div class="flex flex-auto overflow-hidden">
         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
             <div class="grid">
-                <table *ngIf="campaignList.length > 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <table *ngIf="campaignList.length > 0; else noCampaigns" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="Type">
                         <th class="" mat-header-cell *matHeaderCellDef>Type</th>
                         <td mat-cell *matCellDef="let element">
@@ -182,6 +182,9 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                 </table>
+                <ng-template #noCampaigns>
+                    <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">There are no campaigns</div>
+                </ng-template>
             </div>
             <mat-paginator *ngIf="campaignList.length > 0"
                 class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent coustom-paginator-box"
