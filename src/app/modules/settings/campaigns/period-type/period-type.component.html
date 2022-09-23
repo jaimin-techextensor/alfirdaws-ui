@@ -92,7 +92,7 @@
                     <div class="flex flex-auto overflow-hidden">
                         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
                             <div class="grid">
-                                <table *ngIf="periodTypes.length > 0; else noCampagins" mat-table
+                                <table *ngIf="periodTypes.length > 0; else noCampaigns" mat-table
                                     [dataSource]="dataSource" class="mat-elevation-z8">
                                     <ng-container matColumnDef="Name">
                                         <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -141,7 +141,7 @@
                                         (click)="onRowClick($event, row)"></tr>
                                 </table>
 
-                                <ng-template #noCampagins>
+                                <ng-template #noCampaigns>
                                     <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">
                                         There are no period types available</div>
                                 </ng-template>

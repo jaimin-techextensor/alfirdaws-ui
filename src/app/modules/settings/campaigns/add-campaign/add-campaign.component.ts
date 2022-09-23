@@ -22,7 +22,7 @@ export class AddCampaignComponent implements OnInit {
   campaignData: any;
   imageSrc: string;
   imageData: string;
-  campaginTypes: any = [];
+  campaignTypes: any = [];
   periodTypes: any = [];
   reachTypes: any = [];
   message: any = "";
@@ -58,8 +58,8 @@ export class AddCampaignComponent implements OnInit {
     })
 
     if (this.router.url.includes("add-campaign")) {
-      this.campaignTypeService.getCampaginTypes().subscribe(data => {
-        this.campaginTypes = data.data;
+      this.campaignTypeService.getcampaignTypes().subscribe(data => {
+        this.campaignTypes = data.data;
       })
 
       this.periodTypeService.getPeriodTypes().subscribe(data => {
@@ -127,7 +127,7 @@ export class AddCampaignComponent implements OnInit {
       if (data.success == true) {
         this.campaignData = data.data;
         this.imageData = this.campaignData.visual;
-        this.campaginTypes = this.campaignData.campaignTypes;
+        this.campaignTypes = this.campaignData.campaignTypes;
         this.reachTypes = this.campaignData.reachTypes;
         this.periodTypes = this.campaignData.periodTypes;
         this.campaignForm.value["campaignId"] = this.campaignData.campaignId;

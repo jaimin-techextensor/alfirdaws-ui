@@ -22,17 +22,17 @@ export class CampaignTypeComponent implements OnInit {
 
   dataSource: any;
   displayedColumns: string[] = ['Campaign', 'Action'];
-  campaginTypes: any = [];
+  campaignTypes: any = [];
   campaignTypeForm: UntypedFormGroup;
-  isCampaginTypeSelected: boolean = false;
-  selecetedCampaginType: any;
-  campaginTypeId: string;
+  iscampaignTypeselected: boolean = false;
+  selecetedCampaignType: any;
+  campaignTypeId: string;
   message: string = "";
 
   ngOnInit(): void {
-    this._campaignTypeService.getCampaginTypes().subscribe(data => {
-      this.campaginTypes = data.data;
-      this.dataSource = new MatTableDataSource(this.campaginTypes);
+    this._campaignTypeService.getcampaignTypes().subscribe(data => {
+      this.campaignTypes = data.data;
+      this.dataSource = new MatTableDataSource(this.campaignTypes);
     })
 
     this.campaignTypeForm = this._formBuilder.group({
@@ -44,18 +44,18 @@ export class CampaignTypeComponent implements OnInit {
     this.router.navigate(['campaigns']);
   }
 
-  addCampaginType() {
-    this.isCampaginTypeSelected = false;
-    let campaginModel = {
+  addCampaignType() {
+    this.iscampaignTypeselected = false;
+    let campaignModel = {
       name: this.campaignTypeForm.value["name"],
     }
     if (this.campaignTypeForm.invalid) {
       return;
     }
-    this._campaignTypeService.createCampaignType(campaginModel).subscribe((data) => {
+    this._campaignTypeService.createCampaignType(campaignModel).subscribe((data) => {
       if (data.success == true) {
-        this.campaginTypes.push(campaginModel);
-        this.dataSource = new MatTableDataSource(this.campaginTypes);
+        this.campaignTypes.push(campaignModel);
+        this.dataSource = new MatTableDataSource(this.campaignTypes);
         this.campaignTypeForm.clearValidators();
         this.campaignTypeForm.reset();
         this.campaignTypeForm.enable();
@@ -66,24 +66,24 @@ export class CampaignTypeComponent implements OnInit {
     })
   }
 
-  editCampagin() {
+  editCampaign() {
     if (this.campaignTypeForm.invalid) {
       return;
     }
-    let campaginModel = {
+    let campaignModel = {
       name: this.campaignTypeForm.value["name"],
-      campaignTypeId: this.campaginTypeId
+      campaignTypeId: this.campaignTypeId
     }
-    this._campaignTypeService.updateCampaignType(campaginModel).subscribe((data: any) => {
+    this._campaignTypeService.updateCampaignType(campaignModel).subscribe((data: any) => {
       if (data.success == true) {
-        const index = this.campaginTypes.findIndex(a => a.campaignTypeId == this.campaginTypeId)
+        const index = this.campaignTypes.findIndex(a => a.campaignTypeId == this.campaignTypeId)
         if (index >= 0) {
-          let campaginData = {
+          let campaignData = {
             name: this.campaignTypeForm.value["name"],
-            campaignTypeId: this.campaginTypeId
+            campaignTypeId: this.campaignTypeId
           }
-          this.campaginTypes[index] = campaginData;
-          this.dataSource = new MatTableDataSource(this.campaginTypes);
+          this.campaignTypes[index] = campaignData;
+          this.dataSource = new MatTableDataSource(this.campaignTypes);
         }
       } else {
         this.message = data.message ? data.message : '';
@@ -93,16 +93,16 @@ export class CampaignTypeComponent implements OnInit {
   }
 
   cancel() {
-    this.isCampaginTypeSelected = false;
-    this.selecetedCampaginType = null;
-    this.campaginTypeId = "";
+    this.iscampaignTypeselected = false;
+    this.selecetedCampaignType = null;
+    this.campaignTypeId = "";
     this.campaignTypeForm.setValue({ name: null });
   }
 
-  deleteSelectedCampagin(id: string) {
+  deleteSelectedCampaign(id: string) {
     const conformation = this._fuseConfirmationService.open({
-      title: "Delete Campagin type??",
-      message: "Are you sure you want to delete this Campagin type",
+      title: "Delete Campaign type??",
+      message: "Are you sure you want to delete this Campaign type",
       actions: {
         confirm: {
           label: "Delete"
@@ -111,12 +111,12 @@ export class CampaignTypeComponent implements OnInit {
     })
     conformation.afterClosed().subscribe((result) => {
       if (result == "confirmed") {
-        this._campaignTypeService.deleteCampaginType(id).subscribe(data => {
+        this._campaignTypeService.deleteCampaignType(id).subscribe(data => {
           if (data.success == true) {
-            const index = this.campaginTypes.findIndex(a => a.campaignTypeId === id);
+            const index = this.campaignTypes.findIndex(a => a.campaignTypeId === id);
             if (index >= 0) {
-              this.campaginTypes.splice(index, 1);
-              this.dataSource = new MatTableDataSource(this.campaginTypes);
+              this.campaignTypes.splice(index, 1);
+              this.dataSource = new MatTableDataSource(this.campaignTypes);
               this.campaignTypeForm.clearValidators();
               this.campaignTypeForm.reset();
               this.campaignTypeForm.enable();
@@ -129,11 +129,11 @@ export class CampaignTypeComponent implements OnInit {
 
   onRowClick(event: any, rowData: any) {
     if (!(event.srcElement instanceof SVGElement)) {
-      this.isCampaginTypeSelected = true;//!this.visible;
+      this.iscampaignTypeselected = true;//!this.visible;
       if (rowData) {
-        this.selecetedCampaginType = rowData;
-        this.campaginTypeId = rowData.campaignTypeId
-        this.campaignTypeForm.setValue({ name: this.selecetedCampaginType.name });
+        this.selecetedCampaignType = rowData;
+        this.campaignTypeId = rowData.campaignTypeId
+        this.campaignTypeForm.setValue({ name: this.selecetedCampaignType.name });
       }
     }
   }

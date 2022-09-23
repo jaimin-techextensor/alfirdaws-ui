@@ -9,10 +9,10 @@ import { Observable, of, switchMap } from 'rxjs';
 
 export class CampaignService {
 
-  constructor(private _HttpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getCampaign(Id: string): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "campaigns/" + Id).pipe(
+    return this._httpClient.get(environment.APIUrl + "campaigns/" + Id).pipe(
       switchMap((response: any) => {
         return of(response)
       })
@@ -20,7 +20,7 @@ export class CampaignService {
   }
 
   createCampaign(data: any): Observable<any> {
-    return this._HttpClient.post(environment.APIUrl + "campaigns", data).pipe(
+    return this._httpClient.post(environment.APIUrl + "campaigns", data).pipe(
       switchMap((response: any) => {
         return of(response);
       })
@@ -28,26 +28,28 @@ export class CampaignService {
   }
 
   updateCampaign(data: any): Observable<any> {
-    return this._HttpClient.put(environment.APIUrl + "campaigns", data).pipe(
+    return this._httpClient.put(environment.APIUrl + "campaigns", data).pipe(
       switchMap((response: any) => {
         return of(response);
       })
     )
   }
 
-  getCampaginsList(): Observable<any> {
-    return this._HttpClient.get(environment.APIUrl + "campaigns").pipe(
+
+  deleteCampaignByUser(id: string): Observable<any> {
+    return this._httpClient.delete(environment.APIUrl + "campaigns/" + id).pipe(
       switchMap((response) => {
         return of(response)
       })
     )
   }
 
-  deleteCampaginByUser(id: string): Observable<any> {
-    return this._HttpClient.delete(environment.APIUrl + "campaigns/" + id).pipe(
-      switchMap((response) => {
-        return of(response)
+
+  getCampaignsList(pageIndex: number, pageSize: number, searchText: string): Observable<any> {
+    return this._httpClient.get(environment.APIUrl + "campaigns" + "?PageNumber=" + pageIndex + "&SearchText=" + searchText + "&PageSize=" + pageSize).pipe(
+      switchMap((response: any) => {
+        return of(response);
       })
-    )
+    );
   }
 }

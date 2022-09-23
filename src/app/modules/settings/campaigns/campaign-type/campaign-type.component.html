@@ -31,7 +31,7 @@
                 <ng-template mat-tab-label>
                     <span>Campaign Types </span>
                     <button mat-mini-fab [color]="'primary'" [ngStyle]="{transform: 'scale(0.7)'}">
-                        <span> {{campaginTypes?.length}}</span>
+                        <span> {{campaignTypes?.length}}</span>
                     </button>
                 </ng-template>
                 <div
@@ -54,16 +54,16 @@
                                                 </mat-error>
                                             </mat-form-field>
                                             <ng-container>
-                                                <button (click)="addCampaginType()" *ngIf="!isCampaginTypeSelected"
+                                                <button (click)="addCampaignType()" *ngIf="!iscampaignTypeselected"
                                                     class="ml-4" mat-flat-button color="primary">
                                                     <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
                                                     <span class="ml-2 mr-1">Add</span>
                                                 </button>
-                                                <button (click)="cancel()" *ngIf="isCampaginTypeSelected" class="ml-4"
+                                                <button (click)="cancel()" *ngIf="iscampaignTypeselected" class="ml-4"
                                                     mat-flat-button>
                                                     <span class="ml-2 mr-1">Cancel</span>
                                                 </button>
-                                                <button (click)="editCampagin()" *ngIf="isCampaginTypeSelected" name="upd"
+                                                <button (click)="editCampaign()" *ngIf="iscampaignTypeselected" name="upd"
                                                     class="ml-4" mat-flat-button [color]="'primary'">
                                                     <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
                                                     <span class="ml-2 mr-1">Update</span>
@@ -78,7 +78,7 @@
                     <div class="flex flex-auto overflow-hidden">
                         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
                             <div class="grid">
-                                <table *ngIf="campaginTypes.length > 0; else noCampaginTypes" mat-table
+                                <table *ngIf="campaignTypes.length > 0; else nocampaignTypes" mat-table
                                     [dataSource]="dataSource" class="mat-elevation-z8">
                                     <ng-container matColumnDef="Campaign">
                                         <th mat-header-cell *matHeaderCellDef>Campaign Types</th>
@@ -104,7 +104,7 @@
 
                                                 <mat-menu #summaryMenu="matMenu">
                                                     <button mat-menu-item
-                                                        (click)="deleteSelectedCampagin(element.campaignTypeId)">
+                                                        (click)="deleteSelectedCampaign(element.campaignTypeId)">
                                                         <mat-icon class="text-red-600"
                                                             svgIcon="heroicons_outline:folder-remove">
                                                         </mat-icon>
@@ -120,9 +120,9 @@
                                         (click)="onRowClick($event, row)"></tr>
                                 </table>
 
-                                <ng-template #noCampaginTypes>
+                                <ng-template #nocampaignTypes>
                                     <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">
-                                        There are no campagin types available</div>
+                                        There are no campaign types available</div>
                                 </ng-template>
 
                             </div>

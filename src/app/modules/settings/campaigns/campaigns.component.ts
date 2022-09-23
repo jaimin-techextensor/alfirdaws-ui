@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { checkValidPermission } from 'app/core/auth/auth-permission';
 import { CampaignService } from 'app/service/campaign.service';
 import { SettingService } from 'app/service/setting.service';
+import { PageRequestModel } from '../users/page-request';
 @Component({
   selector: 'app-campaigns',
   templateUrl: './campaigns.component.html',
@@ -22,9 +24,14 @@ export class CampaignsComponent implements OnInit {
     "IsActive",
     "Action"
   ];
-  campaginsList: any = [];
-  dataSource1: any;
+  campaignList: any = [];
   counterData: any;
+  campaignsListModel: PageRequestModel = new PageRequestModel();
+  searchTextForCampaign: any;
+  sanitizer: any;
+  isDeletePermission: boolean;
+  isAddPermission: boolean;
+  isEditPermission: boolean;
 
   constructor(
     private _location: Location,
@@ -42,13 +49,10 @@ export class CampaignsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.campaignService.getCampaginsList().subscribe(data => {
-      if (data.success == true) {
-        this.campaginsList = data.data;
-        this.dataSource = new MatTableDataSource(this.campaginsList);
-      }
-
-    })
+    this.getCampaignList(null, false);
+    this.isDeletePermission = checkValidPermission(this._router.url, 'delete');
+    this.isEditPermission = checkValidPermission(this._router.url, 'edit');
+    this.isAddPermission = checkValidPermission(this._router.url, 'add');
   }
 
   navigateBack() {
@@ -68,12 +72,12 @@ export class CampaignsComponent implements OnInit {
   }
 
   deleteCampaign(id: string) {
-    this.campaignService.deleteCampaginByUser(id).subscribe(data => {
+    this.campaignService.deleteCampaignByUser(id).subscribe(data => {
       if (data.success == true) {
-        const index = this.campaginsList.findIndex(a => a.campaignId == id);
+        const index = this.campaignList.findIndex(a => a.campaignId == id);
         if (index >= 0) {
-          this.campaginsList.splice(index, 1);
-          this.dataSource = new MatTableDataSource(this.campaginsList);
+          this.campaignList.splice(index, 1);
+          this.dataSource = new MatTableDataSource(this.campaignList);
         }
       }
     })
@@ -91,5 +95,39 @@ export class CampaignsComponent implements OnInit {
         localStorage.setItem("counter-data", JSON.stringify(this.counterData));
       }
     })
+  }
+
+  getCampaignList(event: any, isSearch: boolean = false) {
+    this.campaignsListModel.PageSize = event?.pageSize ? event.pageSize : this.campaignsListModel.PageSize;
+    this.campaignsListModel.PageNumber = event?.pageIndex >= 0 ? (event.pageIndex + 1) : this.campaignsListModel.PageNumber;
+    if (isSearch) {
+      if (this.searchTextForCampaign.length > 0 && this.searchTextForCampaign.length <= 2) {
+        return;
+      } else {
+        this.campaignsListModel.SearchText = this.searchTextForCampaign ? this.searchTextForCampaign : null;
+      }
+    }
+    else {
+      this.campaignsListModel.SearchText = null;
+    }
+    this.campaignService.getCampaignsList(this.campaignsListModel.PageNumber, this.campaignsListModel.PageSize, this.campaignsListModel.SearchText).subscribe(res => {
+      if (res.success == true) {
+        if (res.pageInfo) {
+          if (event?.pageIndex >= 0) {
+            this.campaignsListModel.PageNumber = res.pageInfo.currentPage - 1;
+          } else {
+            this.campaignsListModel.PageNumber = res.pageInfo.currentPage;
+          }
+          this.campaignsListModel.PageSize = res.pageInfo.pageSize;
+          this.campaignsListModel.TotalPages = res.pageInfo.totalPages;
+          this.campaignsListModel.TotalCount = res.pageInfo.totalCount;
+        }
+        this.campaignList = res.data;
+        this.dataSource = new MatTableDataSource(this.campaignList);
+      }
+      else {
+        console.log("Data not found");
+      }
+    });
   }
 }

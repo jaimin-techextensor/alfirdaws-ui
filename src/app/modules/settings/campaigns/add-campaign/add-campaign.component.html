@@ -82,7 +82,7 @@
                                                 <mat-label>Select a campaign type</mat-label>
                                                 <mat-select [formControlName]="'campaigntype'"
                                                     (selectionChange)="selectedCampaignType($event)">
-                                                    <mat-option *ngFor="let campaign of campaginTypes"
+                                                    <mat-option *ngFor="let campaign of campaignTypes"
                                                         [value]="campaign.campaignTypeId">
                                                         {{campaign.name}}
                                                     </mat-option>
