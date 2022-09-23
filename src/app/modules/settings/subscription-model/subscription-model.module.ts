@@ -18,7 +18,8 @@ import { SubscriptionModelComponent } from './subscription-model.component';
 
 const subscriptModelRought: Route[] = [
   { path: "", component: SubscriptionModelComponent },
-  { path: "add-subscription-model", component: AddSubscriptionModelComponent }
+  { path: "add-subscription-model", component: AddSubscriptionModelComponent },
+  { path: "edit-subscription-modal/:subscriptionModelId", component: AddSubscriptionModelComponent }
 ]
 
 @NgModule({

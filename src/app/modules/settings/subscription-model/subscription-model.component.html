@@ -108,7 +108,8 @@
                                 </button>
 
                                 <mat-menu #summaryMenu="matMenu" [hidden]="!(isEditPermission || isDeletePermission)">
-                                    <button *ngIf="isEditPermission" mat-menu-item>
+                                    <button *ngIf="isEditPermission" mat-menu-item
+                                        [routerLink]="['edit-subscription-modal', element.subscriptionModelId]">
                                         <mat-icon svgIcon="heroicons_outline:pencil-alt">
                                         </mat-icon>
                                         <span>Edit</span>
