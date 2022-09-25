@@ -134,4 +134,17 @@ export class CategoriesService {
       );
     }
 
+ /*
+    Activate or De-activate  a subcategory by its unique id from the the back-end 
+  */
+
+    ActivateSubCategory(Id:string, Active:boolean){
+      return this._httpClient.put(environment.APIUrl + 'categories/subcategories/'+Id + '?isActive=' + Active, null).pipe(
+        switchMap((response: any) => {
+          return of(response);
+        })
+      );
+    }
+
+
 }

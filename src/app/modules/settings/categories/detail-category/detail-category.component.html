@@ -45,15 +45,19 @@
                     <!--Sub Sequence-->
                     <div class="w-6 ">{{ sub.sequence }}</div>
                     <!--Sub Icon-->
-                    <img class="object-cover w-full h-full  w-15 h-15" [src]="sub.icon" />
+                    <img class="object-cover   w-15 h-15" [src]="sub.icon" />
                     <!--Sub Name-->
                     <div class="ml-6 leading-6 w-40">{{ sub.name }}</div>
                     <!--Sub Active-->
                     <ng-container *ngIf="sub.active">
-                        <mat-icon class="text-green-400 icon-size-6 items-end" [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        <button  mat-mini-fab color="white" class="text-green-400" #tooltip="matTooltip" matTooltip="Activate/De-activate"  (click)="toggleActivationSubCategory(sub.subCategoryId)" >
+                            <mat-icon class="text-green-400 icon-size-5 items-end" [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </button>
                     </ng-container>
                     <ng-container *ngIf="!sub.active">
-                        <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                        <button  mat-mini-fab  color="white" class="text-red-400"  #tooltip="matTooltip" matTooltip="Activate/De-activate" (click)="toggleActivationSubCategory(sub.subCategoryId)">
+                            <mat-icon class="text-red-400 icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                        </button>
                     </ng-container>
                 </div>
             </ng-container>  

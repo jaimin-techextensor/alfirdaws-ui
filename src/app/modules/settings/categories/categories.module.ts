@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule} from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,6 +37,7 @@ import { DetailCategoryComponent } from 'app/modules/settings/categories/detail-
         RouterModule.forChild(categoriesRoutes),
         MatIconModule,
         MatButtonModule,
+        MatTooltipModule,
         MatFormFieldModule,
         MatSortModule,
         MatPaginatorModule,
