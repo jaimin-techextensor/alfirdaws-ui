@@ -83,6 +83,7 @@ export class AddressTypeComponent implements OnInit {
         if (index >= 0) {
           this.addressTypes[index] = addressTypeModel;
           this.dataSource = new MatTableDataSource(this.addressTypes);
+          this.isAddressTypeSelected = false;
           this.addressTypeForm = this.formBuilder.group({
             name: ["", [Validators.required]]
           });
