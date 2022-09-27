@@ -97,7 +97,7 @@
                                                         [svgIcon]="'heroicons_solid:chevron-down'">
                                                     </mat-icon>
                                                 </button>
-                                                <ng-container *ngIf="isDeletePermission">
+                                                <ng-container [hidden]="!isDeletePermission">
                                                     <mat-menu #summaryMenu="matMenu">
                                                         <button mat-menu-item *ngIf="isDeletePermission"
                                                             (click)="removeAddressType(element.addressTypeId)">
