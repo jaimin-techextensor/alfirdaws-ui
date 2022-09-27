@@ -70,15 +70,36 @@
                                                 </mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field class="w-full">
+                                            <!-- <mat-form-field class="w-full">
                                                 <mat-label>User type</mat-label>
                                                 <input matInput [formControlName]="'userType'">
                                                 <mat-error
                                                     *ngIf="subscriptionModalForm.get('userType').hasError('required')">
                                                     User type is required
                                                 </mat-error>
-                                            </mat-form-field>
+                                            </mat-form-field> -->
 
+                                            <mat-form-field class="w-full ">
+                                                <mat-label>Select a User type</mat-label>
+                                                <mat-select required [formControlName]="'userType'">
+                                                    <mat-option [value]="'Internet'">
+                                                        Internet
+                                                    </mat-option>
+                                                    <mat-option [value]="'Consumers'">
+                                                        Consumers
+                                                    </mat-option>
+                                                    <mat-option [value]="'Small Business'">
+                                                        Small Business
+                                                    </mat-option>
+                                                    <mat-option [value]="'Large Business'">
+                                                        Large Business
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error
+                                                    *ngIf="subscriptionModalForm.get('userType').hasError('required')">
+                                                    Campaign type is required
+                                                </mat-error>
+                                            </mat-form-field>
                                             <mat-form-field class="w-full">
                                                 <mat-label>Subscription type</mat-label>
                                                 <input matInput [formControlName]="'subscriptionType'">
@@ -103,7 +124,7 @@
 
                                                     <mat-checkbox class="" [color]="'primary'" #checkbox
                                                         [formControlName]="'unlimitedAds'">
-                                                        Unlimited
+                                                        Unlimited 
                                                     </mat-checkbox>
 
                                                 </div>
@@ -117,15 +138,15 @@
 
                                                     <mat-checkbox class="mr-4" [color]="'primary'"
                                                         [formControlName]="'unlimitedPictures'">
-                                                        Unlimited
+                                                        Unlimited 
                                                     </mat-checkbox>
 
                                                 </div>
                                                 <div class="input-layout-box">
-                                                    <mat-slide-toggle class="" [formControlName]="'active'">
-                                                        {{subscriptionModalForm.get('active').value === true ? 'Active'
-                                                        :'Disabled'}}
-                                                    </mat-slide-toggle>
+                                                    <mat-checkbox class="" [color]="'primary'" #checkbox
+                                                    [formControlName]="'active'">
+                                                    Active
+                                                </mat-checkbox>
 
                                                 </div>
                                             </div>
@@ -138,16 +159,16 @@
                                         <div class="coustom-flex-layout mt-3 mb-3">
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'searchEngine'">
+                                                [formControlName]="'searchEngine'" [(ngModel)]="subcriptionModalData.isSearchEngine">
                                                 Search engine
                                             </mat-checkbox>
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'basicCampaigns'">
+                                                [formControlName]="'basicCampaigns'" [(ngModel)]="subcriptionModalData.isBasicCampaigns">
                                                 Basic campaigns
                                             </mat-checkbox>
 
-                                            <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'trends'">
+                                            <mat-checkbox class="mb-3" [color]="'primary'" [formControlName]="'trends'"  [(ngModel)]="subcriptionModalData.isTrends" >
                                                 Trends
                                             </mat-checkbox>
 
@@ -155,17 +176,17 @@
                                         <div class="coustom-flex-layout mb-3">
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'vouchers'">
+                                                [formControlName]="'vouchers'"  [(ngModel)]="subcriptionModalData.isVouchers" >
                                                 Vouchers
                                             </mat-checkbox>
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'extendedCampaigns'">
+                                                [formControlName]="'extendedCampaigns'"  [(ngModel)]="subcriptionModalData.isExtendedCampaigns" >
                                                 Extended campaigns
                                             </mat-checkbox>
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'partnerships'">
+                                                [formControlName]="'partnerships'"  [(ngModel)]="subcriptionModalData.isPartnership" >
                                                 Partnerships
                                             </mat-checkbox>
 
@@ -173,17 +194,17 @@
                                         <div class="coustom-flex-layout mb-3">
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'socialMedia'">
+                                                [formControlName]="'socialMedia'"  [(ngModel)]="subcriptionModalData.isSocialMedia" >
                                                 Social Media
                                             </mat-checkbox>
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'statistics'">
+                                                [formControlName]="'statistics'"  [(ngModel)]="subcriptionModalData.isStatistics" >
                                                 Statistics
                                             </mat-checkbox>
 
                                             <mat-checkbox class="mb-3" [color]="'primary'"
-                                                [formControlName]="'onlineSupport'">
+                                                [formControlName]="'onlineSupport'"  [(ngModel)]="subcriptionModalData.isOnlineSupport" >
                                                 Online support
                                             </mat-checkbox>
 

@@ -58,7 +58,7 @@ export class CampaignsComponent implements OnInit {
   }
 
   navigateBack() {
-    this._location.back();
+    this._router.navigateByUrl("settings");
   }
 
   navigateToCampaignType() {
