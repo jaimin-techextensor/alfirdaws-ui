@@ -57,7 +57,8 @@ export class AddressTypeComponent implements OnInit {
     };
     this.addressTypeService.addAddressType(addressTypeModel).subscribe(data => {
       if (data.success == true) {
-        this.addressTypes.push(addressTypeModel);
+        var addressType = data?.data;
+        this.addressTypes.push(addressType);
         this.dataSource = new MatTableDataSource(this.addressTypes);
         this.addressTypeForm = this.formBuilder.group({
           name: ["", [Validators.required]]
