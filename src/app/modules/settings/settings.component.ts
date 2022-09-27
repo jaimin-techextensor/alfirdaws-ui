@@ -53,7 +53,12 @@ export class SettingsComponent implements OnInit {
   navigateToCampaigns() {
     this.router.navigateByUrl('/campaigns');
   }
+  
   navigateTosubscription() {
     this.router.navigateByUrl('/subscription-model');
+  }
+
+  navigateToAddressType() {
+    this.router.navigateByUrl('/address-type');
   }
 }

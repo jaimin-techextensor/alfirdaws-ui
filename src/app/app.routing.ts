@@ -84,8 +84,9 @@ export const appRoutes: Route[] = [
             { path: 'categories', title: 'Categories', loadChildren: () => import('app/modules/settings/categories/categories.module').then(m => m.CategoriesModule) },
             { path: 'countries', title: 'Countries', loadChildren: () => import('app/modules/settings/countries/countries.modules').then(m => m.CountriesModule) },
             { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) },
-            { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule)},
-            { path: 'subscription-model', title: 'Subscription Model', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/subscription-model/subscription-model.module').then(m => m.SubscriptonModelModule) }
+            { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule) },
+            { path: 'subscription-model', title: 'Subscription Model', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/subscription-model/subscription-model.module').then(m => m.SubscriptonModelModule) },
+            { path: 'address-type', title: 'Address Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/address-type/address-type.module").then(m => m.AddressTypeModule) }
         ]
     }
 ];
