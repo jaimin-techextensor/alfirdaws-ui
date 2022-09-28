@@ -87,7 +87,8 @@ export const appRoutes: Route[] = [
             { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule) },
             { path: 'subscription-model', title: 'Subscription Model', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/subscription-model/subscription-model.module').then(m => m.SubscriptonModelModule) },
             { path: 'address-type', title: 'Address Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/address-type/address-type.module").then(m => m.AddressTypeModule) },
-            { path: 'payment-type', title: 'Payment Type', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/payment-type/payment-type.module').then(m => m.PaymentTypeModule) }
+            { path: 'payment-type', title: 'Payment Type', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/payment-type/payment-type.module').then(m => m.PaymentTypeModule) },
+            { path: 'invoice-type', title: "Invoice Type", canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/invoice-type/invoice-type.module').then(m => m.InvoiceTypeModule) }
         ]
     }
 ];
