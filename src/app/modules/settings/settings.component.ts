@@ -61,4 +61,8 @@ export class SettingsComponent implements OnInit {
   navigateToAddressType() {
     this.router.navigateByUrl('/address-type');
   }
+  
+  navigateToPaymentType() {
+    this.router.navigateByUrl('/payment-type');
+  }
 }

@@ -86,7 +86,8 @@ export const appRoutes: Route[] = [
             { path: 'dashboard', title: 'Dashboard', loadChildren: () => import('app/modules/admin/example/dashboard/dashboard.module').then(m => m.DashboardModule) },
             { path: 'campaigns', title: 'Campaigns', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/campaigns/campaign.module').then(m => m.CampaignsModule) },
             { path: 'subscription-model', title: 'Subscription Model', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/subscription-model/subscription-model.module').then(m => m.SubscriptonModelModule) },
-            { path: 'address-type', title: 'Address Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/address-type/address-type.module").then(m => m.AddressTypeModule) }
+            { path: 'address-type', title: 'Address Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/address-type/address-type.module").then(m => m.AddressTypeModule) },
+            { path: 'payment-type', title: 'Payment Type', canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/payment-type/payment-type.module').then(m => m.PaymentTypeModule) }
         ]
     }
 ];
