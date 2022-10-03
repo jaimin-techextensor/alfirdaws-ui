@@ -35,6 +35,48 @@
                 </ng-template>
                 <div
                     class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg">
+                    <div
+                        class="sm:inset-0 flex flex-col flex-auto min-w-0 flex-auto overflow-hidden sm:overflow-y-auto bg-card dark:bg-transparent border-b border-t border-l border-r shadow-lg ">
+                        <div class="flex flex-col">
+                            <form class="flex flex-col w-full" [formGroup]="invoiceTypeForm">
+                                <div class="flex flex-col sm:flex-row p-8">
+                                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                        <div class="flex flex-row items-center ">
+                                            <mat-form-field class="w-full mr-3">
+                                                <mat-label>Invoice Type</mat-label>
+                                                <input matInput [formControlName]="'name'">
+                                                <mat-error *ngIf="invoiceTypeForm.get('name').hasError('required')">
+                                                    Invoice Type is required
+                                                </mat-error>
+                                                <mat-error *ngIf="invoiceTypeForm.get('name').hasError('duplicate')">
+                                                    {{message}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <ng-container>
+                                                <button class="ml-4" mat-flat-button color="primary"
+                                                    (click)="addInvoiceType()"
+                                                    *ngIf="!isSelectedInvoiceType">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                    <span class="ml-2 mr-1">Add</span>
+                                                </button>
+                                                <button (click)="cancel()"
+                                                    *ngIf="isSelectedInvoiceType && isEditPermission" class="ml-4"
+                                                    mat-flat-button>
+                                                    <span class="ml-2 mr-1">Cancel</span>
+                                                </button>
+                                                <button (click)="editInvoiceType()"
+                                                    *ngIf="isSelectedInvoiceType && isEditPermission" name="update"
+                                                    class="ml-4" mat-flat-button [color]="'primary'">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                    <span class="ml-2 mr-1">Update</span>
+                                                </button>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="flex flex-auto overflow-hidden">
                         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
                             <div class="grid">
@@ -59,13 +101,25 @@
                                                         [svgIcon]="'heroicons_solid:chevron-down'">
                                                     </mat-icon>
                                                 </button>
-
+                                                <ng-container>
+                                                    <mat-menu #summaryMenu="matMenu">
+                                                        <button mat-menu-item
+                                                            *ngIf="isEditPermission && isDeletePermission"
+                                                            (click)="removeInvoiceType(element.invoiceTypeId)">
+                                                            <mat-icon class="text-red-600"
+                                                                svgIcon="heroicons_outline:folder-remove">
+                                                            </mat-icon>
+                                                            <span class="text-red-600">Remove</span>
+                                                        </button>
+                                                    </mat-menu>
+                                                </ng-container>
                                             </div>
                                         </td>
                                     </ng-container>
 
                                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        (click)="onRowClick($event, row)"></tr>
                                 </table>
 
                                 <ng-template #noInvoiceTypes>
