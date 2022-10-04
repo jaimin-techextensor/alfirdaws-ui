@@ -69,4 +69,8 @@ export class SettingsComponent implements OnInit {
   navigateToInvoiceType() {
     this.router.navigateByUrl('/invoice-type');
   }
+
+  navigateToVatType() {
+    this.router.navigateByUrl('/vat-type');
+  }
 }
