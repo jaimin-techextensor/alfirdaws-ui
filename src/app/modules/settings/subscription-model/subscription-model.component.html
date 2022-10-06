@@ -23,16 +23,10 @@
 
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
             <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-                <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
-                    <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'">
-                    </mat-icon>
-                    <input matInput [autocomplete]="'off'" [placeholder]="'Search Campaign'"
-                        [(ngModel)]="searchTextForSubscription" (ngModelChange)="getSubscriptionModelList(null,true)"
-                        [ngModelOptions]="{ standalone: true }" />
-                </mat-form-field>
+                
                 <button class="ml-4" mat-flat-button [color]="'primary'" [routerLink]="['add-subscription-model']">
                     <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                    <span class="ml-2 mr-1">Create campaign</span>
+                    <span class="ml-2 mr-1">Create subscription</span>
                 </button>
                 <button (click)="navigateBack()" class="ml-4" mat-flat-button color="accent">
                     <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
@@ -48,14 +42,17 @@
                     class="mat-elevation-z8">
                     <ng-container matColumnDef="Name">
                         <th mat-header-cell *matHeaderCellDef>Name</th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.name }}
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
+                            <div class="flex flex-auto items-center min-w-5">
+                                <mat-icon [svgIcon]="'heroicons_outline:collection'"></mat-icon>
+                                <span class="ml-1.5 "> <b>{{ element.name }}</b></span> 
+                              </div>   
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Type">
                         <th class="" mat-header-cell *matHeaderCellDef>Type</th>
-                        <td mat-cell *matCellDef="let element">
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             <div class="flex flex-auto items-center min-w-5">
                                 <span class="ml-1.5 "> {{ element.subscriptionType }}</span>
                             </div>
@@ -64,28 +61,28 @@
 
                     <ng-container matColumnDef="UserType">
                         <th mat-header-cell *matHeaderCellDef>User Type</th>
-                        <td mat-cell *matCellDef="let element">
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             {{ element.userType }}
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Ads">
-                        <th mat-header-cell *matHeaderCellDef>No. of Ads</th>
-                        <td mat-cell *matCellDef="let element">
+                        <th mat-header-cell *matHeaderCellDef class="th-right">No. of Ads</th>
+                        <td mat-cell *matCellDef="let element" class="th-right" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             {{ element.nrOfAds }}
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Pictures">
-                        <th mat-header-cell *matHeaderCellDef>No of Pictures</th>
-                        <td mat-cell *matCellDef="let element">
+                        <th mat-header-cell *matHeaderCellDef class="th-right">No of Pictures</th>
+                        <td mat-cell *matCellDef="let element" class="th-right" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             {{ element.nrOfPictures }}
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Active">
-                        <th mat-header-cell *matHeaderCellDef>Active</th>
-                        <td mat-cell *matCellDef="let element">
+                        <th mat-header-cell *matHeaderCellDef class="th-center">Active</th>
+                        <td mat-cell *matCellDef="let element" class="th-center" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             <ng-container *ngIf="element.active">
                                 <mat-icon class="text-green-400 icon-size-6" [svgIcon]="'heroicons_solid:check'">
                                 </mat-icon>
@@ -98,8 +95,8 @@
                     </ng-container>
 
                     <ng-container matColumnDef="Action">
-                        <th mat-header-cell *matHeaderCellDef>Action</th>
-                        <td mat-cell *matCellDef="let element">
+                        <th mat-header-cell *matHeaderCellDef class="th-center">Action</th>
+                        <td mat-cell *matCellDef="let element" class="th-center" [ngClass]="{'bg-primary-50 ': selectedRow?.subscriptionModelId == element.subscriptionModelId}">
                             <div class="hidden sm:block">
                                 <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
                                     [matMenuTriggerFor]="summaryMenu">
@@ -116,7 +113,7 @@
                                     </button>
                                     <button mat-menu-item
                                         (click)="deleteSubscriptionModel(element.subscriptionModelId)">
-                                        <mat-icon svgIcon="heroicons_outline:user-remove">
+                                        <mat-icon svgIcon="mat_solid:delete_outline">
                                         </mat-icon>
                                         <span>Delete</span>
                                     </button>
@@ -126,7 +123,7 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick($event, row)"></tr>
 
                 </table>
                 <ng-template #noSubscriptionModel>

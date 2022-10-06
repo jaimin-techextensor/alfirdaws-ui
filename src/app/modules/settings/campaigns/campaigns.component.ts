@@ -34,6 +34,9 @@ export class CampaignsComponent implements OnInit {
   isAddPermission: boolean;
   isEditPermission: boolean;
 
+  visible: boolean = false;
+  selectedRow: any;
+
   constructor(
     private _location: Location,
     private campaignService: CampaignService,
@@ -146,4 +149,17 @@ export class CampaignsComponent implements OnInit {
       }
     });
   }
+
+   /*
+    When the user clicks on a specific ro in the table
+  */
+    onRowClick(event: any, rowData: any) {
+      if (!(event.srcElement instanceof SVGElement)) {
+        this.visible = true;//!this.visible;
+        if (rowData) {
+          this.selectedRow = rowData;
+        }
+      }
+    }
+    
 }

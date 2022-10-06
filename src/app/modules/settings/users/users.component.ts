@@ -23,6 +23,26 @@ import { checkValidPermission } from 'app/core/auth/auth-permission';
           background-color: #F1F5F9;
           cursor:pointer;
         }
+        .mat-column-Name {
+          width: 300px;
+        }
+        .mat-column-UserName {
+          width: 150px;
+        }
+        .mat-column-Picture {
+          width: 100px;
+        }
+        
+        .mat-column-Action {
+          width: 100px;
+        }
+        .mat-column-IsActive {
+          width: 100px;
+        }
+        .mat-column-LastLoginTime {
+          width: 180px;
+        }
+       
         .inventory-grid {
             grid-template-columns: 48px auto 40px;
 

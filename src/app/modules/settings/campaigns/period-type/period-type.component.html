@@ -4,7 +4,7 @@
 
         <div>
             <div class="flex flex-auto items-center min-w-0">
-                <mat-icon svgIcon="heroicons_outline:duplicate"></mat-icon>
+                <mat-icon class="icon-size-10" svgIcon="heroicons_outline:calendar"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
                         <div
@@ -12,6 +12,11 @@
                             Period Types
                         </div>
                     </ng-container>
+                    <div class="flex items-center">
+                        <div class="ml-1.0 leading-0 truncate text-secondary">
+                          Manage period types
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -96,7 +101,7 @@
                                     [dataSource]="dataSource" class="mat-elevation-z8">
                                     <ng-container matColumnDef="Name">
                                         <th mat-header-cell *matHeaderCellDef>Name</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ': selectedPeriodType?.periodTypeId == element.periodTypeId}">
                                             <div class="flex flex-auto items-center min-w-5">
                                                 <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
                                                 <span class="ml-1.5 "> <b>{{ element.name }}</b></span>
@@ -105,15 +110,15 @@
                                     </ng-container>
 
                                     <ng-container matColumnDef="NumberOfDays">
-                                        <th mat-header-cell *matHeaderCellDef>Number of days</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <th mat-header-cell *matHeaderCellDef class="th-right">Number of days</th>
+                                        <td mat-cell *matCellDef="let element" class="th-right" [ngClass]="{'bg-primary-50 ': selectedPeriodType?.periodTypeId == element.periodTypeId}">
                                             <div class="hidden sm:block">{{element.nrOfDays}}</div>
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="Action">
-                                        <th mat-header-cell *matHeaderCellDef>Action</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <th mat-header-cell *matHeaderCellDef class="th-center">Action</th>
+                                        <td mat-cell *matCellDef="let element" class="th-center" [ngClass]="{'bg-primary-50 ': selectedPeriodType?.periodTypeId == element.periodTypeId}">
                                             <div class="hidden sm:block">
 
                                                 <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button

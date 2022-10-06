@@ -36,6 +36,9 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     subcategoriesList: any[] = [];
     displayedColumns: string[] = ['Icon', 'Sequence', 'Name',  'Active', 'Action'];
     dataSource: any;
+
+    visible: boolean = false;
+    selectedRow: any;
     
     alert: { type: FuseAlertType; message: string } = {
         type: 'success',
@@ -265,6 +268,18 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
         var j= this.categoryForm;
     }
 
+
+    // -------------------------------------------------------------------------
+    //  When the user clicks on a specific ro in the table
+    // -------------------------------------------------------------------------
+    onRowClick(event: any, rowData: any) {
+      if (!(event.srcElement instanceof SVGElement)) {
+        this.visible = true;//!this.visible;
+        if (rowData) {
+          this.selectedRow = rowData;
+        }
+      }
+    }
 
     ngOnDestroy(){
     }

@@ -20,6 +20,9 @@ export class ModlsComponent implements OnInit {
     displayedColumns: string[] = ['Name', 'Description'];
     dataSource: any;
 
+    visible: boolean = false;
+    selectedRow: any;
+
     searchTextForModerator: any;
     alert: { type: FuseAlertType; message: string } = {
              type: 'success',
@@ -64,5 +67,16 @@ export class ModlsComponent implements OnInit {
     });
   }
 
+  /*
+    When the user clicks on a specific ro in the table
+  */
+    onRowClick(event: any, rowData: any) {
+      if (!(event.srcElement instanceof SVGElement)) {
+        this.visible = true;//!this.visible;
+        if (rowData) {
+          this.selectedRow = rowData;
+        }
+      }
+    }
 
 }

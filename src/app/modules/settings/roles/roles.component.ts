@@ -27,6 +27,10 @@ export class RolesComponent implements OnInit {
   dataSource: any;
   pageEvent: PageEvent;
 
+  visible: boolean = false;
+  selectedRow: any;
+  
+
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
     message: ''
@@ -129,5 +133,17 @@ export class RolesComponent implements OnInit {
         })
       }
     });
+  }
+
+  /*
+    When the user clicks on a specific ro in the table
+  */
+  onRowClick(event: any, rowData: any) {
+    if (!(event.srcElement instanceof SVGElement)) {
+      this.visible = true;//!this.visible;
+      if (rowData) {
+        this.selectedRow = rowData;
+      }
+    }
   }
 }

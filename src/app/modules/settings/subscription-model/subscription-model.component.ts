@@ -31,6 +31,9 @@ export class SubscriptionModelComponent implements OnInit {
   isEditPermission = false;
   isAddPermission = false;
 
+  visible: boolean = false;
+  selectedRow: any;
+
   constructor(
     private _router: Router,
     private _location: Location,
@@ -103,4 +106,16 @@ export class SubscriptionModelComponent implements OnInit {
       }
     });
   }
+
+   /*
+    When the user clicks on a specific ro in the table
+  */
+    onRowClick(event: any, rowData: any) {
+      if (!(event.srcElement instanceof SVGElement)) {
+        this.visible = true;//!this.visible;
+        if (rowData) {
+          this.selectedRow = rowData;
+        }
+      }
+    }
 }
