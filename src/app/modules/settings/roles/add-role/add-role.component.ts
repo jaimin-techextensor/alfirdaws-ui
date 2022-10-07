@@ -30,6 +30,9 @@ export class AddRoleComponent implements OnInit {
         message: ''
     };
 
+    visible: boolean = false;
+    selectedRow: any;
+
     constructor(private _location: Location,
         private _formBuilder: UntypedFormBuilder,
         private _rolesService: RolesService,
@@ -208,4 +211,14 @@ export class AddRoleComponent implements OnInit {
             this.dataSource = new MatTableDataSource(this.rolePermissions);
         })
     }
+
+
+    onRowClick(event: any, rowData: any) {
+        if (!(event.srcElement instanceof SVGElement)) {
+          this.visible = true;//!this.visible;
+          if (rowData) {
+            this.selectedRow = rowData;
+          }
+        }
+      }
 }
