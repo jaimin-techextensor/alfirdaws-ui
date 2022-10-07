@@ -40,6 +40,9 @@ export class AddUserComponent implements OnInit {
   selectedRoleId: string;
   selectedRoleName: string;
 
+  visible: boolean = false;
+  selectedRow: any;
+
   isEditMode : boolean=false;
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
@@ -316,4 +319,16 @@ export class AddUserComponent implements OnInit {
     
     console.log(selectedData);
   }
+
+
+  onRowClick(event: any, rowData: any) {
+    if (!(event.srcElement instanceof SVGElement)) {
+      
+      this.visible = true;//!this.visible;
+      if (rowData) {
+        this.selectedRow = rowData;
+      }
+    }
+  }
+
 }

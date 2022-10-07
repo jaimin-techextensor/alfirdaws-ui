@@ -253,9 +253,9 @@
                         mat-menu-item 
                         (click)="deleteSelectedUser(element.userId)"
                         >
-                          <mat-icon svgIcon="heroicons_outline:user-remove">
+                          <mat-icon svgIcon="mat_solid:delete_outline">
                           </mat-icon>
-                          <span>Delete</span>
+                          <span>Remove</span>
                         </button>
                         <mat-divider class="my-2"></mat-divider>
                         <ng-container *ngIf="!element.active && isEditPermission">
