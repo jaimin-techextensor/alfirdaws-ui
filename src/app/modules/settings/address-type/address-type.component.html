@@ -4,7 +4,7 @@
 
         <div>
             <div class="flex flex-auto items-center min-w-0">
-                <mat-icon svgIcon="mat_outline:location_on" class="user_mat-icon"></mat-icon>
+                <mat-icon  svgIcon="mat_outline:location_on" class="icon-size-10"></mat-icon>
                 <div class="flex flex-col min-w-0 ml-4">
                     <ng-container>
                         <div
@@ -84,7 +84,7 @@
                                     [dataSource]="dataSource" class="mat-elevation-z8">
                                     <ng-container matColumnDef="AddressType">
                                         <th mat-header-cell *matHeaderCellDef>Address Types</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ':addressTypeId == element.addressTypeId}">
                                             <div class="flex flex-auto items-center min-w-5">
                                                 <mat-icon [svgIcon]="'mat_outline:location_on'"></mat-icon>
                                                 <span class="ml-1.5 "> <b>{{ element.name }}</b></span>
@@ -94,7 +94,7 @@
 
                                     <ng-container matColumnDef="Action">
                                         <th mat-header-cell *matHeaderCellDef>Action</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'bg-primary-50 ':addressTypeId == element.addressTypeId}">
                                             <div class="hidden sm:block">
                                                 <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
                                                     [matMenuTriggerFor]="summaryMenu">
@@ -106,10 +106,10 @@
                                                     <mat-menu #summaryMenu="matMenu">
                                                         <button mat-menu-item *ngIf="isDeletePermission"
                                                             (click)="removeAddressType(element.addressTypeId)">
-                                                            <mat-icon class="text-red-600"
-                                                                svgIcon="heroicons_outline:folder-remove">
+                                                            <mat-icon class="text-grey-600"
+                                                                svgIcon="mat_solid:delete_outline">
                                                             </mat-icon>
-                                                            <span class="text-red-600">Remove</span>
+                                                            <span class="text-grey-600">Remove</span>
                                                         </button>
                                                     </mat-menu>
                                                 </ng-container>

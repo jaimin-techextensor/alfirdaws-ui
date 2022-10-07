@@ -19,6 +19,7 @@ export class SubscriptionModelComponent implements OnInit {
   dataSource: any;
   searchTextForSubscription: string = null;
   displayedColumns = [
+    "Visual",
     "Name",
     "Type",
     "UserType",

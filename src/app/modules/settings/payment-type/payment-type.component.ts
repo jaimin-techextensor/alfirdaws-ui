@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class PaymentTypeComponent implements OnInit {
   paymentTypes: any = [];
-  displayedColumns = ["PaymentType", "Icon", "Action"];
+  displayedColumns = [ "Icon", "PaymentType", "Action"];
   dataSource: any;
   paymentTypeForm: UntypedFormGroup;
   imageData: string;
