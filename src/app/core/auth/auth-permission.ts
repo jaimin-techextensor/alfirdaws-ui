@@ -1,6 +1,6 @@
 export function getModule(route: string) {
     if (route.includes('role') || route.includes('settings') || route.includes('user') || route.includes('categories') || route.includes('category') || route.includes('countries')
-        || route.includes('country') || route.includes('campaign') || route.includes('subscription-model') || route.includes('address-type') || route.includes('invoice-type') || route.includes('vat-type') || route.includes('payment-type')) {
+        || route.includes('country') || route.includes('campaign') || route.includes('subscription-model') || route.includes('address-type') || route.includes('invoice-type') || route.includes('vat-type') || route.includes('payment-type') || route.includes('price-model')) {
         return 'Settings';
     } else if (route.includes('dashboard')) {
         return 'Dashboard';

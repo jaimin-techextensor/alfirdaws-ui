@@ -26,7 +26,8 @@
                     </ng-container>
                 </div>
                 <div class="flex flex-auto">
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"  (click)="navigateToUsers();">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToUsers();">
 
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:user" class="user_mat-icon"></mat-icon>
@@ -37,16 +38,17 @@
                                 <ng-container *transloco="let t; read:'settings'">
                                     <p>{{ t('users-registered') }}</p>
                                 </ng-container>
-                                
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"  (click)="navigateToRoles();">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToRoles();">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:user-group" class="user_mat-icon"></mat-icon>
                         </div>
-                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label" >
+                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.rolesCount}}</div>
                             <div class="text-md text-secondary">
                                 <ng-container *transloco="let t; read:'settings'">
@@ -56,7 +58,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToModules();">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToModules();">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:collection" class="user_mat-icon"></mat-icon>
                         </div>
@@ -77,7 +80,8 @@
                     </ng-container>
                 </div>
                 <div class="flex flex-auto">
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                    <div
+                        class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
 
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:desktop-computer" class="user_mat-icon"></mat-icon>
@@ -92,7 +96,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                    <div
+                        class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:globe" class="user_mat-icon"></mat-icon>
                         </div>
@@ -114,13 +119,14 @@
                     </ng-container>
                 </div>
                 <div class="flex flex-auto">
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"  (click)="navigateToCategories();">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToCategories();">
                         <div class="text-3xl font-medium  w-13 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:duplicate" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col usr_label">
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.categoriesCount}}</div>
-                            <div class="ml-1.0 text-md text-secondary"> 
+                            <div class="ml-1.0 text-md text-secondary">
                                 <ng-container *transloco="let t; read:'settings'">
                                     <p>{{ t('categories') }}</p>
                                 </ng-container>
@@ -134,11 +140,12 @@
                                     <p>{{ t('subcategories') }}</p>
                                 </ng-container>
                             </div>
-                        </div>                      
+                        </div>
                     </div>
 
-                    
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToCountries();">
+
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToCountries();">
                         <div class="text-3xl font-medium  w-13 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:flag" class="user_mat-icon"></mat-icon>
                         </div>
@@ -164,7 +171,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToCampaigns()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToCampaigns()">
 
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:speakerphone" class="user_mat-icon"></mat-icon>
@@ -182,12 +190,14 @@
                 </div>
                 <div class="flex flex-auto">
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateTosubscription()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateTosubscription()">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="mat_outline:subscriptions" class="user_mat-icon"></mat-icon>
                         </div>
                         <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
-                            <div class="text-2xl font-semibold leading-tight">{{ counterList?.subscriptionModelsCount}}</div>
+                            <div class="text-2xl font-semibold leading-tight">{{ counterList?.subscriptionModelsCount}}
+                            </div>
                             <div class="text-md text-secondary">
                                 <ng-container *transloco="let t; read:'settings'">
                                     <p>{{ t('subscriptionmodels') }}</p>
@@ -195,7 +205,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToAddressType()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToAddressType()">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="mat_outline:house" class="user_mat-icon"></mat-icon>
                         </div>
@@ -208,7 +219,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToPaymentType()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToPaymentType()">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:credit-card" class="user_mat-icon"></mat-icon>
                         </div>
@@ -224,7 +236,8 @@
                 </div>
                 <div class="flex flex-auto">
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToInvoiceType()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToInvoiceType()">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="heroicons_outline:document-text" class="user_mat-icon"></mat-icon>
                         </div>
@@ -238,7 +251,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" (click)="navigateToVatType()">
+                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover"
+                        (click)="navigateToVatType()">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="mat_outline:fact_check" class="user_mat-icon"></mat-icon>
                         </div>
@@ -251,7 +265,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                    <div
+                        class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate ">
                             <mat-icon svgIcon="mat_outline:cases" class="user_mat-icon"></mat-icon>
                         </div>
@@ -265,6 +280,23 @@
                         </div>
                     </div>
                 </div>
+                <!-- <div class="flex flex-auto">
+                    <div (click)="navigateToprice()"
+                        class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                        <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate "
+                            >
+                            <mat-icon svgIcon="euro_symbol" class="user_mat-icon"></mat-icon>
+                        </div>
+                        <div class="flex flex-col ng-tns-c182-763 ng-star-inserted usr_label">
+                            <div class="text-2xl font-semibold leading-tight">{{ counterList?.pricingModelsCount}}</div>
+                            <div class="text-md text-secondary">
+                                <ng-container *transloco="let t; read:'settings'">
+                                    <p>{{ t('pricingmodels') }}</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

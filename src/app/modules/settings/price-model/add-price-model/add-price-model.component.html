@@ -1,0 +1,147 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Header -->
+        <div>
+            <div class="flex flex-auto items-center min-w-0">
+                <mat-icon svgIcon="euro_symbol"></mat-icon>
+                <div class="flex flex-col min-w-0 ml-4">
+                    <ng-container>
+                        <div *ngIf="!isEditMode"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            Create new price modal</div>
+                        <div *ngIf="isEditMode"
+                            class="text-2xl md:text-3xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                            Edit price modal </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button (click)="back()" class="ml-4" mat-flat-button [color]="'accent'">
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                <span class="ml-2 mr-1">Back</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex min-h-5"></div>
+    <div class="flex-auto overflow-hidden sm:overflow-y-auto">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Price Modal">
+                <!-- Form -->
+                <div class="shadow-lg overflow-auto">
+                    <div class="flex border-b border-b border-t border-l border-r">
+                        <!-- Add Price Modal Form -->
+                        <form class="flex flex-col w-full" [formGroup]="priceModalForm">
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                                    <div class="flex flex-col items-start">
+
+                                        <mat-form-field class=" w-full ">
+                                            <mat-label>Subscription Model</mat-label>
+                                            <mat-select [formControlName]="'SubscriptionModel'"
+                                                (selectionChange)="selectedSubscriptionModel($event)">
+                                                <mat-option *ngFor="let subscriptionModal of subscriptionList"
+                                                    [value]="subscriptionModal.subscriptionModelId">
+                                                    {{subscriptionModal.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="priceModalForm.get('SubscriptionModel').hasError('required')">
+                                                Subscription model is required
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class=" w-full ">
+                                            <mat-label>Period</mat-label>
+                                            <mat-select [formControlName]="'PeriodType'"
+                                                (selectionChange)="selectedPeriodType($event)">
+                                                <mat-option *ngFor="let periodType of periodTypes"
+                                                    [value]="periodType.periodTypeId">
+                                                    {{periodType.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="priceModalForm.get('PeriodType').hasError('required')">
+                                                Period type is required
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full mr-3">
+                                            <mat-label>Number of days</mat-label>
+                                            <input type="number" matInput [formControlName]="'NrOfDays'">
+                                            <mat-error *ngIf="priceModalForm.get('NrOfDays').hasError('required')">
+                                                Number of days is required
+                                            </mat-error>
+
+                                        </mat-form-field>
+
+                                        <div class="flex w-full">
+
+                                            <mat-form-field class="w-1/3 pr-2">
+                                                <mat-label>Price</mat-label>
+                                                <span matPrefix>€</span>
+                                                <input matInput type="number" [formControlName]="'Price'"
+                                                    (keyup)='onKeyupCalculate()'>
+                                            </mat-form-field>
+
+                                            <mat-form-field class="w-1/3 px-2">
+                                                <mat-label>Discounted Percentage</mat-label>
+                                                <span matPrefix>%</span>
+                                                <input matInput type="number" [formControlName]="'DiscountPercentage'"
+                                                    (keyup)='onKeyupCalculate()'>
+                                            </mat-form-field>
+
+                                            <mat-form-field class="w-1/3 pl-2">
+                                                <mat-label>Net price</mat-label>
+                                                <span matPrefix>€</span>
+                                                <input matInput [formControlName]="'NetPrice'" readonly>
+                                            </mat-form-field>
+
+                                        </div>
+
+                                        <div class="flex w-full">
+
+                                            <mat-form-field class="w-1/2 pr-2">
+                                                <mat-label>Saving</mat-label>
+                                                <span matPrefix>€</span>
+                                                <input matInput [formControlName]="'Saving'" readonly>
+                                            </mat-form-field>
+
+                                            <mat-form-field class="w-1/2 px-2">
+                                                <mat-label>Price/day</mat-label>
+                                                <span matPrefix>€</span>
+                                                <input matInput [formControlName]="'PricePerDay'" readonly>
+                                            </mat-form-field>
+
+                                        </div>
+
+                                        <div class="flex shrink-0 items-center mt-6 justify-end sm:ml-4">
+                                            <button class="mr-4" mat-flat-button (click)="back()">
+                                                <span class="ml-2 mr-1">Cancel</span>
+                                            </button>
+
+                                            <button *ngIf="isEditMode" mat-flat-button [color]="'primary'"
+                                                (click)="editPriceModel()">
+                                                <span class="ml-2 mr-1">Update</span>
+                                            </button>
+
+                                            <button *ngIf="!isEditMode" mat-flat-button [color]="'primary'"
+                                                (click)="addPriceModel()">
+                                                <span class="ml-2 mr-1">Save</span>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
