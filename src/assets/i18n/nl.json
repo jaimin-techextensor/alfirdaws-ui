@@ -39,6 +39,7 @@
     "paymenttypes": "Betalingstypes",
     "invoicetypes": "Factuurtypes",
     "vattypes": "BTW types",
-    "casemanagement": "Case Management"
+    "casemanagement": "Case Management",
+    "pricingmodel": "Modules de tarification"
   }
 }

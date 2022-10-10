@@ -74,7 +74,7 @@ export class SettingsComponent implements OnInit {
     this.router.navigateByUrl('/vat-type');
   }
 
-  // navigateToprice() {
-  //   this.router.navigateByUrl('/price-model');
-  // }
+  navigateToPricingModel() {
+    this.router.navigateByUrl('/pricing-model');
+  }
 }

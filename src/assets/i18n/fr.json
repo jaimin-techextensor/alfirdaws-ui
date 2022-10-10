@@ -39,6 +39,7 @@
     "paymenttypes": "Types de paiement",
     "invoicetypes": "Types de facture",
     "vattypes": "Types de TVA",
-    "casemanagement": "La gestion de cas"
+    "casemanagement": "La gestion de cas",
+    "pricingmodel": "Modules de tarification"
   }
 }

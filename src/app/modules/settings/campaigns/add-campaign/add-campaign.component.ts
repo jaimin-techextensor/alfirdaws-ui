@@ -124,7 +124,6 @@ export class AddCampaignComponent implements OnInit {
 
   getCampaign(Id: string): void {
     this.campaignService.getCampaign(Id).subscribe((data) => {
-      debugger
       if (data.success == true) {
         this.campaignData = data.data;
         this.imageData = this.campaignData.visual;

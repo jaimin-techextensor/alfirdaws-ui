@@ -39,6 +39,7 @@
     "paymenttypes": "Payment Types",
     "invoicetypes": "Invoice Types",
     "vattypes": "VAT Types",
-    "casemanagement": "Case Management"
+    "casemanagement": "Case Management",
+    "pricingmodel": "Pricing Models"
   }
 }

@@ -280,9 +280,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="flex flex-auto">
-                    <div (click)="navigateToprice()"
-                        class="flex flex-row  w-80 h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover">
+                <div class="flex flex-auto">
+                    <div (click)="navigateToPricingModel()"
+                        class="flex flex-row h-30  p-6 bg-card shadow rounded-2xl overflow-hidden settings-card card_hover" style="width: 14rem">
                         <div class="text-3xl font-medium  w-20 tracking-tight leading-6 truncate "
                             >
                             <mat-icon svgIcon="euro_symbol" class="user_mat-icon"></mat-icon>
@@ -291,12 +291,12 @@
                             <div class="text-2xl font-semibold leading-tight">{{ counterList?.pricingModelsCount}}</div>
                             <div class="text-md text-secondary">
                                 <ng-container *transloco="let t; read:'settings'">
-                                    <p>{{ t('pricingmodels') }}</p>
+                                    <p>{{ t('pricingmodel') }}</p>
                                 </ng-container>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

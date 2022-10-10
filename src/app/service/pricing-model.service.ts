@@ -6,7 +6,7 @@ import { Observable, of, switchMap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PriceModelService {
+export class PricingModelService {
 
   constructor(private _httpClient: HttpClient) { }
 
