@@ -77,4 +77,8 @@ export class SettingsComponent implements OnInit {
   navigateToPricingModel() {
     this.router.navigateByUrl('/pricing-model');
   }
+  
+  navigateToCaseType() {
+    this.router.navigateByUrl('/case-type');
+  }
 }
