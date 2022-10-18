@@ -81,4 +81,9 @@ export class SettingsComponent implements OnInit {
   navigateToCaseType() {
     this.router.navigateByUrl('/case-type');
   }
+
+  navigateToCaseCagetory() {
+    this.router.navigateByUrl('/case-cagetory');
+  };
+
 }

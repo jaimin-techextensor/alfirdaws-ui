@@ -91,7 +91,8 @@ export const appRoutes: Route[] = [
             { path: 'invoice-type', title: "Invoice Type", canLoad: [AuthGuard], loadChildren: () => import('app/modules/settings/invoice-type/invoice-type.module').then(m => m.InvoiceTypeModule) },
             { path: 'vat-type', title: 'Vat Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/vat-type/vat-type.module").then(m => m.VatTypeModule) },
             { path: 'pricing-model', title: 'Pricing Model', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/pricing-model/pricing-model.module").then(m => m.PricingModule) },
-            { path: 'case-type', title: 'Case Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/case-type/case-type.module").then(m => m.CaseTypeModule) }
+            { path: 'case-type', title: 'Case Type', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/case-type/case-type.module").then(m => m.CaseTypeModule) },
+            { path: 'case-cagetory', title: 'Case Cagetory', canLoad: [AuthGuard], loadChildren: () => import("app/modules/settings/case-category/case-category.module").then(m => m.CaseCategoryModule) }
         ]
     }
 ];
